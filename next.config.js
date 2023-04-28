@@ -7,11 +7,7 @@ const nextConfig = {
   images: {
     domains: ["links.papareact.com"],
   },
-  serverRuntimeConfig: {
-    disableServerSideCookies: true,
-  },
-  productionBrowserSourceMaps: true,
-  previewMode: true,
+  target: "serverless",
 };
 
 module.exports = nextConfig;
