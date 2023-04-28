@@ -7,7 +7,6 @@ const nextConfig = {
   images: {
     domains: ["links.papareact.com"],
   },
-  target: "serverless",
 };
 
 module.exports = nextConfig;
