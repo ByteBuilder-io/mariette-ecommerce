@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Exmouth";   /*Can be any text*/
+    src: local("Exmouth"),
+    url('./fonts/exmouth_.ttf') format("truetype");
+}
+
+.font-ma {
+    font-family: "Exmouth";
+}
