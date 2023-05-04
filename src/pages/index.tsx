@@ -12,11 +12,15 @@ import {
 } from "@chakra-ui/react";
 import { sanityImage } from "@/lib/sanity.image";
 import Navbar from "@/components/menus/nav";
+import Footer from "@/components/footer";
+import Hero from "@/components/hero";
 
 const Home = () => {
   return (
     <Box w={"100%"}>
       <Navbar />
+      <Hero />
+      <Footer />
     </Box>
   );
 };
