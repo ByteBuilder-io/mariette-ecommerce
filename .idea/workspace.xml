@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/default.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/nav.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/faq/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/typesSanity/faq.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menus/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fonts/exmouth_.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
     </list>
@@ -50,8 +52,9 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src" />
+      <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\public\fonts" />
       <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src\fonts" />
+      <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src" />
       <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\public" />
       <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src\pages\css" />
     </key>
@@ -66,7 +69,9 @@
       <updated>1682828858362</updated>
       <workItem from="1682828859828" duration="2185000" />
       <workItem from="1682831097244" duration="2708000" />
-      <workItem from="1683084286718" duration="6563000" />
+      <workItem from="1683084286718" duration="7530000" />
+      <workItem from="1683132254820" duration="3522000" />
+      <workItem from="1683231446807" duration="13860000" />
     </task>
     <servers />
   </component>
