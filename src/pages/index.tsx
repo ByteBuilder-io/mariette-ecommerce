@@ -1,13 +1,11 @@
-import {
-  Box,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Footer from "@/components/footer";
-// import Hero from "@/components/hero";
+import Hero from "@/components/hero";
 
 const Home = () => {
   return (
     <Box w={"100%"}>
-      {/*<Hero />*/}
+      <Hero />
       <Footer />
     </Box>
   );
