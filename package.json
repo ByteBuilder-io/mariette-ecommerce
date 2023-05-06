@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.0",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
+    "@fontsource/castoro": "^4.5.9",
+    "@fontsource/montserrat": "^4.5.14",
     "@portabletext/react": "^3.0.0",
     "@sanity/image-url": "^1.0.2",
     "@types/node": "18.16.3",
@@ -29,6 +32,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "swiper": "^9.2.4",
+    "react-markdown": "^8.0.7",
     "typescript": "5.0.4"
   }
 }
