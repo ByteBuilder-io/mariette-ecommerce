@@ -2,39 +2,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
 import { Box, Image, Text, Button } from "@chakra-ui/react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
-
-import { Fragment, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import { styleSlider } from "./utils";
+import { THero, TMain } from "@/typesSanity/hero";
 
-type TMain = {
-  contenido: THero[];
-};
+interface IProps {
+  maxH: string | number;
+}
 
-type THero = {
-  imagen: TContenido;
-  texto: string;
-  texto_button: string;
-  _key: string;
-};
-
-type TContenido = {
-  _type: string;
-  asset: {
-    _type: string;
-    _ref: string;
-  };
-};
-
-const Hero = () => {
+const Hero = ({ maxH }: IProps) => {
   const query = `*[_type == "hero"]`;
   const [data, setData] = useState<TMain[]>();
   const { width, height } = useWindowDimensions();
@@ -47,22 +28,30 @@ const Hero = () => {
       const result = contenido.map((item: THero) => {
         return (
           <SwiperSlide key={item._key}>
-            <Box position="relative">
-              <Image
-                src={sanityImage(item.imagen.asset._ref).url()}
-                height="70%"
-                width="100%"
-                alt={item._key}
-              />
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              height="100%"
+            >
+              <Box maxH={maxH}>
+                <Image
+                  src={sanityImage(item.imagen.asset._ref).url()}
+                  alt={item._key}
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </Box>
               <Text
                 position="absolute"
-                top="30%"
+                top="50%"
                 left="50%"
                 transform="translate(-50%, -50%)"
                 color="white"
                 fontSize="50px"
                 fontWeight="100"
                 textAlign="center"
+                fontFamily="Castoro Titling"
               >
                 {item.texto}
                 <Box>
@@ -106,16 +95,16 @@ const Hero = () => {
   }, [query]);
 
   return (
-    <Fragment>
+    <Box maxH={maxH}>
       <style>{styleSlider}</style>
       <Swiper
         navigation={!isPaginations}
-        pagination={isPaginations}
+        pagination={true}
         modules={[Navigation, Pagination]}
       >
         {renderSlider()}
       </Swiper>
-    </Fragment>
+    </Box>
   );
 };
 

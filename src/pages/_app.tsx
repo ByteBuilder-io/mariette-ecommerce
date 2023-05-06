@@ -2,11 +2,12 @@ import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Navbar from "@/components/menus/nav";
 import { Global, css } from "@emotion/react";
+import Footer from "@/components/footer";
 
 const theme = extendTheme({
   fonts: {
     heading: "Castoro Titling, sans-serif",
-    body: "Castoro Titling, sans-serif",
+    body: "Montserrat Regular, sans-serif",
   },
 });
 export default function App({ Component, pageProps }: AppProps) {
@@ -21,8 +22,8 @@ export default function App({ Component, pageProps }: AppProps) {
             font-style: normal;
           }
           @font-face {
-            font-family: "Manhattan";
-            src: url("/fonts/manhattan.ttf") format("truetype");
+            font-family: "Montserrat Regular";
+            src: url("/fonts/montserrat-regular.ttf") format("truetype");
             font-weight: normal;
             font-style: normal;
           }
@@ -30,6 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       <Navbar />
       <Component {...pageProps} />
+      <Footer />
     </ChakraProvider>
   );
 }

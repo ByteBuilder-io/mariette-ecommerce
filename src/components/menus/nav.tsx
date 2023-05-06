@@ -58,10 +58,13 @@ export default function Navbar() {
       <Flex h={16} alignItems="center" justifyContent="space-between" mx="auto">
         <HStack spacing={8} alignItems="center">
           {data && (
-            <Image
-              src={sanityImage(data[0].logo.asset._ref).url()}
-              maxW="150px"
-            />
+            <Link href="/">
+              <Image
+                src={sanityImage(data[0].logo.asset._ref).url()}
+                maxW="150px"
+                cursor={"pointer"}
+              />
+            </Link>
           )}
           <HStack
             as="nav"

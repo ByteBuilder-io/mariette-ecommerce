@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="Merge branch 'dev' of github.com:ByteBuilder-io/mariette-ecommerce into mec-11/footer&#10;&#10;# Conflicts:&#10;#&#9;package.json&#10;#&#9;src/pages/index.tsx">
-      <change afterPath="$PROJECT_DIR$/public/fonts/castoro-titling-regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/fonts/manhattan.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/faq/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/faq.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/cards/cardTyc.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/tyc/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/typesSanity/hero.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/typesSanity/tyc.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/hero/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/hero/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/menus/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/fonts/exmouth_.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typesSanity/faq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/faq.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +39,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "C:/Users/jcarl/Documents/bytebuilder/mariette-ecommerce/src/components/cards",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
@@ -50,11 +49,14 @@
     "nodejs_package_manager_path": "npm",
     "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jcarl\\Documents\\bytebuilder\\mariette-ecommerce\\node_modules\\prettier",
     "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2022.3.3\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "ts.external.directory.path": "C:\\Users\\jcarl\\Documents\\bytebuilder\\mariette-ecommerce\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src\components\cards" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\public\fonts" />
       <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src\fonts" />

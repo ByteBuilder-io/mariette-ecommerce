@@ -111,7 +111,7 @@ const Footer = () => {
       const result = dataDetail.map(
         (item: { _key: string; nombre: string; url?: string }) => {
           return (
-            <Link href={"#"} key={item._key}>
+            <Link href={item.url} key={item._key}>
               {item.nombre}
             </Link>
           );
@@ -157,11 +157,9 @@ const Footer = () => {
             </Stack>
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>Sobre nosotros</ListHeader>
             {renderAboutUs("sobre_nosotros_apartado_1")}
           </Stack>
           <Stack align={"flex-start"}>
-            <ListHeader>.</ListHeader>
             {renderAboutUs("sobre_nosotros_apartado_2")}
           </Stack>
           <Stack align={"flex-start"}>

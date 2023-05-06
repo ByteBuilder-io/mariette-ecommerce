@@ -5,8 +5,7 @@ import Hero from "@/components/hero";
 const Home = () => {
   return (
     <Box w={"100%"}>
-      <Hero />
-      <Footer />
+      <Hero maxH={"500px"} />
     </Box>
   );
 };
