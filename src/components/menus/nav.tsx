@@ -33,7 +33,7 @@ import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
 import { IDataNav } from "@/typesSanity/nav";
 import { sanityImage } from "@/lib/sanity.image";
-import { BsCart4 } from "react-icons/all";
+import { BiCartAlt } from "react-icons/bi";
 import { PhoneIcon, SearchIcon } from "@chakra-ui/icons";
 import { IconToInput } from "@/components/inputs/searchInput";
 
@@ -137,13 +137,13 @@ export default function Navbar() {
 
           <HStack spacing={5} pr={10}>
             <IconToInput />
-            <Icon as={BsCart4} boxSize={6} cursor={"pointer"} />
+            <Icon as={BiCartAlt} boxSize={6} cursor={"pointer"} />
           </HStack>
         </HStack>
 
         <HStack>
           <Icon
-            as={BsCart4}
+            as={BiCartAlt}
             boxSize={6}
             cursor={"pointer"}
             display={["inherit", "inherit", "none"]}
