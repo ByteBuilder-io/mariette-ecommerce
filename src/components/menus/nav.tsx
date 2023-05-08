@@ -141,7 +141,7 @@ export default function Navbar() {
           </HStack>
         </HStack>
 
-        <HStack>
+        <HStack display={["inherit", "inherit", "none"]}>
           <Icon
             as={BiCartAlt}
             boxSize={6}
