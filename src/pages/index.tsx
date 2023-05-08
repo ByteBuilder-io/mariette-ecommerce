@@ -14,11 +14,13 @@ import { sanityImage } from "@/lib/sanity.image";
 import Navbar from "@/components/menus/nav";
 import Footer from "@/components/footer";
 import Hero from "@/components/hero";
+import ProductDetail from "@/components/productDetail";
 
 const Home = () => {
   return (
     <Box w={"100%"}>
       <Navbar />
+      <ProductDetail />
       <Hero />
       <Footer />
     </Box>
