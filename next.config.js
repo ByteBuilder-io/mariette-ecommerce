@@ -8,19 +8,18 @@ const nextConfig = {
   },
   webpack(config) {
     config.module.rules.push({
-      test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-      include: path.resolve(__dirname, "src/fonts"),
-      use: [
-        {
-          loader: "file-loader",
-          options: {
-            name: "[name].[ext]",
-            outputPath: "static/fonts/",
-          },
+      test: /\.(woff(2)?|eot|ttf|otf|)$/,
+      type: "asset",
+      parser: {
+        dataUrlCondition: {
+          maxSize: 8 * 1024,
         },
-      ],
+      },
+      include: path.resolve(__dirname, "public/fonts"),
+      generator: {
+        filename: "static/fonts/[hash][ext][query]",
+      },
     });
-
     return config;
   },
 };

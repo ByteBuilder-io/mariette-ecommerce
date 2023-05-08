@@ -25,39 +25,12 @@ import {
 } from "@chakra-ui/react";
 // Here we have used react-icons package for the icons
 import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose, AiTwotoneThunderbolt } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
-import { MdTimeline } from "react-icons/md";
-import { BsBook } from "react-icons/bs";
-import { IconType } from "react-icons";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
 import { IDataNav } from "@/typesSanity/nav";
 import { sanityImage } from "@/lib/sanity.image";
-
-const navLinks = [
-  { name: "About", path: "#" },
-  { name: "Blog", path: "#" },
-  { name: "Features", path: "#" },
-];
-
-const dropdownLinks = [
-  {
-    name: "Projects",
-    path: "#",
-    icon: MdTimeline,
-  },
-  {
-    name: "Tech Stack",
-    path: "#",
-    icon: AiTwotoneThunderbolt,
-  },
-  {
-    name: "Open Source",
-    path: "#",
-    icon: BsBook,
-  },
-];
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -75,14 +48,23 @@ export default function Navbar() {
   }, []);
 
   return (
-    <Box px={4} boxShadow="lg" width="100%">
+    <Box
+      px={4}
+      boxShadow="lg"
+      width="100%"
+      zIndex={10}
+      backgroundColor={"white"}
+    >
       <Flex h={16} alignItems="center" justifyContent="space-between" mx="auto">
         <HStack spacing={8} alignItems="center">
           {data && (
-            <Image
-              src={sanityImage(data[0].logo.asset._ref).url()}
-              maxW="150px"
-            />
+            <Link href="/">
+              <Image
+                src={sanityImage(data[0].logo.asset._ref).url()}
+                maxW="150px"
+                cursor={"pointer"}
+              />
+            </Link>
           )}
           <HStack
             as="nav"
