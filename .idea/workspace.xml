@@ -4,19 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="Merge branch 'dev' of github.com:ByteBuilder-io/mariette-ecommerce into mec-11/footer&#10;&#10;# Conflicts:&#10;#&#9;package.json&#10;#&#9;src/pages/index.tsx">
-      <change afterPath="$PROJECT_DIR$/src/components/cards/cardTyc.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/tyc/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/hero.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/tyc.ts" afterDir="false" />
+    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/cards/cardAviso.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/inputs/searchInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/aviso/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/hero/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/hero/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cards/cardTyc.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardTyc.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/menus/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/faq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/faq.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/faq/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/faq/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/tyc/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/tyc/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +40,7 @@
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "",
+    "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.standard": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
@@ -78,6 +75,7 @@
       <workItem from="1683084286718" duration="7530000" />
       <workItem from="1683132254820" duration="3522000" />
       <workItem from="1683231446807" duration="13860000" />
+      <workItem from="1683578358054" duration="3014000" />
     </task>
     <servers />
   </component>

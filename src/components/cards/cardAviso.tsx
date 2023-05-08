@@ -6,7 +6,7 @@ interface Props {
   content: string;
 }
 
-const CardTyc = ({ content }: Props) => {
+const CardAviso = ({ content }: Props) => {
   const { width, height } = useWindowDimensions();
   return (
     <Box
@@ -27,4 +27,4 @@ const CardTyc = ({ content }: Props) => {
   );
 };
 
-export default CardTyc;
+export default CardAviso;

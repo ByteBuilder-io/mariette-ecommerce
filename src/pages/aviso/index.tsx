@@ -1,22 +1,13 @@
-import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  VStack,
-  Input,
-  InputGroup,
-  InputLeftElement,
-} from "@chakra-ui/react";
-import { Search2Icon } from "@chakra-ui/icons";
-import CardFaq from "@/components/cards/cardFaq";
+import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
-import { IDataFaq } from "@/typesSanity/faq";
+import { IDataTyc } from "@/typesSanity/tyc";
+import CardTyc from "@/components/cards/cardTyc";
+import CardAviso from "@/components/cards/cardAviso";
 
-const FAQ = () => {
-  const query = `*[_type == "faqPage"]`;
-  const [data, setData] = useState<IDataFaq[]>();
+const Aviso = () => {
+  const query = `*[_type == 'avisoPage']`;
+  const [data, setData] = useState<IDataTyc[]>();
 
   useEffect(() => {
     async function fetchData() {
@@ -40,7 +31,11 @@ const FAQ = () => {
           >
             <VStack>
               <Box>
-                <Heading textColor={"#836a59"} fontFamily={"heading"}>
+                <Heading
+                  textColor={"#836a59"}
+                  fontFamily={"heading"}
+                  textAlign={"center"}
+                >
                   {data[0].title}
                 </Heading>
               </Box>
@@ -55,13 +50,13 @@ const FAQ = () => {
                 </Text>
               </Box>
               <Box py={10} w={"100%"}>
-                <CardFaq faqs={data[0].faqs} />
+                <CardAviso content={data[0].content} />
               </Box>
             </VStack>
           </Container>
           <Box
             backgroundColor={"#faf5f1"}
-            h="100%"
+            h={"100%"}
             position={"absolute"}
             top={0}
             left={0}
@@ -74,4 +69,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default Aviso;

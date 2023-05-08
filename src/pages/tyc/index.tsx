@@ -30,7 +30,11 @@ const TYC = () => {
           >
             <VStack>
               <Box>
-                <Heading textColor={"#836a59"} fontFamily={"heading"}>
+                <Heading
+                  textColor={"#836a59"}
+                  fontFamily={"heading"}
+                  textAlign={"center"}
+                >
                   {data[0].title}
                 </Heading>
               </Box>
@@ -51,7 +55,7 @@ const TYC = () => {
           </Container>
           <Box
             backgroundColor={"#faf5f1"}
-            h={300}
+            h={"100%"}
             position={"absolute"}
             top={0}
             left={0}

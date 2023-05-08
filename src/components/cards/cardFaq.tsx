@@ -24,7 +24,7 @@ const CardFaq = ({ faqs }: Props) => {
       rounded="md"
       overflow="hidden"
       bg={useColorModeValue("white", "gray.800")}
-      w={{ base: "100%", sm: "1000px" }}
+      w={{ base: "100%", lg: "1000px" }}
       minW="100%"
     >
       <Accordion defaultIndex={[0]} allowToggle>
