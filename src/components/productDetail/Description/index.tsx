@@ -4,7 +4,7 @@ import { Fragment } from "react";
 const Description = () => {
   return (
     <Fragment>
-      <Flex mt="20px">
+      <Flex pt="30px">
         <Text fontSize="14px">
           Un accesorio moderno que puede combinarse con todos tus conjuntos,
           este anillo grueso presenta cinco gemas para formar una constelación.

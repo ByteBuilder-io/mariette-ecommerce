@@ -6,12 +6,32 @@ import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 import Form from "./Form";
 import Currency from "./Currency";
-import SmallImage from "./SmallImage";
+import SmallImages from "./SmallImages";
 import Description from "./Description";
+import ProductGrid from "./ProductGrid";
 
 const ProductDetail = () => {
-	const { width, height } = useWindowDimensions();
-	const [isMobile, setIsMobile] = useState<boolean>(false)
+  const { width, height } = useWindowDimensions();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [data, setData] = useState([
+    {
+      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-4-scaled.jpg",
+      isSelected: true,
+    },
+    {
+      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-5-scaled.jpg",
+      isSelected: false,
+    },
+    {
+      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-2-scaled.jpg",
+      isSelected: false,
+    },
+    {
+      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-3-scaled.jpg",
+      isSelected: false,
+    },
+  ]);
+	const [imgMain, setImgMain] = useState<string>(data[0].img);
 
   const MainImage = ({ src }: any) => (
     <Zoom
@@ -23,35 +43,34 @@ const ProductDetail = () => {
     />
   );
 
-  const SmallImages = () => (
-    <Box
-      display="flex"
-      flexWrap="wrap"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <SmallImage
-        src="https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-4-scaled.jpg"
-        isSelected={true}
-      />
-      <SmallImage
-        src="https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-4-scaled.jpg"
-        isSelected={false}
-      />
-      <SmallImage
-        src="https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-4-scaled.jpg"
-        isSelected={false}
-      />
-    </Box>
-  );
+  const handleImageClick = (index: number) => {
+		setImgMain(data[index].img);
+    const newData = data.map((item, i) => {
+      if (i === index) {
+        return { ...item, isSelected: true };
+      } else {
+        return { ...item, isSelected: false };
+      }
+    });
+    setData(newData);
+  };
 
-	useEffect(() => {
-		if (width < 992) {
+  useEffect(() => {
+    if (width < 992) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
     }
-	}, [width])
+  }, [width]);
+
+	// let responseData = pm.response.json();
+	// let dueDate = pm.variables.get("dueDate");
+	// let dueDatez = new Date(dueDate + "Z");
+
+	// pm.test("Date in Project Element time zone;" 
+	// 	+ dueDatez.toLocaleString("en-US", { year: 'numeric', timeZone: responseData.locationInfo.timeZone}) + "-"
+	// 	+ dueDatez.toLocaleString("en-US", { month: '2-digit', timeone: responseData.locationInfo.timeZone}) + "-"
+	// 	+ duedatez.toLocaleString("en-US", { day: '2-digit', timezone: responseData.locationInfo.timeZone}));
 
   return (
     <Fragment>
@@ -68,16 +87,20 @@ const ProductDetail = () => {
         >
           <Flex direction="column" align="center" flex="1">
             <MainImage
-              src="https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-4-scaled.jpg"
+              src={imgMain}
               alt="Main image"
               zoomScale={3}
               transitionTime={0.5}
               width="100%"
               maxWidth="100%"
             />
-            <SmallImages />
+            <SmallImages data={data} handleImageClick={handleImageClick} />
           </Flex>
-          <Stack spacing={{ base: "8", md: "4" }} flex="2" alignItems={isMobile ? "center" : "left"}>
+          <Stack
+            spacing={{ base: "8", md: "4" }}
+            flex="2"
+            alignItems={isMobile ? "center" : "left"}
+          >
             <Text
               fontSize="3xl"
               fontWeight="semibold"
@@ -90,6 +113,7 @@ const ProductDetail = () => {
             <Description />
           </Stack>
         </Stack>
+				<ProductGrid />
       </Box>
     </Fragment>
   );
