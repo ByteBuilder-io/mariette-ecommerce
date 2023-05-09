@@ -1,12 +1,10 @@
 import {
   Box,
-  chakra,
   Container,
   Link,
   SimpleGrid,
   Stack,
   Text,
-  VisuallyHidden,
   Input,
   Image,
   useColorModeValue,
@@ -20,43 +18,12 @@ import {
   FaTiktok,
 } from "react-icons/fa";
 import { IDataFooter } from "@/typesSanity/footer";
+import SocialButton from "../commons/socialMedia";
 
 import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
 import { IconType } from "react-icons";
 
-const SocialButton = ({
-  children,
-  label,
-  href,
-}: {
-  children: ReactNode;
-  label: string;
-  href: string;
-}) => {
-  return (
-    <chakra.button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-      rounded={"full"}
-      w={8}
-      h={8}
-      cursor={"pointer"}
-      as={"a"}
-      href={href}
-      target="_blank"
-      display={"inline-flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      transition={"background 0.3s ease"}
-      _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  );
-};
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
