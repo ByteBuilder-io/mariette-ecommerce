@@ -6,13 +6,13 @@ import CardTyc from "@/components/cards/cardTyc";
 import CardAviso from "@/components/cards/cardAviso";
 
 const Aviso = () => {
-  const query = `*[_type == 'avisoPage']`;
-  const [data, setData] = useState<IDataTyc[]>();
+  const query = `*[_type == "settings"]{avisoPage}`;
+  const [data, setData] = useState<IDataTyc>();
 
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data);
+      setData(data[0].avisoPage);
     }
 
     fetchData();
@@ -36,7 +36,7 @@ const Aviso = () => {
                   fontFamily={"heading"}
                   textAlign={"center"}
                 >
-                  {data[0].title}
+                  {data.title}
                 </Heading>
               </Box>
               <Box>
@@ -46,11 +46,11 @@ const Aviso = () => {
                   textAlign={"center"}
                   fontFamily={"heading"}
                 >
-                  {data[0].subtitle}
+                  {data.subtitle}
                 </Text>
               </Box>
               <Box py={10} w={"100%"}>
-                <CardAviso content={data[0].content} />
+                <CardAviso content={data.content} />
               </Box>
             </VStack>
           </Container>

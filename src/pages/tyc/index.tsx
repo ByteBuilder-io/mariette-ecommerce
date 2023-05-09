@@ -5,13 +5,13 @@ import { IDataTyc } from "@/typesSanity/tyc";
 import CardTyc from "@/components/cards/cardTyc";
 
 const TYC = () => {
-  const query = `*[_type == 'tycPage']`;
-  const [data, setData] = useState<IDataTyc[]>();
+  const query = `*[_type == "settings"]{tycPage}`;
+  const [data, setData] = useState<IDataTyc>();
 
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data);
+      setData(data[0].tycPage);
     }
 
     fetchData();
@@ -35,7 +35,7 @@ const TYC = () => {
                   fontFamily={"heading"}
                   textAlign={"center"}
                 >
-                  {data[0].title}
+                  {data.title}
                 </Heading>
               </Box>
               <Box>
@@ -45,11 +45,11 @@ const TYC = () => {
                   textAlign={"center"}
                   fontFamily={"heading"}
                 >
-                  {data[0].subtitle}
+                  {data.subtitle}
                 </Text>
               </Box>
               <Box py={10} w={"100%"}>
-                <CardTyc content={data[0].content} />
+                <CardTyc content={data.content} />
               </Box>
             </VStack>
           </Container>

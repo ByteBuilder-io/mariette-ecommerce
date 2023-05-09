@@ -40,13 +40,13 @@ import { IconToInput } from "@/components/inputs/searchInput";
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const query = `*[_type == "navbar"]`;
-  const [data, setData] = useState<IDataNav[]>();
+  const query = `*[_type == "settings"]{navbar}`;
+  const [data, setData] = useState<IDataNav>();
 
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data);
+      setData(data[0].navbar);
     }
 
     fetchData();
@@ -65,7 +65,7 @@ export default function Navbar() {
           {data && (
             <Link href="/">
               <Image
-                src={sanityImage(data[0].logo.asset._ref).url()}
+                src={sanityImage(data.logo.asset._ref).url()}
                 maxW="150px"
                 cursor={"pointer"}
               />
@@ -79,7 +79,7 @@ export default function Navbar() {
           alignItems="center"
         >
           {data &&
-            data[0].links.map((e) => {
+            data.links.map((e) => {
               if (!e.link.isSubmenu) {
                 return (
                   <NavLink
@@ -170,7 +170,7 @@ export default function Navbar() {
               <Box>
                 {data && (
                   <Image
-                    src={sanityImage(data[0].logo.asset._ref).url()}
+                    src={sanityImage(data.logo.asset._ref).url()}
                     maxW="150px"
                   />
                 )}
@@ -188,7 +188,7 @@ export default function Navbar() {
           <DrawerBody>
             <Stack as="nav" spacing={2}>
               {data &&
-                data[0].links.map((e) => {
+                data.links.map((e) => {
                   if (!e.link.isSubmenu) {
                     return (
                       <NavLink
