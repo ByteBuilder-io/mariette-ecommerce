@@ -35,10 +35,10 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 };
 
 const Footer = () => {
-  const query = `*[_type == "footer"]`;
-  const [data, setData] = useState<IDataFooter[]>();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
+  const query = `*[_type == "settings"]{footer}`;
+  const [data, setData] = useState<IDataFooter>();
 
   const iconos: { [nombre: string]: IconType } = {
     FaInstagram: FaInstagram,
@@ -49,8 +49,8 @@ const Footer = () => {
   };
 
   const renderSocialMedia = () => {
-    if (data && data.length > 0) {
-      const { enlaces } = data[0];
+    if (data) {
+      const { enlaces } = data;
 
       const result = enlaces.map(
         (item: {
@@ -75,8 +75,8 @@ const Footer = () => {
   const renderAboutUs = (
     type: "sobre_nosotros_apartado_1" | "sobre_nosotros_apartado_2"
   ) => {
-    if (data && data.length > 0) {
-      const dataDetail = data[0][type];
+    if (data) {
+      const dataDetail = data[type];
 
       const result = dataDetail.map(
         (item: { _key: string; nombre: string; url?: string }) => {
@@ -95,7 +95,7 @@ const Footer = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data);
+      setData(data[0].footer);
     }
 
     fetchData();
@@ -127,16 +127,20 @@ const Footer = () => {
             <Box>
               {data && (
                 <Image
-                  src={sanityImage(data[0].logo.asset._ref).url()}
+                  src={sanityImage(data.logo.asset._ref).url()}
                   maxW="150px"
                   alt="logo"
                 />
               )}
             </Box>
             <Text fontSize={"sm"} textAlign={isMobile ? "center" : "left"}>
-              {data ? data[0].derechos : ""}
+              {data ? data.derechos : ""}
             </Text>
-            <Stack direction={"row"} spacing={6} justify={isMobile ? "center" : ""}>
+            <Stack
+              direction={"row"}
+              spacing={6}
+              justify={isMobile ? "center" : ""}
+            >
               {data && renderSocialMedia()}
             </Stack>
           </Stack>

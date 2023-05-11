@@ -1,6 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import { Box, Image, Text, Button } from "@chakra-ui/react";
+import { Box, Image, Text, Button, Container } from "@chakra-ui/react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
@@ -95,7 +95,7 @@ const Hero = ({ maxH }: IProps) => {
   }, [query]);
 
   return (
-    <Box maxH={maxH}>
+    <Container maxH={maxH} maxW={"1400px"}>
       <style>{styleSlider}</style>
       <Swiper
         navigation={!isPaginations}
@@ -104,7 +104,7 @@ const Hero = ({ maxH }: IProps) => {
       >
         {renderSlider()}
       </Swiper>
-    </Box>
+    </Container>
   );
 };
 

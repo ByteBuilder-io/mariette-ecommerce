@@ -15,13 +15,13 @@ import { client } from "@/lib/sanity.client";
 import { IDataFaq } from "@/typesSanity/faq";
 
 const FAQ = () => {
-  const query = `*[_type == "faqPage"]`;
-  const [data, setData] = useState<IDataFaq[]>();
+  const query = `*[_type == "settings"]{faqPage}`;
+  const [data, setData] = useState<IDataFaq>();
 
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data);
+      setData(data[0].faqPage);
     }
 
     fetchData();
@@ -41,7 +41,7 @@ const FAQ = () => {
             <VStack>
               <Box>
                 <Heading textColor={"#836a59"} fontFamily={"heading"}>
-                  {data[0].title}
+                  {data.title}
                 </Heading>
               </Box>
               <Box>
@@ -51,17 +51,17 @@ const FAQ = () => {
                   textAlign={"center"}
                   fontFamily={"heading"}
                 >
-                  {data[0].subtitle}
+                  {data.subtitle}
                 </Text>
               </Box>
               <Box py={10} w={"100%"}>
-                <CardFaq faqs={data[0].faqs} />
+                <CardFaq faqs={data.faqs} />
               </Box>
             </VStack>
           </Container>
           <Box
             backgroundColor={"#faf5f1"}
-            h={300}
+            h="100%"
             position={"absolute"}
             top={0}
             left={0}

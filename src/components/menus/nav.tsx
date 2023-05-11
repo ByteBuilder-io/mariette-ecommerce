@@ -22,8 +22,10 @@ import {
   Drawer,
   DrawerHeader,
   Spacer,
+  InputGroup,
+  Input,
+  InputLeftElement,
 } from "@chakra-ui/react";
-// Here we have used react-icons package for the icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
@@ -31,17 +33,20 @@ import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
 import { IDataNav } from "@/typesSanity/nav";
 import { sanityImage } from "@/lib/sanity.image";
+import { BiCartAlt } from "react-icons/bi";
+import { PhoneIcon, SearchIcon } from "@chakra-ui/icons";
+import { IconToInput } from "@/components/inputs/searchInput";
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const query = `*[_type == "navbar"]`;
-  const [data, setData] = useState<IDataNav[]>();
+  const query = `*[_type == "settings"]{navbar}`;
+  const [data, setData] = useState<IDataNav>();
 
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data);
+      setData(data[0].navbar);
     }
 
     fetchData();
@@ -60,87 +65,100 @@ export default function Navbar() {
           {data && (
             <Link href="/">
               <Image
-                src={sanityImage(data[0].logo.asset._ref).url()}
+                src={sanityImage(data.logo.asset._ref).url()}
                 maxW="150px"
                 cursor={"pointer"}
               />
             </Link>
           )}
-          <HStack
-            as="nav"
-            spacing={1}
-            display={{ base: "none", md: "flex" }}
-            alignItems="center"
-          >
-            {data &&
-              data[0].links.map((e) => {
-                if (!e.link.isSubmenu) {
-                  return (
-                    <NavLink
-                      key={e._key}
-                      name={e.title}
-                      path={e.link.url!}
-                      onClose={onClose}
-                    />
-                  );
-                }
+        </HStack>
+        <HStack
+          as="nav"
+          spacing={1}
+          display={{ base: "none", md: "flex" }}
+          alignItems="center"
+        >
+          {data &&
+            data.links.map((e) => {
+              if (!e.link.isSubmenu) {
                 return (
-                  <Menu key={e._key} autoSelect={false} isLazy>
-                    {({ isOpen, onClose }) => (
-                      <>
-                        <MenuButton
-                          as={Button}
-                          variant="ghost"
-                          size="sm"
-                          px={3}
-                          py={1}
-                          lineHeight="inherit"
-                          fontSize="1em"
-                          fontWeight="normal"
-                          rounded="md"
-                          height="auto"
-                          _hover={{ color: "black", bg: "white" }}
-                        >
-                          <Flex alignItems="center">
-                            <Text>{e.title}</Text>
-                            <Icon
-                              as={BiChevronDown}
-                              h={5}
-                              w={5}
-                              ml={1}
-                              transition="all .25s ease-in-out"
-                              transform={isOpen ? "rotate(180deg)" : ""}
-                            />
-                          </Flex>
-                        </MenuButton>
-                        <MenuList zIndex={5} border="none">
-                          {e.link.submenu!.map((link, index) => (
-                            <MenuLink
-                              key={index}
-                              name={link.title}
-                              path={link.url}
-                              onClose={onClose}
-                            />
-                          ))}
-                        </MenuList>
-                      </>
-                    )}
-                  </Menu>
+                  <NavLink
+                    key={e._key}
+                    name={e.title}
+                    path={e.link.url!}
+                    onClose={onClose}
+                  />
                 );
-              })}
+              }
+              return (
+                <Menu key={e._key} autoSelect={false} isLazy>
+                  {({ isOpen, onClose }) => (
+                    <>
+                      <MenuButton
+                        as={Button}
+                        variant="ghost"
+                        size="sm"
+                        px={3}
+                        py={1}
+                        lineHeight="inherit"
+                        fontSize="1em"
+                        fontWeight="normal"
+                        rounded="md"
+                        height="auto"
+                        _hover={{ color: "black", bg: "white" }}
+                      >
+                        <Flex alignItems="center">
+                          <Text>{e.title}</Text>
+                          <Icon
+                            as={BiChevronDown}
+                            h={5}
+                            w={5}
+                            ml={1}
+                            transition="all .25s ease-in-out"
+                            transform={isOpen ? "rotate(180deg)" : ""}
+                          />
+                        </Flex>
+                      </MenuButton>
+                      <MenuList zIndex={5} border="none">
+                        {e.link.submenu!.map((link, index) => (
+                          <MenuLink
+                            key={index}
+                            name={link.title}
+                            path={link.url}
+                            onClose={onClose}
+                          />
+                        ))}
+                      </MenuList>
+                    </>
+                  )}
+                </Menu>
+              );
+            })}
+
+          <HStack spacing={5} pr={10}>
+            <IconToInput />
+            <Icon as={BiCartAlt} boxSize={6} cursor={"pointer"} />
           </HStack>
         </HStack>
 
-        {!isOpen && (
-          <IconButton
-            variant="ghost"
-            size="md"
-            icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}
-            aria-label="Open Menu"
+        <HStack display={["inherit", "inherit", "none"]}>
+          <Icon
+            as={BiCartAlt}
+            boxSize={6}
+            cursor={"pointer"}
             display={["inherit", "inherit", "none"]}
-            onClick={isOpen ? onClose : onOpen}
           />
-        )}
+          {!isOpen && (
+            <IconButton
+              variant="ghost"
+              size="md"
+              icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}
+              aria-label="Open Menu"
+              display={["inherit", "inherit", "none"]}
+              onClick={isOpen ? onClose : onOpen}
+            />
+          )}
+        </HStack>
       </Flex>
 
       {/* Mobile Screen Links */}
@@ -152,7 +170,7 @@ export default function Navbar() {
               <Box>
                 {data && (
                   <Image
-                    src={sanityImage(data[0].logo.asset._ref).url()}
+                    src={sanityImage(data.logo.asset._ref).url()}
                     maxW="150px"
                   />
                 )}
@@ -170,7 +188,7 @@ export default function Navbar() {
           <DrawerBody>
             <Stack as="nav" spacing={2}>
               {data &&
-                data[0].links.map((e) => {
+                data.links.map((e) => {
                   if (!e.link.isSubmenu) {
                     return (
                       <NavLink
@@ -225,6 +243,12 @@ export default function Navbar() {
                     </Menu>
                   );
                 })}
+              <InputGroup>
+                <InputLeftElement pointerEvents="none">
+                  <SearchIcon color="gray.300" />
+                </InputLeftElement>
+                <Input type="search" placeholder="Buscar..." />
+              </InputGroup>
             </Stack>
           </DrawerBody>
         </DrawerContent>
