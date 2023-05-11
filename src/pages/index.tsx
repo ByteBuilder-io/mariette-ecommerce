@@ -3,10 +3,12 @@ import Hero from "@/components/hero";
 import ProductDetail from "@/components/productDetail";
 import ShoppingCart from "@/components/cart";
 import Filter from "@/components/filter";
+import BasicImage from "@/components/basicImage";
 
 const Home = () => {
   return (
     <Box w={"100%"}>
+      <BasicImage />
       <Filter />
       <ProductDetail />
       <ShoppingCart />
