@@ -36,6 +36,7 @@ const ProductGrid = () => (
       }}
       textAlign="center"
       size="md"
+      fontFamily="Castoro Titling"
     >
       Productos Relacionados
     </Heading>

@@ -18,12 +18,13 @@ import {
   FaTiktok,
 } from "react-icons/fa";
 import { IDataFooter } from "@/typesSanity/footer";
+
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 import SocialButton from "../commons/socialMedia";
 
 import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
 import { IconType } from "react-icons";
-
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
@@ -36,6 +37,8 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 const Footer = () => {
   const query = `*[_type == "footer"]`;
   const [data, setData] = useState<IDataFooter[]>();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { width, height } = useWindowDimensions();
 
   const iconos: { [nombre: string]: IconType } = {
     FaInstagram: FaInstagram,
@@ -78,7 +81,7 @@ const Footer = () => {
       const result = dataDetail.map(
         (item: { _key: string; nombre: string; url?: string }) => {
           return (
-            <Link href={item.url} key={item._key}>
+            <Link href={item.url} key={item._key} fontSize="14px">
               {item.nombre}
             </Link>
           );
@@ -98,6 +101,14 @@ const Footer = () => {
     fetchData();
   }, [query]);
 
+  useEffect(() => {
+    if (width < 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [width]);
+
   return (
     <Box
       bg={useColorModeValue("gray.50", "gray.900")}
@@ -108,7 +119,11 @@ const Footer = () => {
           templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
           spacing={8}
         >
-          <Stack spacing={6}>
+          <Stack
+            spacing={6}
+            justify={isMobile ? "center" : ""}
+            align={isMobile ? "center" : ""}
+          >
             <Box>
               {data && (
                 <Image
@@ -118,18 +133,20 @@ const Footer = () => {
                 />
               )}
             </Box>
-            <Text fontSize={"sm"}>{data ? data[0].derechos : ""}</Text>
-            <Stack direction={"row"} spacing={6}>
+            <Text fontSize={"sm"} textAlign={isMobile ? "center" : "left"}>
+              {data ? data[0].derechos : ""}
+            </Text>
+            <Stack direction={"row"} spacing={6} justify={isMobile ? "center" : ""}>
               {data && renderSocialMedia()}
             </Stack>
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={isMobile ? "center" : "flex-start"}>
             {renderAboutUs("sobre_nosotros_apartado_1")}
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={isMobile ? "center" : "flex-start"}>
             {renderAboutUs("sobre_nosotros_apartado_2")}
           </Stack>
-          <Stack align={"flex-start"}>
+          <Stack align={isMobile ? "center" : "flex-start"}>
             <ListHeader>Buscar</ListHeader>
             <Stack direction={"row"}>
               <Input

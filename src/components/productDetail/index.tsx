@@ -63,14 +63,6 @@ const ProductDetail = () => {
     }
   }, [width]);
 
-	// let responseData = pm.response.json();
-	// let dueDate = pm.variables.get("dueDate");
-	// let dueDatez = new Date(dueDate + "Z");
-
-	// pm.test("Date in Project Element time zone;" 
-	// 	+ dueDatez.toLocaleString("en-US", { year: 'numeric', timeZone: responseData.locationInfo.timeZone}) + "-"
-	// 	+ dueDatez.toLocaleString("en-US", { month: '2-digit', timeone: responseData.locationInfo.timeZone}) + "-"
-	// 	+ duedatez.toLocaleString("en-US", { day: '2-digit', timezone: responseData.locationInfo.timeZone}));
 
   return (
     <Fragment>
