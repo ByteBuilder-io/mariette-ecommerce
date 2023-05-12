@@ -20,6 +20,7 @@ const Hero = ({ maxH }: IProps) => {
   const [data, setData] = useState<TMain[]>();
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const renderSlider = () => {
     if (data && data.length > 0) {
@@ -48,7 +49,7 @@ const Hero = ({ maxH }: IProps) => {
                 left="50%"
                 transform="translate(-50%, -50%)"
                 color="white"
-                fontSize="50px"
+                fontSize={isMobile ? "30px" : "50px"}
                 fontWeight="100"
                 textAlign="center"
                 fontFamily="Castoro Titling"
@@ -58,11 +59,12 @@ const Hero = ({ maxH }: IProps) => {
                   <Button
                     fontWeight="300"
                     textAlign="center"
+                    fontSize={isMobile ? "12px" : "20px"}
                     borderRadius="none"
                     bg="#997d6c"
                     color="white"
-                    h="55px"
-                    width="150px"
+                    h={isMobile ? "40px" : "55px"}
+                    width={isMobile ? "120px" : "150px" }
                   >
                     {item.texto_button}
                   </Button>
@@ -76,6 +78,14 @@ const Hero = ({ maxH }: IProps) => {
       return result;
     }
   };
+
+  useEffect(() => {
+    if (width < 600) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [width]);
 
   useEffect(() => {
     if (width < 768) {
