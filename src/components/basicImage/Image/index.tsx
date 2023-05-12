@@ -1,4 +1,7 @@
 import { Box, Flex, Text, Image } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 interface Props {
   text: string;
@@ -7,6 +10,17 @@ interface Props {
 }
 
 const ImageText = ({ text, imageUrl, position }: Props) => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { width, height } = useWindowDimensions();
+
+  useEffect(() => {
+    if (width < 1024) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [width]);
+
   const renderText = () => {
     if (position === 1) {
       return (
@@ -19,7 +33,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
           <Flex flexDirection={{ base: "column", md: "row" }}>
             <Box
               w={{ base: "100%", md: "40%" }}
-              mb={{ base: "4", md: "0" }}
+              mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
             >
               <Text
@@ -28,7 +42,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                 justifyContent="center"
                 alignItems="center"
                 height="90%"
-                fontSize="30px"
+                fontSize={isMobile ? "24px" : "30px"}
                 fontFamily="Castoro Titling"
                 pl="35px"
                 pr="35px"
@@ -65,7 +79,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                 justifyContent="center"
                 alignItems="center"
                 height="90%"
-                fontSize="30px"
+                fontSize={isMobile ? "24px" : "30px"}
                 fontFamily="Castoro Titling"
                 pl="35px"
                 pr="35px"
