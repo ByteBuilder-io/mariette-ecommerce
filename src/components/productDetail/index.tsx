@@ -38,7 +38,7 @@ const ProductDetail = () => {
       img={src}
       zoomScale={3}
       height={337}
-      width={505}
+      width={isMobile ? 405 : 505}
       transitionTime={0.5}
     />
   );
