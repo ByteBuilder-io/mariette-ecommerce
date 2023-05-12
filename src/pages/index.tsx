@@ -3,13 +3,15 @@ import Hero from "@/components/hero";
 import ProductDetail from "@/components/productDetail";
 import ShoppingCart from "@/components/cart";
 import Filter from "@/components/filter";
-import BasicImage from "@/components/basicImage";
+import BasicImageRight from "@/components/basicImage/right";
+import BasicImageLeft from "@/components/basicImage/left";
 import CardCategory from "@/components/cards/cardCategory";
 
 const Home = () => {
   return (
     <Container w={"100%"} maxW={"1400px"}>
-      <BasicImage />
+      <BasicImageRight />
+      <BasicImageLeft />
       <Filter />
       <ProductDetail />
       <ShoppingCart />
