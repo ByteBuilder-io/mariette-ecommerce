@@ -9,8 +9,12 @@ import Currency from "./Currency";
 import SmallImages from "./SmallImages";
 import Description from "./Description";
 import ProductGrid from "./ProductGrid";
+import { IDataProductos } from "@/typesSanity/productos";
 
-const ProductDetail = () => {
+interface Props {
+  producto: IDataProductos;
+}
+const ProductDetail = ({ producto }: Props) => {
   const { width, height } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [data, setData] = useState([
@@ -31,7 +35,7 @@ const ProductDetail = () => {
       isSelected: false,
     },
   ]);
-	const [imgMain, setImgMain] = useState<string>(data[0].img);
+  const [imgMain, setImgMain] = useState<string>(data[0].img);
 
   const MainImage = ({ src }: any) => (
     <Zoom
@@ -44,7 +48,7 @@ const ProductDetail = () => {
   );
 
   const handleImageClick = (index: number) => {
-		setImgMain(data[index].img);
+    setImgMain(data[index].img);
     const newData = data.map((item, i) => {
       if (i === index) {
         return { ...item, isSelected: true };
@@ -62,7 +66,6 @@ const ProductDetail = () => {
       setIsMobile(false);
     }
   }, [width]);
-
 
   return (
     <Fragment>
@@ -98,14 +101,14 @@ const ProductDetail = () => {
               fontWeight="semibold"
               fontFamily="Castoro Titling"
             >
-              {"ANILLO 'CARLOTTA'"}
+              {producto.title}
             </Text>
-            <Currency value={18800} />
+            <Currency value={producto.priceRange.maxVariantPrice} />
             <Form />
             <Description />
           </Stack>
         </Stack>
-				<ProductGrid />
+        {/*<ProductGrid />*/}
       </Box>
     </Fragment>
   );

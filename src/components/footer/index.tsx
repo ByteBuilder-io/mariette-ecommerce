@@ -150,19 +150,19 @@ const Footer = () => {
           <Stack align={isMobile ? "center" : "flex-start"}>
             {renderAboutUs("sobre_nosotros_apartado_2")}
           </Stack>
-          <Stack align={isMobile ? "center" : "flex-start"}>
-            <ListHeader>Buscar</ListHeader>
-            <Stack direction={"row"}>
-              <Input
-                placeholder={"Buscar..."}
-                bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-                border={0}
-                _focus={{
-                  bg: "whiteAlpha.300",
-                }}
-              />
-            </Stack>
-          </Stack>
+          {/*<Stack align={isMobile ? "center" : "flex-start"}>*/}
+          {/*  <ListHeader>Buscar</ListHeader>*/}
+          {/*  <Stack direction={"row"}>*/}
+          {/*    <Input*/}
+          {/*      placeholder={"Buscar..."}*/}
+          {/*      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}*/}
+          {/*      border={0}*/}
+          {/*      _focus={{*/}
+          {/*        bg: "whiteAlpha.300",*/}
+          {/*      }}*/}
+          {/*    />*/}
+          {/*  </Stack>*/}
+          {/*</Stack>*/}
         </SimpleGrid>
       </Container>
     </Box>

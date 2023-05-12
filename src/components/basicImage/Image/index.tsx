@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Image } from "@chakra-ui/react";
+import { Box, Flex, Text, Image, Center } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
@@ -25,14 +25,12 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
     if (position === 1) {
       return (
         <Box
-          maxW={{ base: "3xl", lg: "7xl" }}
-          mx="auto"
-          px={{ base: "4", md: "8", lg: "12" }}
+          maxW={{ base: "3xl", lg: "1336px" }}
           py={{ base: "6", md: "8", lg: "12" }}
         >
           <Flex flexDirection={{ base: "column", md: "row" }}>
             <Box
-              w={{ base: "100%", md: "40%" }}
+              w={{ base: "100%", md: "80%" }}
               mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
             >
@@ -50,7 +48,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                 {text}
               </Text>
             </Box>
-            <Box w={{ base: "100%", md: "60%" }}>
+            <Box w={{ base: "100%", md: "80%" }}>
               <Image src={imageUrl} alt="img" />
             </Box>
           </Flex>
@@ -59,18 +57,16 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
     } else {
       return (
         <Box
-          maxW={{ base: "3xl", lg: "7xl" }}
-          mx="auto"
-          px={{ base: "4", md: "8", lg: "12" }}
+          maxW={{ base: "3xl", lg: "1336px" }}
           py={{ base: "6", md: "8", lg: "12" }}
         >
           <Flex flexDirection={{ base: "column", md: "row" }}>
-            <Box w={{ base: "100%", md: "60%" }}>
+            <Box w={{ base: "100%", md: "80%" }}>
               <Image src={imageUrl} alt="img" />
             </Box>
             <Box
-              w={{ base: "100%", md: "40%" }}
-              mb={{ base: "4", md: "0" }}
+              w={{ base: "100%", md: "100%" }}
+              mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
             >
               <Text
@@ -93,7 +89,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
     }
   };
 
-  return <>{renderText()}</>;
+  return <Center>{renderText()}</Center>;
 };
 
 export default ImageText;
