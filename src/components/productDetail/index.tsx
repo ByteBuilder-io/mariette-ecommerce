@@ -10,33 +10,17 @@ import SmallImages from "./SmallImages";
 import Description from "./Description";
 import ProductGrid from "./ProductGrid";
 import { IDataProductos } from "@/typesSanity/productos";
+import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 
 interface Props {
   producto: IDataProductos;
+  images: { node: { originalSrc: string } }[];
 }
-const ProductDetail = ({ producto }: Props) => {
+const ProductDetail = ({ producto, images }: Props) => {
   const { width, height } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [data, setData] = useState([
-    {
-      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-4-scaled.jpg",
-      isSelected: true,
-    },
-    {
-      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-5-scaled.jpg",
-      isSelected: false,
-    },
-    {
-      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-2-scaled.jpg",
-      isSelected: false,
-    },
-    {
-      img: "https://mariette.com.mx/wp-content/uploads/2023/03/AMIRA-3-scaled.jpg",
-      isSelected: false,
-    },
-  ]);
-  const [imgMain, setImgMain] = useState<string>(data[0].img);
-
+  const [data, setData] = useState(images);
+  const [imgMain, setImgMain] = useState<string>(images[0].node.originalSrc);
   const MainImage = ({ src }: any) => (
     <Zoom
       img={src}
@@ -48,7 +32,7 @@ const ProductDetail = ({ producto }: Props) => {
   );
 
   const handleImageClick = (index: number) => {
-    setImgMain(data[index].img);
+    setImgMain(data[index].node.originalSrc);
     const newData = data.map((item, i) => {
       if (i === index) {
         return { ...item, isSelected: true };

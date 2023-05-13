@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="" />
+    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/lib/shopify.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/SmallImages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/SmallImages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/productos/detalle/[...slug].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/detalle/[...slug].tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,11 +77,22 @@
       <workItem from="1683599188512" duration="11661000" />
       <workItem from="1683683267932" duration="2563000" />
       <workItem from="1683837165857" duration="7948000" />
-      <workItem from="1683917691590" duration="5344000" />
+      <workItem from="1683917691590" duration="14154000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

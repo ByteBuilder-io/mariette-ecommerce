@@ -4,9 +4,19 @@ import { useEffect, useState } from "react";
 import { IDataProductos } from "@/typesSanity/productos";
 import { client } from "@/lib/sanity.client";
 import ProductDetail from "@/components/productDetail";
+import { graphQLClient } from "@/lib/shopify";
+
+export interface IDataImage {
+  product: {
+    images: {
+      edges: { node: { originalSrc: string } }[];
+    };
+  };
+}
 
 const ProductoDetalle = () => {
   const [data, setData] = useState<IDataProductos[]>();
+  const [dataImages, setDataImages] = useState<IDataImage>();
   const router = useRouter();
   const { slug } = router.query;
 
@@ -32,12 +42,39 @@ const ProductoDetalle = () => {
         }`;
         const data: IDataProductos[] = await client.fetch(query);
         setData(data);
+        const s = `
+          query {
+            product(id: "${data[0].gid}") {
+              images(first: 10) {
+                edges {
+                  node {
+                    originalSrc
+                  }
+                }
+              }
+            }
+          }
+        `;
+
+        // Utilizando el cliente GraphQL
+        // @ts-ignore
+        const image: IDataImage = await graphQLClient.request(s);
+        setDataImages(image);
       }
     }
     fetchData();
   }, [slug]);
-  console.log(data);
-  return <Box>{data && <ProductDetail producto={data[0]} />}</Box>;
+  console.log(data, dataImages);
+  return (
+    <Box>
+      {data && dataImages && (
+        <ProductDetail
+          producto={data[0]}
+          images={dataImages.product.images.edges}
+        />
+      )}
+    </Box>
+  );
 };
 
 export default ProductoDetalle;
