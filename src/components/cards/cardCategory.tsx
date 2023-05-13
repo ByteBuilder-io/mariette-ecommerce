@@ -86,7 +86,7 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
       <Flex
         as={"a"}
         href={"/productos" + "?filter=" + filter}
-        w="425.343px"
+        w="425px"
         h="200px"
         onMouseEnter={handleFlipStart}
         onMouseLeave={handleFlipEnd}
