@@ -9,7 +9,7 @@ import {
   extendTheme,
   ChakraProvider,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { IoMdClose } from "react-icons/io";
@@ -29,7 +29,11 @@ const customTheme = extendTheme({
   },
 });
 
-const Filter = () => {
+interface Props {
+  children: ReactNode;
+}
+
+const Filter = ({ children }: Props) => {
   const { width, height } = useWindowDimensions();
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -159,6 +163,7 @@ const Filter = () => {
             <BadgeFilter text="Azul" />
             <BadgeFilter text="Hombre" />
           </Stack>
+          {children}
         </Stack>
       </Stack>
     </Box>

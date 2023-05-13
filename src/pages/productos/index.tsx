@@ -18,69 +18,64 @@ import { client } from "@/lib/sanity.client";
 import { useRouter } from "next/router";
 import { IDataProductos } from "@/typesSanity/productos";
 import { sanityImage } from "@/lib/sanity.image";
+import Filter from "@/components/filter";
+import ProductGrid from "@/components/productDetail/ProductGrid";
+import { products } from "@/components/productDetail/ProductGrid/utils";
+import ProductCard from "@/components/productDetail/ProductGrid/ProductCard";
+import ProductGridCard from "@/components/productDetail/ProductGrid/ProductGrid";
 
 const Productos = () => {
   const [data, setData] = useState<IDataProductos[]>();
   const router = useRouter();
   const { filter } = router.query;
-  const query = filter
-    ? `*[_type == 'product' && lower(store.productType) match '*${filter}*' && store.status != 'draft']{store}`
-    : `*[_type == 'product' && store.status != 'draft']{store}`;
-
-  console.log(query);
+  const query = `*[_type == 'product' && store.status != 'draft'] {
+  "createdAt": store.createdAt,
+  "descriptionHtml": store.descriptionHtml,
+  "gid": store.gid,
+  "id": store.id,
+  "isDeleted": store.isDeleted,
+  "options": store.options,
+  "previewImageUrl": store.previewImageUrl,
+  "priceRange": store.priceRange,
+  "productType": store.productType,
+  "slug": store.slug,
+  "status": store.status,
+  "tags": store.tags,
+  "title": store.title,
+  "variants": store.variants,
+  "vendor": store.vendor,
+}`;
 
   useEffect(() => {
     async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data);
+      const data: IDataProductos[] = await client.fetch(query);
+      console.log(filter);
+      if (filter != undefined && filter != "" && data) {
+        const filteredData = data.filter(
+          (item) => item.productType.toLowerCase() === filter
+        );
+        setData(filteredData);
+      } else {
+        setData(data);
+      }
     }
 
     fetchData();
-  }, []);
-  console.log(data);
+  }, [filter]);
   return (
-    <Container py={10} maxW="1200px">
-      <SimpleGrid columns={3} spacing={10}>
-        {data &&
-          data.map((e) => {
-            return (
-              <Box key={e.store.id}>
-                <Card maxW="sm">
-                  <CardBody>
-                    <Image
-                      src={e.store.previewImageUrl}
-                      alt={e.store.title}
-                      borderRadius="lg"
-                    />
-                    <Stack mt="6" spacing="3">
-                      <Heading size="md">{e.store.title}</Heading>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html: e.store.descriptionHtml,
-                        }}
-                      />
-                      <Text color="blue.600" fontSize="2xl">
-                        ${e.store.priceRange.minVariantPrice} - $
-                        {e.store.priceRange.maxVariantPrice}
-                      </Text>
-                    </Stack>
-                  </CardBody>
-                  <Divider />
-                  <CardFooter>
-                    <ButtonGroup spacing="2">
-                      <Button variant="solid" colorScheme="blue">
-                        Buy now
-                      </Button>
-                      <Button variant="ghost" colorScheme="blue">
-                        Add to cart
-                      </Button>
-                    </ButtonGroup>
-                  </CardFooter>
-                </Card>
-              </Box>
-            );
-          })}
-      </SimpleGrid>
+    <Container py={10} maxW="1400px">
+      <Filter>
+        <ProductGridCard>
+          {data &&
+            data.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                totalRows={data.length / 4}
+              />
+            ))}
+        </ProductGridCard>
+      </Filter>
     </Container>
   );
 };

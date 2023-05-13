@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/pages/productos/[[...slug]].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/categorias.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/productos.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cards/cardCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardCategory.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +68,8 @@
       <workItem from="1683578358054" duration="4448000" />
       <workItem from="1683599188512" duration="11661000" />
       <workItem from="1683683267932" duration="2563000" />
-      <workItem from="1683837165857" duration="5525000" />
+      <workItem from="1683837165857" duration="7948000" />
+      <workItem from="1683917691590" duration="5344000" />
     </task>
     <servers />
   </component>

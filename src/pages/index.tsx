@@ -10,12 +10,10 @@ import CardCategory from "@/components/cards/cardCategory";
 const Home = () => {
   return (
     <Container w={"100%"} maxW={"1400px"}>
-      <ProductDetail />
+      {/*<ShoppingCart />*/}
+      <Hero maxH={"500px"} />
       <BasicImageRight />
       <BasicImageLeft />
-      <Filter />
-      <ShoppingCart />
-      <Hero maxH={"500px"} />
       <CardCategory />
       <Box
         backgroundColor={"#faf5f1"}

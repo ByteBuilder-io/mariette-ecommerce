@@ -40,11 +40,11 @@ const ProductGrid = () => (
     >
       Productos Relacionados
     </Heading>
-    <ProductGridCard>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </ProductGridCard>
+    {/*<ProductGridCard>*/}
+    {/*  {products.map((product) => (*/}
+    {/*    <ProductCard key={product.id} product={product} />*/}
+    {/*  ))}*/}
+    {/*</ProductGridCard>*/}
   </Box>
 );
 
