@@ -32,34 +32,40 @@ import ButtonOutline from "@/components/filter/ButtonOutline";
 const Form = () => {
   const toast = useToast();
   const [quantity, setQuantity] = useState(1);
-  const [category, setCategory] = useState("Category 1");
+  const [gema, setGema] = useState("");
+  const [value, setValue] = useState<any>(0);
+  const [data, setData] = useState({
+    gema: "",
+    material: [],
+    talla: [],
+    cantidad: 0,
+  });
+
   const handleQuantityChange = (event: any) => {
     setQuantity(event.target.value);
   };
+
   const handleCategoryChange = (event: any) => {
-    setCategory(event.target.value);
-  };
-  const handleAddToCart = () => {
-    toast({
-      title: "Product added to cart",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      containerStyle: {
-        backgroundColor: "#D7C0b4",
-      },
-    });
-  };
-  const handleAddToFavorites = () => {
-    toast({
-      title: "Product added to favorites",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
+    setGema(event);
   };
 
-  const [value, setValue] = useState<any>(0);
+  const handleChange = (
+    value: any,
+    id:
+      | "producto"
+      | "material"
+      | "rango_precio"
+      | "talla"
+      | "categoria"
+      | "color"
+  ) => {
+    setData((prevData: any) => ({
+      ...prevData,
+      [id]: prevData[id].includes(value)
+        ? prevData[id].filter((val: any) => val !== value)
+        : [...prevData[id], value],
+    }));
+  };
 
   const handleIncrease = () => {
     setValue(value + 1);
@@ -71,6 +77,33 @@ const Form = () => {
     }
   };
 
+  const handleAddToCart = () => {
+    toast({
+      title: "Product added to cart",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      containerStyle: {
+        backgroundColor: "#D7C0b4",
+      },
+    });
+    const obj = {
+      ...data,
+      cantidad: quantity,
+      gema: gema,
+    };
+    console.log(obj, "obj");
+  };
+
+  const handleAddToFavorites = () => {
+    toast({
+      title: "Product added to favorites",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   return (
     <Box pt="20px">
       <Box mb="10px">
@@ -79,27 +112,32 @@ const Form = () => {
         </Text>
       </Box>
       <Select
-        value={category}
+        value={gema}
         onChange={handleCategoryChange}
         placeholder="Selecciona..."
         styles={customStyles}
         options={dataGema}
       />
-
-      <BasicCheckBox title="Material" options={d2} custom />
-
+      <BasicCheckBox
+        title="Material"
+        options={d2}
+        custom
+        id="material"
+        onClick={handleChange}
+        data={data}
+      />
       <Box w="60px">
         <Text fontWeight="bold" fontSize="14px" mb="10px">
           Talla
         </Text>
       </Box>
       <HStack direction="row" spacing={2}>
-        <ButtonOutline text="4" />
-        <ButtonOutline text="5" />
-        <ButtonOutline text="6" />
-        <ButtonOutline text="7" />
-        <ButtonOutline text="8" />
-        <ButtonOutline text="9" />
+        <ButtonOutline text="4" data={data} onClick={handleChange} />
+        <ButtonOutline text="5" data={data} onClick={handleChange} />
+        <ButtonOutline text="6" data={data} onClick={handleChange} />
+        <ButtonOutline text="7" data={data} onClick={handleChange} />
+        <ButtonOutline text="8" data={data} onClick={handleChange} />
+        <ButtonOutline text="9" data={data} onClick={handleChange} />
       </HStack>
       <Box pt="40px">
         <Text mb="8px" fontWeight="bold" fontSize="14px">

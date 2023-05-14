@@ -1,7 +1,9 @@
 export const dataGema: any = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
+  { value: 'diamante', label: 'Diamante' },
+  { value: 'esmeralda', label: 'Esmeralda' },
+  { value: 'rubí', label: 'Rubí' },
+  { value: 'zafiro', label: 'Zafiro' },
+  { value: 'topacio', label: 'Topacio' }
 ];
 
 export const d2 = [

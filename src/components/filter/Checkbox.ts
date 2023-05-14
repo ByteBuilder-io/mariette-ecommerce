@@ -34,18 +34,18 @@ const variantCircular = definePartsStyle({
 });
 
 // Defining a custom variant
-const variantCircularCustom = definePartsStyle({
+const variantCircularCustomBlack = definePartsStyle({
   control: defineStyle({
     boxSize: 10,
     fontSize: "10px",
     rounded: "full",
-		bg: "#272458",
+    bg: "black",
     _checked: {
-      bg: "#272458",
-      borderColor: "#272458",
+      bg: "black",
+      borderColor: "black",
       _hover: {
-        borderColor: "#272458",
-        bg: "#272458",
+        borderColor: "black",
+        bg: "black",
       },
     },
   }),
@@ -56,7 +56,7 @@ const variantSquare = definePartsStyle({
     boxSize: 10,
     fontSize: "10px",
     rounded: "full",
-		bg: "#272458",
+    bg: "#272458",
     _checked: {
       bg: "#272458",
       borderColor: "#272458",
@@ -68,10 +68,64 @@ const variantSquare = definePartsStyle({
   }),
 });
 
+const variantCircularCustomOrange = definePartsStyle({
+  control: defineStyle({
+    boxSize: 10,
+    fontSize: "10px",
+    rounded: "full",
+    bg: "#ff6347",
+    _checked: {
+      bg: "#ff6347",
+      borderColor: "#ff6347",
+      _hover: {
+        borderColor: "#ff6347",
+        bg: "#ff6347",
+      },
+    },
+  }),
+});
+
+const variantCircularCustomPurple = definePartsStyle({
+  control: defineStyle({
+    boxSize: 10,
+    fontSize: "10px",
+    rounded: "full",
+    bg: "#272458",
+    _checked: {
+      bg: "#272458",
+      borderColor: "#272458",
+      _hover: {
+        borderColor: "#272458",
+        bg: "#272458",
+      },
+    },
+  }),
+});
+
+const variantCircularCustomGrow = definePartsStyle({
+  control: defineStyle({
+    boxSize: 10,
+    fontSize: "10px",
+    rounded: "full",
+    bg: "#bfb8a5",
+    _checked: {
+      bg: "#bfb8a5",
+      borderColor: "#bfb8a5",
+      _hover: {
+        borderColor: "#bfb8a5",
+        bg: "#bfb8a5",
+      },
+    },
+  }),
+});
+
 const variants = {
-	square: variantSquare,
+  square: variantSquare,
   circular: variantCircular,
-  circulasCustom: variantCircularCustom,
+  circulasCustomBlack: variantCircularCustomBlack,
+  circulasCustomOrange: variantCircularCustomOrange,
+  circulasCustomPurple: variantCircularCustomPurple,
+  circulasCustomGrow: variantCircularCustomGrow,
 };
 
 const sizes = {
