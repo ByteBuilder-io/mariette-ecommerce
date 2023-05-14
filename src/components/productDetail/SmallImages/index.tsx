@@ -11,17 +11,22 @@ const SmallImages = (props: ContainerProps) => {
   const { data, handleImageClick } = props;
 
   const renderImgs = useCallback(() => {
-    const result = data.map((item: any, index: number) => {
-      return (
-        <SmallImage
-          src={item.img}
-          isSelected={item.isSelected}
-					handleImageClick={handleImageClick}
-					itemIndex={index}
-          key={index}
-        />
-      );
-    });
+    const result = data.map(
+      (
+        item: { node: { originalSrc: string }; isSelected: boolean },
+        index: number
+      ) => {
+        return (
+          <SmallImage
+            src={item.node.originalSrc}
+            isSelected={item.isSelected}
+            handleImageClick={handleImageClick}
+            itemIndex={index}
+            key={index}
+          />
+        );
+      }
+    );
 
     return result;
   }, [data, handleImageClick]);
