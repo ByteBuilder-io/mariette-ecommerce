@@ -121,7 +121,7 @@ const Filter = ({ children }: Props) => {
     }
   };
 
-  console.log(data, "datadata");
+  console.log(data, "data form");
 
   const RenderFilters = () => {
     return (

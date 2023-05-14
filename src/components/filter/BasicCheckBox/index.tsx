@@ -17,15 +17,6 @@ const customTheme = extendTheme({
   },
 });
 
-interface IData {
-  producto: string[];
-  material: string[];
-  talla: string[];
-  rango_precio: string[];
-  color: string[];
-  categoria: string[];
-}
-
 interface ContainerProps {
   title: string;
   options: { text: string; subText?: string }[];
@@ -38,7 +29,7 @@ interface ContainerProps {
     | "rango_precio"
     | "talla"
     | "categoria";
-  data: IData;
+  data: any;
 }
 
 const BasicCheckBox = (props: ContainerProps) => {

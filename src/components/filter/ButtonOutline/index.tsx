@@ -12,7 +12,7 @@ interface IData {
 interface ContainerProps {
   text: string;
   onClick?: any;
-  data: IData;
+  data: any;
 }
 
 const ButtonActive = (props: ContainerProps) => {
