@@ -33,11 +33,28 @@ interface Props {
   children: ReactNode;
 }
 
+interface IData {
+  producto: string[];
+  material: string[];
+  talla: string[];
+  rango_precio: string[];
+  color: string[];
+  categoria: string[];
+}
+
 const Filter = ({ children }: Props) => {
   const { width, height } = useWindowDimensions();
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(true);
+  const [data, setData] = useState<any>({
+    producto: [],
+    material: [],
+    talla: [],
+    rango_precio: [],
+    color: [],
+    categoria: [],
+  });
 
   const handleChangeSlider = (nuevoRango: [number, number]) => {
     setRango(nuevoRango);
@@ -55,11 +72,74 @@ const Filter = ({ children }: Props) => {
     setIsOpenFilter(true);
   };
 
+  const handleCheckboxChange = (
+    value: any,
+    id:
+      | "producto"
+      | "material"
+      | "rango_precio"
+      | "talla"
+      | "categoria"
+      | "color"
+  ) => {
+    setData((prevData: any) => ({
+      ...prevData,
+      [id]: prevData[id].includes(value)
+        ? prevData[id].filter((val: any) => val !== value)
+        : [...prevData[id], value],
+    }));
+  };
+
+  const renderBadges = (
+    type:
+      | "producto"
+      | "material"
+      | "categoria"
+      | "rango_precio"
+      | "talla"
+      | "color"
+  ) => {
+    if (
+      type === "producto" ||
+      type === "material" ||
+      type === "color" ||
+      type === "categoria" ||
+      type === "rango_precio"
+    ) {
+      const result = data[type].map((item: string, index: number) => {
+        return <BadgeFilter text={item} key={index} />;
+      });
+
+      return result;
+    }
+    if (type === "talla") {
+      const result = data.talla.map((item: string, index: number) => {
+        return <BadgeFilter text={`Talla: ${item}`} key={index} />;
+      });
+
+      return result;
+    }
+  };
+
+  console.log(data, "datadata");
+
   const RenderFilters = () => {
     return (
       <Stack spacing="6" mt="50px">
-        <BasicCheckBox title="Producto" options={d1} />
-        <BasicCheckBox title="Material" options={d2} />
+        <BasicCheckBox
+          title="Producto"
+          options={d1}
+          id="producto"
+          onClick={handleCheckboxChange}
+          data={data}
+        />
+        <BasicCheckBox
+          title="Material"
+          options={d2}
+          id="material"
+          onClick={handleCheckboxChange}
+          data={data}
+        />
         <Text fontWeight="bold" fontSize="14px">
           Talla
         </Text>
@@ -67,17 +147,47 @@ const Filter = ({ children }: Props) => {
           <Stack spacing="1">
             <ChakraProvider theme={customTheme}>
               <HStack direction="row" spacing={2}>
-                <ButtonOutline text="4" />
-                <ButtonOutline text="5" />
-                <ButtonOutline text="6" />
-                <ButtonOutline text="7" />
-                <ButtonOutline text="8" />
-                <ButtonOutline text="9" />
+                <ButtonOutline
+                  text="4"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="6"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="7"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="8"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="9"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
               </HStack>
             </ChakraProvider>
           </Stack>
         </CheckboxGroup>
-        <BasicCheckBox title="Rango de precio" options={d3} />
+        <BasicCheckBox
+          title="Rango de precio"
+          options={d3}
+          id="rango_precio"
+          onClick={handleCheckboxChange}
+          data={data}
+        />
         <Box w="200px">
           <Flex justifyContent="space-between">
             <Text fontSize="14px">Desde: ${rango[0]}</Text>
@@ -97,12 +207,25 @@ const Filter = ({ children }: Props) => {
           <ChakraProvider theme={customTheme}>
             <HStack direction="row" spacing={2}>
               {colors.map((color, index) => (
-                <Checkbox variant="circulasCustom" size="md" key={index} />
+                <Checkbox
+                  variant={`circulasCustom${color.name}`}
+                  size="md"
+                  key={index}
+                  colorScheme="red"
+                  isChecked={data.color.includes(color.label)}
+                  onChange={() => handleCheckboxChange(color.label, "color")}
+                />
               ))}
             </HStack>
           </ChakraProvider>
         </Flex>
-        <BasicCheckBox title="Categoria" options={d4} />
+        <BasicCheckBox
+          title="Categoria"
+          options={d4}
+          id="categoria"
+          onClick={handleCheckboxChange}
+          data={data}
+        />
       </Stack>
     );
   };
@@ -147,21 +270,22 @@ const Filter = ({ children }: Props) => {
         <Stack spacing={{ base: "8", md: "4" }} flex="4">
           <BreadCrumb />
           {!isOpenFilter && !isMobile && (
-              <BadgeFilter text="Filtros" isFilter onClick={handleFilterOpen} />
-            )}
-            {isMobile && (
-              <BadgeFilter
-                text="Filtros"
-                isFilter
-                onClick={handleFilterOpenDrawer}
-              />
-            )}
+            <BadgeFilter text="Filtros" isFilter onClick={handleFilterOpen} />
+          )}
+          {isMobile && (
+            <BadgeFilter
+              text="Filtros"
+              isFilter
+              onClick={handleFilterOpenDrawer}
+            />
+          )}
           <Stack direction="row" flexWrap="wrap" marginTop="10px !important">
-            <BadgeFilter text="Talla: 7" />
-            <BadgeFilter text="Anillos" />
-            <BadgeFilter text="Oro" />
-            <BadgeFilter text="Azul" />
-            <BadgeFilter text="Hombre" />
+            {renderBadges("talla")}
+            {renderBadges("producto")}
+            {renderBadges("material")}
+            {renderBadges("color")}
+            {renderBadges("categoria")}
+            {renderBadges("rango_precio")}
           </Stack>
           {children}
         </Stack>

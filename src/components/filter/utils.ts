@@ -20,8 +20,8 @@ export const d3 = [
 export const d4 = [{ text: "Hombre" }, { text: "Mujer" }];
 
 export const colors = [
-  { name: "Negro", value: "black" },
-  { name: "Naranja", value: "#ff6347" },
-  { name: "Morado", value: "#272458" },
-  { name: "Cafe", value: "#bfb8a5" },
+  { name: "Black", value: "black", label: "Negro" },
+  { name: "Orange", value: "#ff6347", label: "Naranja" },
+  { name: "Purple", value: "#272458", label: "Morado" },
+  { name: "Grow", value: "#bfb8a5", label: "Cafe" },
 ];

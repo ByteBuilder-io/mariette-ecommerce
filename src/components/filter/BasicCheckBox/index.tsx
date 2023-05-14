@@ -17,20 +17,44 @@ const customTheme = extendTheme({
   },
 });
 
+interface IData {
+  producto: string[];
+  material: string[];
+  talla: string[];
+  rango_precio: string[];
+  color: string[];
+  categoria: string[];
+}
+
 interface ContainerProps {
   title: string;
   options: { text: string; subText?: string }[];
   custom?: boolean;
+  onClick?: any;
+  id:
+    | "producto"
+    | "material"
+    | "categoria"
+    | "rango_precio"
+    | "talla"
+    | "categoria";
+  data: IData;
 }
 
 const BasicCheckBox = (props: ContainerProps) => {
-  const { title, options, custom } = props;
+  const { title, options, custom, onClick, id, data } = props;
 
   const renderOptions = () => {
     const result = options.map(
       (item: { text: string; subText?: string }, index: number) => {
         return (
-          <Checkbox variant="circular" size="md" key={index}>
+          <Checkbox
+            variant="circular"
+            size="md"
+            key={index}
+            isChecked={data[id].includes(item.text)}
+            onChange={() => onClick(item.text, id)}
+          >
             <HStack>
               <Text fontSize="14px">{item.text}</Text>
               {item.subText && (
