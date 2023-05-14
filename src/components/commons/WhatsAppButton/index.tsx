@@ -27,6 +27,7 @@ const WhatsAppButton = () => {
           zIndex=""
           bg={data[0].color}
           color={data[0].color_icono}
+          borderRadius="30px"
           onClick={() =>
             window.open(`https://api.whatsapp.com/send?phone=${data[0].phone}`)
           }

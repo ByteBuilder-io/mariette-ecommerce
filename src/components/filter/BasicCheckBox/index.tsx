@@ -20,10 +20,11 @@ const customTheme = extendTheme({
 interface ContainerProps {
   title: string;
   options: { text: string; subText?: string }[];
+  custom?: boolean;
 }
 
 const BasicCheckBox = (props: ContainerProps) => {
-  const { title, options } = props;
+  const { title, options, custom } = props;
 
   const renderOptions = () => {
     const result = options.map(
@@ -43,19 +44,22 @@ const BasicCheckBox = (props: ContainerProps) => {
       }
     );
 
-		return result
+    return result;
   };
 
   return (
     <Fragment>
-      <Text fontWeight="bold" fontSize="14px">
+      <Text
+        fontWeight="bold"
+        fontSize="14px"
+        mb={custom ? "10px" : ""}
+        mt={custom ? "15px" : ""}
+      >
         {title}
       </Text>
       <CheckboxGroup>
-        <Stack spacing="1">
-          <ChakraProvider theme={customTheme}>
-            {renderOptions()}
-          </ChakraProvider>
+        <Stack spacing="1" mb={custom ? "20px" : ""}>
+          <ChakraProvider theme={customTheme}>{renderOptions()}</ChakraProvider>
         </Stack>
       </CheckboxGroup>
     </Fragment>

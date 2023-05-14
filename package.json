@@ -33,6 +33,7 @@
     "react-icons": "^4.8.0",
     "react-img-zoom": "^0.1.0",
     "react-markdown": "^8.0.7",
+    "react-select": "^5.7.3",
     "swiper": "^9.2.4",
     "typescript": "5.0.4"
   }

@@ -9,22 +9,24 @@ import CardCategory from "@/components/cards/cardCategory";
 
 const Home = () => {
   return (
-    <Container w={"100%"} maxW={"1400px"}>
-      {/*<ShoppingCart />*/}
+    <>
       <Hero maxH={"500px"} />
-      <BasicImageRight />
-      <BasicImageLeft />
-      <CardCategory />
-      <Box
-        backgroundColor={"#faf5f1"}
-        h="100%"
-        position={"absolute"}
-        top={0}
-        left={0}
-        w="100%"
-        zIndex={-2}
-      />
-    </Container>
+      <Container w={"100%"} maxW={"1400px"}>
+        {/*<ShoppingCart />*/}
+        <BasicImageRight />
+        <BasicImageLeft />
+        <CardCategory />
+        <Box
+          backgroundColor={"#faf5f1"}
+          h="100%"
+          position={"absolute"}
+          top={0}
+          left={0}
+          w="100%"
+          zIndex={-2}
+        />
+      </Container>
+    </>
   );
 };
 
