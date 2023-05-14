@@ -146,8 +146,7 @@ const Filter = ({ children }: Props) => {
         )}
         <Stack spacing={{ base: "8", md: "4" }} flex="4">
           <BreadCrumb />
-          <Stack direction="row" flexWrap="wrap">
-            {!isOpenFilter && !isMobile && (
+          {!isOpenFilter && !isMobile && (
               <BadgeFilter text="Filtros" isFilter onClick={handleFilterOpen} />
             )}
             {isMobile && (
@@ -157,6 +156,7 @@ const Filter = ({ children }: Props) => {
                 onClick={handleFilterOpenDrawer}
               />
             )}
+          <Stack direction="row" flexWrap="wrap" marginTop="10px !important">
             <BadgeFilter text="Talla: 7" />
             <BadgeFilter text="Anillos" />
             <BadgeFilter text="Oro" />

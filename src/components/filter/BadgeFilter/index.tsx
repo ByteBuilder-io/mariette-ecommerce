@@ -20,6 +20,7 @@ const BadgeFilter = (props: ContainerProps) => {
         position="relative"
         pr="20px"
         onClick={onClick}
+        bg={!isFilter ? "gray.100" : ""}
       >
         <Text
           pl="8px"

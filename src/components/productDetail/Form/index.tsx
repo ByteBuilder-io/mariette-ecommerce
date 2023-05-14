@@ -2,7 +2,6 @@ import {
   Box,
   HStack,
   Text,
-  Select,
   Flex,
   InputGroup,
   InputLeftElement,
@@ -13,6 +12,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import Select from "react-select";
 
 import { FaHeart } from "react-icons/fa";
 import { MdAdd, MdRemove } from "react-icons/md";
@@ -25,6 +25,9 @@ import {
   FaTiktok,
 } from "react-icons/fa";
 import SocialButton from "../../commons/socialMedia";
+import { dataGema, customStyles, d2 } from "./utils";
+import BasicCheckBox from "@/components/filter/BasicCheckBox";
+import ButtonOutline from "@/components/filter/ButtonOutline";
 
 const Form = () => {
   const toast = useToast();
@@ -70,65 +73,33 @@ const Form = () => {
 
   return (
     <Box pt="20px">
-      <HStack pb="10px">
-        <Box w="50px">
-          <Text fontWeight="bold" fontSize="14px">
-            Gema
-          </Text>
-        </Box>
-        <Select
-          fontSize="14px"
-          mb={4}
-          value={category}
-          onChange={handleCategoryChange}
-          placeholder="Select category"
-          borderRadius="0px"
-          w="218px"
-        >
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 3</option>
-        </Select>
-      </HStack>
-      <HStack pb="10px">
-        <Box w="50px">
-          <Text fontWeight="bold" fontSize="14px">
-            Metal
-          </Text>
-        </Box>
-        <Select
-          fontSize="14px"
-          mb={4}
-          value={category}
-          onChange={handleCategoryChange}
-          placeholder="Select category"
-          borderRadius="0px"
-          w="218px"
-        >
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 3</option>
-        </Select>
-      </HStack>
-      <HStack pb="10px">
-        <Box w="50px">
-          <Text fontWeight="bold" fontSize="14px">
-            Talla
-          </Text>
-        </Box>
-        <Select
-          fontSize="14px"
-          mb={4}
-          value={category}
-          onChange={handleCategoryChange}
-          placeholder="Select category"
-          borderRadius="0px"
-          w="218px"
-        >
-          <option value="Category 1">Category 1</option>
-          <option value="Category 2">Category 2</option>
-          <option value="Category 3">Category 3</option>
-        </Select>
+      <Box mb="10px">
+        <Text fontWeight="bold" fontSize="14px">
+          Gema
+        </Text>
+      </Box>
+      <Select
+        value={category}
+        onChange={handleCategoryChange}
+        placeholder="Selecciona..."
+        styles={customStyles}
+        options={dataGema}
+      />
+
+      <BasicCheckBox title="Material" options={d2} custom />
+
+      <Box w="60px">
+        <Text fontWeight="bold" fontSize="14px" mb="10px">
+          Talla
+        </Text>
+      </Box>
+      <HStack direction="row" spacing={2}>
+        <ButtonOutline text="4" />
+        <ButtonOutline text="5" />
+        <ButtonOutline text="6" />
+        <ButtonOutline text="7" />
+        <ButtonOutline text="8" />
+        <ButtonOutline text="9" />
       </HStack>
       <Box pt="40px">
         <Text mb="8px" fontWeight="bold" fontSize="14px">
@@ -151,11 +122,11 @@ const Form = () => {
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
                 textAlign="center"
-								fontSize="14px"
+                fontSize="14px"
               />
               <InputRightElement>
                 <IconButton
-									fontSize="14px"
+                  fontSize="14px"
                   aria-label="Increase value"
                   icon={<MdAdd />}
                   onClick={handleIncrease}
@@ -182,7 +153,7 @@ const Form = () => {
         color="white"
         w="237px"
         h="50px"
-				fontSize="12px"
+        fontSize="12px"
       >
         AÑADIR AL CARRITO
       </Button>

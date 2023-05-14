@@ -1,4 +1,12 @@
-import { Box, Flex, Text, Image, Center } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Image,
+  Center,
+  Button,
+  Stack,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
@@ -34,19 +42,41 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
               mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
             >
-              <Text
+              <Stack
                 align="center"
                 display="flex"
                 justifyContent="center"
-                alignItems="center"
-                height="90%"
-                fontSize={isMobile ? "24px" : "30px"}
-                fontFamily="Castoro Titling"
-                pl="35px"
-                pr="35px"
+                height="100%"
+                mb={isMobile ? "20px" : ""}
+                mt={isMobile ? "20px" : ""}
               >
-                {text}
-              </Text>
+                <Text
+                  align="center"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  fontSize={isMobile ? "24px" : "30px"}
+                  fontFamily="Castoro Titling"
+                  pl="35px"
+                  pr="35px"
+                >
+                  {text}
+                </Text>
+                <Button
+                  fontWeight="300"
+                  textAlign="center"
+                  fontSize={isMobile ? "12px" : "20px"}
+                  borderRadius="none"
+                  bg="#997d6c"
+                  color="white"
+                  h={isMobile ? "40px" : "55px"}
+                  width={isMobile ? "120px" : "auto"}
+                >
+                  <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                    Ver Mas
+                  </Text>
+                </Button>
+              </Stack>
             </Box>
             <Box w={{ base: "100%", md: "80%" }}>
               <Image src={imageUrl} alt="img" />
@@ -69,19 +99,41 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
               mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
             >
-              <Text
+              <Stack
                 align="center"
                 display="flex"
                 justifyContent="center"
-                alignItems="center"
-                height="90%"
-                fontSize={isMobile ? "24px" : "30px"}
-                fontFamily="Castoro Titling"
-                pl="35px"
-                pr="35px"
+                height="100%"
+                mb={isMobile ? "20px" : ""}
+                mt={isMobile ? "20px" : ""}
               >
-                {text}
-              </Text>
+                <Text
+                  align="center"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  fontSize={isMobile ? "24px" : "30px"}
+                  fontFamily="Castoro Titling"
+                  pl="35px"
+                  pr="35px"
+                >
+                  {text}
+                </Text>
+                <Button
+                  fontWeight="300"
+                  textAlign="center"
+                  fontSize={isMobile ? "12px" : "20px"}
+                  borderRadius="none"
+                  bg="#997d6c"
+                  color="white"
+                  h={isMobile ? "40px" : "55px"}
+                  width={isMobile ? "120px" : "auto"}
+                >
+                  <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                    Ver Mas
+                  </Text>
+                </Button>
+              </Stack>
             </Box>
           </Flex>
         </Box>

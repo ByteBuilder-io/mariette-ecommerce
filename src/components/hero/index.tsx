@@ -64,9 +64,9 @@ const Hero = ({ maxH }: IProps) => {
                     bg="#997d6c"
                     color="white"
                     h={isMobile ? "40px" : "55px"}
-                    width={isMobile ? "120px" : "150px" }
+                    width={isMobile ? "120px" : "auto" }
                   >
-                    {item.texto_button}
+                    <Text pr="10px" pl="10px">{item.texto_button}</Text>
                   </Button>
                 </Box>
               </Text>
@@ -105,7 +105,7 @@ const Hero = ({ maxH }: IProps) => {
   }, [query]);
 
   return (
-    <Container maxH={maxH} maxW={"1400px"}>
+    <Box mb={isMobile ? "20px" : "35px"}>
       <style>{styleSlider}</style>
       <Swiper
         navigation={!isPaginations}
@@ -114,7 +114,7 @@ const Hero = ({ maxH }: IProps) => {
       >
         {renderSlider()}
       </Swiper>
-    </Container>
+    </Box>
   );
 };
 
