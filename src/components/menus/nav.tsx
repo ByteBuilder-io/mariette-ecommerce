@@ -5,7 +5,6 @@ import {
   HStack,
   Button,
   Text,
-  Link,
   Menu,
   MenuButton,
   MenuList,
@@ -36,6 +35,7 @@ import { sanityImage } from "@/lib/sanity.image";
 import { BiCartAlt } from "react-icons/bi";
 import { PhoneIcon, SearchIcon } from "@chakra-ui/icons";
 import { IconToInput } from "@/components/inputs/searchInput";
+import Link from "next/link";
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,7 +63,7 @@ export default function Navbar() {
       <Flex h={16} alignItems="center" justifyContent="space-between" mx="auto">
         <HStack spacing={8} alignItems="center">
           {data && (
-            <Link href="/">
+            <Link href="/" passHref legacyBehavior>
               <Image
                 src={sanityImage(data.logo.asset._ref).url()}
                 maxW="150px"
@@ -271,16 +271,13 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
   };
 
   return (
-    <Link
-      href={path}
-      px={3}
-      py={1}
-      lineHeight="inherit"
-      rounded="md"
-      onClick={() => onClose()}
-    >
-      <Text>{name}</Text>
-    </Link>
+    <>
+      {path && (
+        <Link href={path!} onClick={() => onClose()}>
+          <Text>{name}</Text>
+        </Link>
+      )}
+    </>
   );
 };
 

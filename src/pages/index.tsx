@@ -12,7 +12,7 @@ const Home = () => {
     <>
       <Hero maxH={"500px"} />
       <Container w={"100%"} maxW={"1400px"}>
-        {/*<ShoppingCart />*/}
+        <ShoppingCart />
         <BasicImageRight />
         <BasicImageLeft />
         <CardCategory />

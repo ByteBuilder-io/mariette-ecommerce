@@ -23,6 +23,7 @@ import { IDataTyc } from "@/typesSanity/tyc";
 import { client } from "@/lib/sanity.client";
 import { IDataCategirias } from "@/typesSanity/categorias";
 import { sanityImage } from "@/lib/sanity.image";
+import Link from "next/link";
 
 const CardCategory = () => {
   const query = `*[_type == "categorias"]`;
@@ -82,10 +83,13 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
   };
 
   return (
-    <LinkBox>
+    <Link
+      href={{
+        pathname: "/productos",
+        query: { filter: filter },
+      }}
+    >
       <Flex
-        as={"a"}
-        href={"/productos" + "?filter=" + filter}
         w="425px"
         h="200px"
         onMouseEnter={handleFlipStart}
@@ -118,7 +122,7 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
           h="200px"
         />
       </Flex>
-    </LinkBox>
+    </Link>
   );
 };
 

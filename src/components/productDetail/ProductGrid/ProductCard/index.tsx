@@ -4,7 +4,6 @@ import {
   Button,
   HStack,
   Image,
-  Link,
   Skeleton,
   Stack,
   StackProps,
@@ -18,6 +17,7 @@ import { FavouriteButton } from "./FavouriteButton";
 import { PriceTag } from "./PriceTag";
 import { Product } from "../utils";
 import { IDataProductos } from "@/typesSanity/productos";
+import Link from "next/link";
 
 interface Props {
   totalRows: number;
@@ -39,51 +39,49 @@ const ProductCard = (props: Props) => {
   console.log(props.totalRows);
 
   return (
-    <Stack
-      spacing={{ base: "4", md: "5" }}
-      {...rootProps}
-      as={"a"}
-      cursor={"pointer"}
-      href={"/productos/detalle/" + props.product.id}
-    >
-      <Box position="relative">
-        <AspectRatio ratio={props.totalRows >= 1 ? 4 / 3 : 10 / 3}>
-          <Image
-            src={isHovered ? product.previewImageUrl : product.previewImageUrl}
-            alt={product.title}
-            draggable="false"
-            fallback={<Skeleton />}
-            cursor="pointer"
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
-            maxW={"280px"}
-            maxH={"210px"}
-          />
-        </AspectRatio>
-        {/*<FavouriteButton*/}
-        {/*  position="absolute"*/}
-        {/*  top="4"*/}
-        {/*  right="4"*/}
-        {/*  aria-label={`Add ${name} to your favourites`}*/}
-        {/*/>*/}
-      </Box>
-      <Stack>
-        <Stack spacing="1">
-          <Text
-            fontWeight="medium"
-            color={useColorModeValue("gray.700", "gray.400")}
-            fontSize="14px"
-          >
-            {product.title}
-          </Text>
-          <PriceTag
-            price={product.priceRange.maxVariantPrice}
-            salePrice={0}
-            currency="USD"
-          />
+    <Link href={"/productos/detalle/" + props.product.id}>
+      <Stack spacing={{ base: "4", md: "5" }} {...rootProps}>
+        <Box position="relative">
+          <AspectRatio ratio={props.totalRows >= 1 ? 4 / 3 : 10 / 3}>
+            <Image
+              src={
+                isHovered ? product.previewImageUrl : product.previewImageUrl
+              }
+              alt={product.title}
+              draggable="false"
+              fallback={<Skeleton />}
+              cursor="pointer"
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+              maxW={"280px"}
+              maxH={"210px"}
+            />
+          </AspectRatio>
+          {/*<FavouriteButton*/}
+          {/*  position="absolute"*/}
+          {/*  top="4"*/}
+          {/*  right="4"*/}
+          {/*  aria-label={`Add ${name} to your favourites`}*/}
+          {/*/>*/}
+        </Box>
+        <Stack>
+          <Stack spacing="1">
+            <Text
+              fontWeight="medium"
+              color={useColorModeValue("gray.700", "gray.400")}
+              fontSize="14px"
+            >
+              {product.title}
+            </Text>
+            <PriceTag
+              price={product.priceRange.maxVariantPrice}
+              salePrice={0}
+              currency="USD"
+            />
+          </Stack>
         </Stack>
       </Stack>
-    </Stack>
+    </Link>
   );
 };
 
