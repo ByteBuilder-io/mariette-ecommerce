@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { FaArrowRight } from "react-icons/fa";
 import { formatPrice } from "../CartItem/PriceTag";
+import Cookies from "js-cookie";
 
 type OrderSummaryItemProps = {
   label: string;
@@ -28,29 +29,34 @@ const OrderSummaryItem = (props: OrderSummaryItemProps) => {
   );
 };
 
-const CartOrderSummary = () => {
+interface IProps {
+  total: string;
+}
+
+const CartOrderSummary = ({ total }: IProps) => {
+  const checkoutUrl = Cookies.get("checkoutUrl");
   return (
     <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
       <Heading size="md">Resumen del pedido</Heading>
 
       <Stack spacing="6">
-        <OrderSummaryItem label="Subtotal" value={formatPrice(597)} />
-        <OrderSummaryItem label="Envio + Tax">
-          <Link href="#" textDecor="underline">
-            Calcular Envio
-          </Link>
-        </OrderSummaryItem>
-        <OrderSummaryItem label="Codigo de cupon">
-          <Link href="#" textDecor="underline">
-            Agregar
-          </Link>
-        </OrderSummaryItem>
+        {/*<OrderSummaryItem label="Subtotal" value={formatPrice(597)} />*/}
+        {/*<OrderSummaryItem label="Envio + Tax">*/}
+        {/*  <Link href="#" textDecor="underline">*/}
+        {/*    Calcular Envio*/}
+        {/*  </Link>*/}
+        {/*</OrderSummaryItem>*/}
+        {/*<OrderSummaryItem label="Codigo de cupon">*/}
+        {/*  <Link href="#" textDecor="underline">*/}
+        {/*    Agregar*/}
+        {/*  </Link>*/}
+        {/*</OrderSummaryItem>*/}
         <Flex justify="space-between">
           <Text fontSize="lg" fontWeight="semibold">
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold">
-            {formatPrice(597)}
+            {formatPrice(Number(total))} + IVA
           </Text>
         </Flex>
       </Stack>
@@ -60,6 +66,8 @@ const CartOrderSummary = () => {
         borderRadius="0px"
         size="lg"
         fontSize="md"
+        as={"a"}
+        href={checkoutUrl}
         rightIcon={<FaArrowRight />}
       >
         Checkout

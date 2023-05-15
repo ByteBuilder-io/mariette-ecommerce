@@ -22,13 +22,7 @@ interface ContainerProps {
   options: { text: string; subText?: string }[];
   custom?: boolean;
   onClick?: any;
-  id:
-    | "producto"
-    | "material"
-    | "categoria"
-    | "rango_precio"
-    | "talla"
-    | "categoria";
+  id: any;
   data: any;
 }
 

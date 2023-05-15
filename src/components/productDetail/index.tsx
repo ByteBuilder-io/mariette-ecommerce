@@ -21,6 +21,9 @@ const ProductDetail = ({ producto, images }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [data, setData] = useState(images);
   const [imgMain, setImgMain] = useState<string>(images[0].node.originalSrc);
+  const [value, setValue] = useState<number>(
+    producto.priceRange.maxVariantPrice
+  );
   const MainImage = ({ src }: any) => (
     <Zoom
       img={src}
@@ -87,8 +90,12 @@ const ProductDetail = ({ producto, images }: Props) => {
             >
               {producto.title}
             </Text>
-            <Currency value={producto.priceRange.maxVariantPrice} />
-            <Form />
+            <Currency value={value} />
+            <Form
+              options={producto.options}
+              idProduct={producto.gid}
+              setValue={setValue}
+            />
             <Description />
           </Stack>
         </Stack>

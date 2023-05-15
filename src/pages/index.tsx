@@ -10,9 +10,8 @@ import CardCategory from "@/components/cards/cardCategory";
 const Home = () => {
   return (
     <>
-      <Hero maxH={"500px"} />
+      <Hero maxH={"800px"} />
       <Container w={"100%"} maxW={"1400px"}>
-        <ShoppingCart />
         <BasicImageRight />
         <BasicImageLeft />
         <CardCategory />

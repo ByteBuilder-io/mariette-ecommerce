@@ -23,7 +23,7 @@ const ButtonActive = (props: ContainerProps) => {
       borderColor="#997d6c"
       variant="outline"
       onClick={() => {
-        onClick(text, "talla");
+        onClick(text, "Talla");
       }}
       bg="#997d6c"
       color="white"
@@ -43,7 +43,7 @@ const ButtonNoActive = (props: ContainerProps) => {
       variant="outline"
       color="#997d6c"
       onClick={() => {
-        onClick(text, "talla");
+        onClick(text, "Talla");
       }}
     >
       {text}
@@ -55,7 +55,7 @@ const ButtonOutline = (props: ContainerProps) => {
   const { text, onClick, data } = props;
 
   const getValidation = () => {
-    const filter = data.talla.includes(text);
+    const filter = data.Talla === text;
     return filter;
   };
 

@@ -40,6 +40,7 @@ const ProductoDetalle = () => {
           "variants": store.variants,
           "vendor": store.vendor,
         }`;
+        console.log(query);
         const data: IDataProductos[] = await client.fetch(query);
         setData(data);
         const s = `
@@ -57,7 +58,6 @@ const ProductoDetalle = () => {
         `;
 
         // Utilizando el cliente GraphQL
-        // @ts-ignore
         const image: IDataImage = await graphQLClient.request(s);
         setDataImages(image);
       }

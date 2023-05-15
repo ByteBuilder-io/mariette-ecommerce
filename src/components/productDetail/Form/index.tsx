@@ -11,73 +11,123 @@ import {
   Button,
   useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 
-import { FaHeart } from "react-icons/fa";
 import { MdAdd, MdRemove } from "react-icons/md";
 
-import {
-  FaInstagram,
-  FaTwitter,
-  FaYoutube,
-  FaFacebook,
-  FaTiktok,
-} from "react-icons/fa";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 import SocialButton from "../../commons/socialMedia";
 import { dataGema, customStyles, d2 } from "./utils";
 import BasicCheckBox from "@/components/filter/BasicCheckBox";
 import ButtonOutline from "@/components/filter/ButtonOutline";
+import { graphQLClient } from "@/lib/shopify";
+import Cookies from "js-cookie";
 
-const Form = () => {
-  const toast = useToast();
-  const [quantity, setQuantity] = useState(1);
-  const [gema, setGema] = useState("");
-  const [value, setValue] = useState<any>(0);
-  const [data, setData] = useState({
-    gema: "",
-    material: [],
-    talla: [],
-    cantidad: 0,
+interface IOptions {
+  name: string;
+  values: string[];
+  _key: string;
+  _type: string;
+}
+
+interface Props {
+  options: IOptions[];
+  idProduct: string;
+  setValue: React.Dispatch<React.SetStateAction<number>>;
+}
+interface MyMapInterface {
+  [key: string]: string;
+}
+
+interface IDataQuery {
+  name: string;
+  value: string;
+}
+
+const Form = ({ options, idProduct, setValue }: Props) => {
+  const myMap: MyMapInterface = options.reduce((prev, curr) => {
+    return { ...prev, [curr.name]: curr.values[0] };
+  }, {});
+
+  let myDataquery: IDataQuery[] = [];
+  options.map((e) => {
+    myDataquery = [...myDataquery, { name: e.name, value: e.values[0] }];
   });
 
-  const handleQuantityChange = (event: any) => {
-    setQuantity(event.target.value);
+  const toast = useToast();
+  const [quantity, setQuantity] = useState<number>(1);
+  const [data, setData] = useState(myMap);
+  const [dataQuery, setDataQuery] = useState<IDataQuery[]>(myDataquery);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (dataQuery) {
+        const selectedOptionsQuery = dataQuery
+          .map(
+            (option) =>
+              `{name: ${JSON.stringify(option.name)}, value: ${JSON.stringify(
+                option.value
+              )}}`
+          )
+          .join(", ");
+
+        const query = `
+          query {
+            product(id: "${idProduct}") {
+              variantBySelectedOptions(
+                selectedOptions: [${selectedOptionsQuery}]
+              ) {
+                id
+                priceV2 {
+                  amount
+                }
+              }
+            }
+          }
+        `;
+        // Utilizando el cliente GraphQL
+        const data: any = await graphQLClient.request(query);
+        setValue(Number(data.product.variantBySelectedOptions.priceV2.amount));
+      }
+    }
+    fetchData();
+  }, [dataQuery]);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (dataQuery && data) {
+        let myDataquery: IDataQuery[] = [];
+        options.map((e) => {
+          myDataquery = [...myDataquery, { name: e.name, value: data[e.name] }];
+        });
+        setDataQuery(myDataquery);
+        const dq: any = await getLastPrice(idProduct, myDataquery);
+        setValue(Number(dq.product.variantBySelectedOptions.priceV2.amount));
+      }
+    }
+    fetchData();
+  }, [data]);
+  const handleSelectChange = (event: any, id: string) => {
+    console.log(event, id);
+    setData({ ...data, [id]: event.value });
   };
 
-  const handleCategoryChange = (event: any) => {
-    setGema(event);
-  };
-
-  const handleChange = (
-    value: any,
-    id:
-      | "producto"
-      | "material"
-      | "rango_precio"
-      | "talla"
-      | "categoria"
-      | "color"
-  ) => {
-    setData((prevData: any) => ({
-      ...prevData,
-      [id]: prevData[id].includes(value)
-        ? prevData[id].filter((val: any) => val !== value)
-        : [...prevData[id], value],
-    }));
+  const handleChange = (value: any, id: any) => {
+    setData({ ...data, [id]: value });
   };
 
   const handleIncrease = () => {
-    setValue(value + 1);
+    setQuantity(quantity + 1);
   };
 
   const handleDecrease = () => {
-    if (value > 0) {
-      setValue(value - 1);
+    if (quantity != 1) {
+      setQuantity(quantity - 1);
     }
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     toast({
       title: "Product added to cart",
       status: "success",
@@ -87,12 +137,84 @@ const Form = () => {
         backgroundColor: "#D7C0b4",
       },
     });
+    let myDataquery: IDataQuery[] = [];
+    options.map((e) => {
+      myDataquery = [...myDataquery, { name: e.name, value: data[e.name] }];
+    });
+    setDataQuery(myDataquery);
+    const dq: any = await getLastPrice(idProduct, myDataquery);
+    const idCart = Cookies.get("idCart");
+    const queryCart =
+      idCart != undefined
+        ? `
+        mutation {
+          checkoutLineItemsAdd(
+            checkoutId: "${idCart}",
+            lineItems: [
+              {
+                variantId: "${dq.product.variantBySelectedOptions.id}",
+                quantity: ${quantity}
+              },
+            ]
+          ) {
+            checkout {
+              id
+              webUrl
+            }
+            checkoutUserErrors {
+              field
+              message
+            }
+          }
+        }
+    `
+        : `
+        mutation {
+          checkoutCreate(input: {
+            lineItems: [
+              {
+                variantId: "${dq.product.variantBySelectedOptions.id}",
+                quantity: ${quantity}
+              }
+            ]
+          }) {
+            checkout {
+              id
+              webUrl
+            }
+            checkoutUserErrors {
+              code
+              message
+            }
+          }
+        }
+    `;
+    const resultCart: any = await graphQLClient.request(queryCart);
+    // if (resultCart.checkoutCreate.checkoutUserErrors.length != 0)
+    //   return toast({
+    //     title: "Hubo un error al actualizar el carrito, vuelva a intentarlo",
+    //     status: "error",
+    //     duration: 3000,
+    //     isClosable: true,
+    //     containerStyle: {
+    //       backgroundColor: "#D7C0b4",
+    //     },
+    //   });
+    console.log(resultCart);
+    if (idCart === undefined) {
+      await Cookies.set("idCart", resultCart.checkoutCreate.checkout.id);
+      await Cookies.set(
+        "checkoutUrl",
+        resultCart.checkoutCreate.checkout.webUrl
+      );
+    }
+    const myCookieValue = Cookies.get("checkoutUrl");
+
+    console.log(myCookieValue);
     const obj = {
       ...data,
       cantidad: quantity,
-      gema: gema,
     };
-    console.log(obj, "obj");
   };
 
   const handleAddToFavorites = () => {
@@ -106,39 +228,74 @@ const Form = () => {
 
   return (
     <Box pt="20px">
-      <Box mb="10px">
-        <Text fontWeight="bold" fontSize="14px">
-          Gema
-        </Text>
-      </Box>
-      <Select
-        value={gema}
-        onChange={handleCategoryChange}
-        placeholder="Selecciona..."
-        styles={customStyles}
-        options={dataGema}
-      />
-      <BasicCheckBox
-        title="Material"
-        options={d2}
-        custom
-        id="material"
-        onClick={handleChange}
-        data={data}
-      />
-      <Box w="60px">
-        <Text fontWeight="bold" fontSize="14px" mb="10px">
-          Talla
-        </Text>
-      </Box>
-      <HStack direction="row" spacing={2}>
-        <ButtonOutline text="4" data={data} onClick={handleChange} />
-        <ButtonOutline text="5" data={data} onClick={handleChange} />
-        <ButtonOutline text="6" data={data} onClick={handleChange} />
-        <ButtonOutline text="7" data={data} onClick={handleChange} />
-        <ButtonOutline text="8" data={data} onClick={handleChange} />
-        <ButtonOutline text="9" data={data} onClick={handleChange} />
-      </HStack>
+      {options.map((e) => {
+        switch (e.name) {
+          case "Metal":
+            let metal: { text: string }[] = [];
+            e.values.map((i) => {
+              metal = [...metal, { text: i }];
+            });
+            return (
+              <BasicCheckBox
+                key={e._key}
+                title="Material"
+                options={metal}
+                custom
+                id="Metal"
+                onClick={handleChange}
+                data={data}
+              />
+            );
+            break;
+          case "Talla":
+            return (
+              <Box>
+                <Box w="60px">
+                  <Text fontWeight="bold" fontSize="14px" mb="10px">
+                    Talla
+                  </Text>
+                </Box>
+                <HStack direction="row" spacing={2}>
+                  {e.values.map((i) => {
+                    return (
+                      <ButtonOutline
+                        key={i}
+                        text={i}
+                        data={data}
+                        onClick={handleChange}
+                      />
+                    );
+                  })}
+                </HStack>
+              </Box>
+            );
+            break;
+          case "Gema":
+            let gemaData: { label: string; value: string }[] = [];
+            e.values.map((i) => {
+              gemaData = [...gemaData, { label: i, value: i }];
+            });
+            return (
+              <Box key={e._key}>
+                <Box mb="10px">
+                  <Text fontWeight="bold" fontSize="14px">
+                    Gema
+                  </Text>
+                </Box>
+                <Select
+                  value={gemaData[0]}
+                  onChange={(value) => {
+                    handleSelectChange(value, e.name);
+                  }}
+                  placeholder="Selecciona..."
+                  styles={customStyles}
+                  options={gemaData}
+                />
+              </Box>
+            );
+            break;
+        }
+      })}
       <Box pt="40px">
         <Text mb="8px" fontWeight="bold" fontSize="14px">
           Cantidad
@@ -157,8 +314,8 @@ const Form = () => {
               </InputLeftElement>
               <Input
                 type="number"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
                 textAlign="center"
                 fontSize="14px"
               />
@@ -172,15 +329,15 @@ const Form = () => {
               </InputRightElement>
             </InputGroup>
           </InputGroup>
-          <InputGroup width="50%">
-            <IconButton
-              aria-label="Agregar al carrito"
-              icon={<FaHeart />}
-              size="lg"
-              variant="outline"
-              onClick={handleAddToFavorites}
-            />
-          </InputGroup>
+          {/*<InputGroup width="50%">*/}
+          {/*  <IconButton*/}
+          {/*    aria-label="Agregar al carrito"*/}
+          {/*    icon={<FaHeart />}*/}
+          {/*    size="lg"*/}
+          {/*    variant="outline"*/}
+          {/*    onClick={handleAddToFavorites}*/}
+          {/*  />*/}
+          {/*</InputGroup>*/}
         </HStack>
       </Flex>
       <Button
@@ -207,6 +364,34 @@ const Form = () => {
       </Flex>
     </Box>
   );
+};
+
+const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
+  const selectedOptionsQuery = myDataquery
+    .map(
+      (option) =>
+        `{name: ${JSON.stringify(option.name)}, value: ${JSON.stringify(
+          option.value
+        )}}`
+    )
+    .join(", ");
+
+  const query = `
+          query {
+            product(id: "${idProduct}") {
+              variantBySelectedOptions(
+                selectedOptions: [${selectedOptionsQuery}]
+              ) {
+                id
+                priceV2 {
+                  amount
+                }
+              }
+            }
+          }
+        `;
+  // Utilizando el cliente GraphQL
+  return await graphQLClient.request(query);
 };
 
 export default Form;
