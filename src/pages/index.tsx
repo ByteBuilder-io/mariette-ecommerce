@@ -10,6 +10,8 @@ import BasicImage from "@/components/basicImage";
 import { client } from "@/lib/sanity.client";
 import { useEffect, useState } from "react";
 import { IHome } from "@/typesSanity/pages/home";
+import Contact from "@/components/contact";
+import Instagram from "@/components/instragram";
 
 const Home = () => {
   const [data, setData] = useState<IHome>();
@@ -56,6 +58,10 @@ const Home = () => {
             data={componente}
           />
         ))}
+        <Container w={"100%"} maxW={"1400px"}>
+            <Instagram />
+            <Contact />
+        </Container>
     </>
   );
 };
