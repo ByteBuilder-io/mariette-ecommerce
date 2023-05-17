@@ -1,23 +1,13 @@
 import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
-import { IDataTyc } from "@/typesSanity/tyc";
+import { IDataTyc } from "@/typesSanity/docs/tyc";
 import CardTyc from "@/components/cards/cardTyc";
 import CardAviso from "@/components/cards/cardAviso";
 
-const Aviso = () => {
-  const query = `*[_type == "settings"]{avisoPage}`;
-  const [data, setData] = useState<IDataTyc>();
+const Aviso = ({ dataAviso }: { dataAviso: IDataTyc }) => {
+  const [data, setData] = useState<IDataTyc>(dataAviso);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data[0].avisoPage);
-    }
-
-    fetchData();
-  }, []);
-  console.log(data);
   return (
     <>
       {data && (

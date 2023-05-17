@@ -1,4 +1,4 @@
-import { IDataNav } from "@/typesSanity/nav";
+import { IDataNav } from "@/typesSanity/docs/nav";
 import {
   Accordion,
   AccordionButton,

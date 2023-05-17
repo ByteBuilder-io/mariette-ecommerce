@@ -12,11 +12,12 @@ import {
   Heading,
   Text,
   Button,
+  Wrap,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
 import { useRouter } from "next/router";
-import { IDataProductos } from "@/typesSanity/productos";
+import { IDataProductos } from "@/typesSanity/docs/productos";
 import { sanityImage } from "@/lib/sanity.image";
 import Filter from "@/components/filter";
 import ProductGrid from "@/components/productDetail/ProductGrid";
@@ -65,7 +66,7 @@ const Productos = () => {
   return (
     <Container py={10} maxW="1400px">
       <Filter>
-        <ProductGridCard>
+        <Wrap spacing="30px" py={10} px={1}>
           {data &&
             data.map((product) => (
               <ProductCard
@@ -74,7 +75,7 @@ const Productos = () => {
                 totalRows={data.length / 4}
               />
             ))}
-        </ProductGridCard>
+        </Wrap>
       </Filter>
     </Container>
   );

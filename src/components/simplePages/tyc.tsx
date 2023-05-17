@@ -1,22 +1,12 @@
 import { Box, Container, Heading, Text, VStack } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
-import { IDataTyc } from "@/typesSanity/tyc";
+import { IDataTyc } from "@/typesSanity/docs/tyc";
 import CardTyc from "@/components/cards/cardTyc";
 
-const TYC = () => {
-  const query = `*[_type == "settings"]{tycPage}`;
-  const [data, setData] = useState<IDataTyc>();
+const Tyc = ({ dataTyc }: { dataTyc: IDataTyc }) => {
+  const [data, setData] = useState<IDataTyc>(dataTyc);
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data[0].tycPage);
-    }
-
-    fetchData();
-  }, []);
-  console.log(data);
   return (
     <>
       {data && (
@@ -68,4 +58,4 @@ const TYC = () => {
   );
 };
 
-export default TYC;
+export default Tyc;

@@ -9,22 +9,22 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { styleSlider } from "./utils";
-import { THero, TMain } from "@/typesSanity/hero";
+import { IHero, THero } from "@/typesSanity/docs/hero";
 
 interface IProps {
-  maxH: string | number;
+  dataHero: IHero;
 }
 
-const Hero = ({ maxH }: IProps) => {
-  const query = `*[_type == "hero"]`;
-  const [data, setData] = useState<TMain[]>();
+const Hero = ({ dataHero }: IProps) => {
+  const maxH = "800px";
+  const [data, setData] = useState<IHero>(dataHero);
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const renderSlider = () => {
-    if (data && data.length > 0) {
-      const { contenido } = data[0];
+    if (data) {
+      const { contenido } = data;
 
       const result = contenido.map((item: THero) => {
         return (
@@ -64,9 +64,11 @@ const Hero = ({ maxH }: IProps) => {
                     bg="#997d6c"
                     color="white"
                     h={isMobile ? "40px" : "55px"}
-                    width={isMobile ? "120px" : "auto" }
+                    width={isMobile ? "120px" : "auto"}
                   >
-                    <Text pr="10px" pl="10px">{item.texto_button}</Text>
+                    <Text pr="10px" pl="10px">
+                      {item.texto_button}
+                    </Text>
                   </Button>
                 </Box>
               </Text>
@@ -94,15 +96,6 @@ const Hero = ({ maxH }: IProps) => {
       setIsPagination(false);
     }
   }, [width]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data);
-    }
-
-    fetchData();
-  }, [query]);
 
   return (
     <Box mb={isMobile ? "20px" : "35px"}>

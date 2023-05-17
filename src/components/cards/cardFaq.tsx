@@ -8,7 +8,7 @@ import {
   Accordion,
   Text,
 } from "@chakra-ui/react";
-import { IFaqs } from "@/typesSanity/faq";
+import { IFaqs } from "@/typesSanity/docs/faq";
 import ReactMarkdown from "react-markdown";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 

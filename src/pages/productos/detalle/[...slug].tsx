@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { IDataProductos } from "@/typesSanity/productos";
+import { IDataProductos } from "@/typesSanity/docs/productos";
 import { client } from "@/lib/sanity.client";
 import ProductDetail from "@/components/productDetail";
 import { graphQLClient } from "@/lib/shopify";

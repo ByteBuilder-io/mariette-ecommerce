@@ -9,7 +9,7 @@ import Currency from "./Currency";
 import SmallImages from "./SmallImages";
 import Description from "./Description";
 import ProductGrid from "./ProductGrid";
-import { IDataProductos } from "@/typesSanity/productos";
+import { IDataProductos } from "@/typesSanity/docs/productos";
 import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 
 interface Props {
@@ -96,7 +96,10 @@ const ProductDetail = ({ producto, images }: Props) => {
               idProduct={producto.gid}
               setValue={setValue}
             />
-            <Description />
+            {/*<Description />*/}
+            <Box
+              dangerouslySetInnerHTML={{ __html: producto.descriptionHtml }}
+            />
           </Stack>
         </Stack>
         {/*<ProductGrid />*/}

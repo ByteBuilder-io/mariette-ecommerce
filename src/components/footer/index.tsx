@@ -17,7 +17,7 @@ import {
   FaFacebook,
   FaTiktok,
 } from "react-icons/fa";
-import { IDataFooter } from "@/typesSanity/footer";
+import { IDataFooter } from "@/typesSanity/docs/footer";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import SocialButton from "../commons/socialMedia";

@@ -1,4 +1,4 @@
-import { SanityBody } from "@/typesSanity/default";
+import { SanityBody } from "@/typesSanity/docs/default";
 
 export interface IDataFaq extends SanityBody {
   title: string;

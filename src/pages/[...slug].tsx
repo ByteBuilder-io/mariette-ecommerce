@@ -10,44 +10,35 @@ import BasicImage from "@/components/basicImage";
 import { client } from "@/lib/sanity.client";
 import { useEffect, useState } from "react";
 import { IHome } from "@/typesSanity/pages/home";
+import { useRouter } from "next/router";
 
-const Home = () => {
+const Page = () => {
+  const router = useRouter();
+  const { slug } = router.query;
   const [data, setData] = useState<IHome>();
-  const query = `
-    *[_type == "homeDoc"] {
-      _id,
-      title,
-      "slug": slug.current,
-      componentes[]-> {
-        ...
-      }
-    }[0]
-  `;
 
   useEffect(() => {
     async function fetchData() {
-      const dataHome = await client.fetch(query);
-      setData(dataHome);
+      if (slug != undefined && slug != "") {
+        const query = `
+            *[_type == "pages" && slug.current == "${slug}"] {
+              _id,
+              title,
+              "slug": slug.current,
+              componentes[]-> {
+                ...
+              }
+            }[0]
+          `;
+        const dataHome = await client.fetch(query);
+        setData(dataHome);
+      }
     }
 
     fetchData();
-  }, []);
+  }, [slug]);
   return (
     <>
-      {/*<Hero />*/}
-      {/*<Container w={"100%"} maxW={"1400px"}>*/}
-      {/*  <BasicImage positionImg={"left"} data={""} />*/}
-      {/*  <CardCategory />*/}
-      {/*  <Box*/}
-      {/*    backgroundColor={"#faf5f1"}*/}
-      {/*    h="100%"*/}
-      {/*    position={"absolute"}*/}
-      {/*    top={0}*/}
-      {/*    left={0}*/}
-      {/*    w="100%"*/}
-      {/*    zIndex={-2}*/}
-      {/*  />*/}
-      {/*</Container>*/}
       {data &&
         data.componentes.map((componente) => (
           <ComponentRenderer
@@ -72,4 +63,4 @@ const ComponentRenderer = ({
   return <Component data={data} />;
 };
 
-export default Home;
+export default Page;

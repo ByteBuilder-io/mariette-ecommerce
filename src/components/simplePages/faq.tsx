@@ -12,21 +12,10 @@ import { Search2Icon } from "@chakra-ui/icons";
 import CardFaq from "@/components/cards/cardFaq";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
-import { IDataFaq } from "@/typesSanity/faq";
+import { IDataFaq } from "@/typesSanity/docs/faq";
 
-const FAQ = () => {
-  const query = `*[_type == "settings"]{faqPage}`;
-  const [data, setData] = useState<IDataFaq>();
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data[0].faqPage);
-    }
-
-    fetchData();
-  }, []);
-  console.log(data);
+const Faq = ({ dataFaq }: { dataFaq: IDataFaq }) => {
+  const [data, setData] = useState<IDataFaq>(dataFaq);
   return (
     <>
       {data && (
@@ -74,4 +63,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default Faq;

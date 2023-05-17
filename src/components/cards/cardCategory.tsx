@@ -19,24 +19,18 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { IDataTyc } from "@/typesSanity/tyc";
+import { IDataTyc } from "@/typesSanity/docs/tyc";
 import { client } from "@/lib/sanity.client";
-import { IDataCategirias } from "@/typesSanity/categorias";
+import { IDataCategorias } from "@/typesSanity/docs/categorias";
 import { sanityImage } from "@/lib/sanity.image";
 import Link from "next/link";
 
-const CardCategory = () => {
-  const query = `*[_type == "categorias"]`;
-  const [data, setData] = useState<IDataCategirias[]>();
+interface ICategoryProps {
+  dataCategory: IDataCategorias;
+}
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data);
-    }
-
-    fetchData();
-  }, []);
+const CardCategory = ({ dataCategory }: ICategoryProps) => {
+  const [data, setData] = useState<IDataCategorias>(dataCategory);
   console.log(data);
   return (
     <Container w={"100%"} maxW={"1400px"} py={10}>
@@ -48,13 +42,13 @@ const CardCategory = () => {
 
       <Wrap spacing="30px" justify="center" py={10}>
         {data &&
-          data.map((e) => {
+          data.images.map((e) => {
             return (
-              <WrapItem key={e._id} cursor="pointer">
+              <WrapItem key={data._id} cursor="pointer">
                 <BlurCard
                   image={e.image.asset._ref}
                   title={e.title}
-                  filter={e.slug.current}
+                  filter={e.title.toLowerCase()}
                 />
               </WrapItem>
             );
@@ -100,14 +94,32 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
         textAlign="center"
       >
         {breakpoint == "base" ? (
-          <Heading color={"black"} fontSize={"3xl"}>
+          <Text
+            fontSize="3xl"
+            align="center"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            fontFamily="Castoro Titling"
+            pl="35px"
+            pr="35px"
+          >
             {title}
-          </Heading>
+          </Text>
         ) : (
           blur && (
-            <Heading color={"black"} fontSize={"3xl"}>
+            <Text
+              fontSize="3xl"
+              align="center"
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              fontFamily="Castoro Titling"
+              pl="35px"
+              pr="35px"
+            >
               {title}
-            </Heading>
+            </Text>
           )
         )}
 

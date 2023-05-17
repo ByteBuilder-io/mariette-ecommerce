@@ -1,4 +1,4 @@
-import { IDataNav } from "@/typesSanity/nav";
+import { IDataNav } from "@/typesSanity/docs/nav";
 import {
   Accordion,
   AccordionButton,
@@ -46,7 +46,7 @@ const DrawerCart = ({ isOpen, onOpen, onClose }: IDrawerCart) => {
             aria-label="Open Menu"
             onClick={isOpen ? onClose : onOpen}
           />
-          <Heading fontSize="2xl" fontWeight="extrabold">
+          <Heading fontSize="2xl" fontFamily={"Castoro"}>
             Carrito de compras
           </Heading>
         </HStack>

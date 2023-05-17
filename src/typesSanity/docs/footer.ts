@@ -1,4 +1,4 @@
-import { SanityBody } from "@/typesSanity/default";
+import { SanityBody } from "@/typesSanity/docs/default";
 
 export interface IDataFooter extends SanityBody {
   logo: {
@@ -16,13 +16,13 @@ export interface IDataFooter extends SanityBody {
     _key: string;
   }[];
   sobre_nosotros_apartado_1: {
-    _key: string,
-    nombre: string,
-    url?: string
-  }[]
+    _key: string;
+    nombre: string;
+    url?: string;
+  }[];
   sobre_nosotros_apartado_2: {
-    _key: string,
-    nombre: string,
-    url?: string
-  }[]
+    _key: string;
+    nombre: string;
+    url?: string;
+  }[];
 }
