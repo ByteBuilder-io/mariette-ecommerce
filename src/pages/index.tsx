@@ -6,6 +6,8 @@ import Filter from "@/components/filter";
 import BasicImageRight from "@/components/basicImage/right";
 import BasicImageLeft from "@/components/basicImage/left";
 import CardCategory from "@/components/cards/cardCategory";
+import Contact from "@/components/contact";
+import Instagram from "@/components/instragram";
 
 const Home = () => {
   return (
@@ -24,6 +26,8 @@ const Home = () => {
           w="100%"
           zIndex={-2}
         />
+        <Instagram />
+        <Contact />
       </Container>
     </>
   );

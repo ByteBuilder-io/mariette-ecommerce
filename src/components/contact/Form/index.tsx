@@ -1,0 +1,225 @@
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Text,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  Textarea,
+  VStack,
+  WrapItem,
+  useToast,
+} from "@chakra-ui/react";
+import axios from "axios";
+import { BsPerson } from "react-icons/bs";
+import { MdOutlineEmail } from "react-icons/md";
+
+import { htmlClient, htmlUser } from "./utils";
+import { useState } from "react";
+
+interface ContainerProps {
+  isMobile: boolean;
+}
+
+const Form = (props: ContainerProps) => {
+  const { isMobile } = props;
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEmail, setIsEmail] = useState(true);
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+	const usersMariette = [
+		{ name: "Pepe Lim", email: "pepe.lim3@gmail.com" },
+		{ name: "Pepe Lim1", email: "pepe@bytebuilder.io" },
+		{ name: "Carlos", email: "jcarlos@bytebuilder.io" },
+		{ name: "Osvaldo", email: "osvaldo@bytebuilder.io" },
+	]
+
+  const handleText = (e: any, type: "name" | "email" | "message") => {
+    setData({
+      ...data,
+      [type]: e.target.value,
+    });
+  };
+
+  const validateEmail = (input: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(input);
+  };
+
+  const resetFormData = () => {
+    setData({
+      name: "",
+      email: "",
+      message: "",
+    });
+  };
+
+  const sendClient = async () => {
+    const text = data.message;
+    let html = htmlClient.replace("{{cuerpo_msg}}", text);
+    html = html.replace("{{name}}", data.name);
+
+    const opts = {
+      sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
+      to: [{ email: data.email, name: data.name }],
+      replyTo: { email: "hecntdev1@gmail.com" },
+      subject: "Gracias por contactarnos - Mariette",
+      htmlContent: html,
+    };
+    const headers = {
+      "api-key":
+        "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",
+      "Content-Type": "application/json",
+    };
+
+    await axios.post("https://api.brevo.com/v3/smtp/email", opts, {
+      headers: headers,
+    });
+  };
+
+	const sendClientUser = async () => {
+    const text = data.message;
+    let html = htmlUser.replace("{{msg}}", text);
+    html = html.replace("{{name}}", data.name);
+		html = html.replace("{{email}}", data.email);
+
+    const opts = {
+      sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
+      to: usersMariette,
+      replyTo: { email: "hecntdev1@gmail.com" },
+      subject: "Nuevo mensaje - Mariette",
+      htmlContent: html,
+    };
+    const headers = {
+      "api-key":
+        "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",
+      "Content-Type": "application/json",
+    };
+
+    await axios.post("https://api.brevo.com/v3/smtp/email", opts, {
+      headers: headers,
+    });
+  };
+
+  const sendMail = async () => {
+    if (
+      data.email.length === 0 ||
+      data.message.length === 0 ||
+      data.name.length === 0
+    ) {
+      toast({
+        title: "Alerta",
+        description: "Debes completar los campos nombre, correo y mensaje.",
+        status: "warning",
+        duration: 2000,
+        isClosable: true,
+      });
+    } else {
+      setIsEmail(validateEmail(data.email));
+      if (validateEmail(data.email)) {
+        setIsLoading(true);
+        await sendClient();
+				await sendClientUser();
+        setIsLoading(false);
+        toast({
+          title: "Gracias.",
+          description: "En un momento se pondran en contacto contigo.",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+				resetFormData()
+      } else {
+        toast({
+          title: "Error",
+          description: "Debes de ingresar un correo valido.",
+          status: "warning",
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    }
+  };
+
+  return (
+    <WrapItem>
+      <Box bg="white" borderRadius="none" ml="8px" mb={isMobile ? "20px" : ""} w="500px">
+        <Box m={8} color="#0B0E3F">
+          <VStack spacing={5}>
+            <FormControl id="name">
+              <FormLabel>Tú nombre</FormLabel>
+              <InputGroup borderColor="#E0E1E7">
+                <InputLeftElement
+                  pointerEvents="none"
+                  // eslint-disable-next-line react/no-children-prop
+                  children={<BsPerson color="gray.800" />}
+                />
+                <Input
+                  type="text"
+                  size="md"
+                  borderRadius="none"
+									value={data.name}
+                  onChange={(e: any) => handleText(e, "name")}
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl id="name">
+              <FormLabel>Correo</FormLabel>
+              <InputGroup borderColor="#E0E1E7">
+                <InputLeftElement
+                  pointerEvents="none"
+                  // eslint-disable-next-line react/no-children-prop
+                  children={<MdOutlineEmail color="gray.800" />}
+                />
+                <Input
+                  type="text"
+                  size="md"
+                  borderRadius="none"
+                  onChange={(e: any) => handleText(e, "email")}
+									value={data.email}
+                  borderColor={isEmail ? "gray.300" : "red.400"}
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl id="name">
+              <FormLabel>Mensaje</FormLabel>
+              <Textarea
+                borderColor="gray.300"
+                borderRadius="none"
+                _hover={{
+                  borderRadius: "gray.300",
+                }}
+                placeholder="Escribir un mensaje..."
+								value={data.message}
+                onChange={(e: any) => handleText(e, "message")}
+              />
+            </FormControl>
+            <FormControl id="name" float="right">
+              <Button
+                isLoading={isLoading}
+                variant="solid"
+                bg="#846a5a"
+                color="white"
+                borderRadius="2px"
+                _hover={{}}
+                onClick={sendMail}
+              >
+                <Text fontSize="14px" fontWeight="normal">
+                  Enviar mensaje
+                </Text>
+              </Button>
+            </FormControl>
+          </VStack>
+        </Box>
+      </Box>
+    </WrapItem>
+  );
+};
+
+export default Form;
