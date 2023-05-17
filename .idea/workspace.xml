@@ -4,51 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/basicImage/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/AvisoSanity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/BasicImageSanity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/CardCategorySanity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/FaqSanity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/HeroSanity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/TycSanity.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/simplePages/aviso.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/simplePages/faq.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/hooks/useContador.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/[...slug].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/components/componentsSanity.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/pages/home.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typesSanity/pages/slugPage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cards/cardCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardCategory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardFaq.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cart/CartItem/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartItem/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cart/CartOrderSummary/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartOrderSummary/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cart/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/hero/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/hero/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menus/drawerCart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/drawerCart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menus/drawerNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/drawerNav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menus/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductGrid/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductGrid/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/productDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/aviso/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/faq/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/productos/detalle/[...slug].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/detalle/[...slug].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/productos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/tyc/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/simplePages/tyc.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/categorias.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/categorias.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/default.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/default.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/faq.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/faq.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/footer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/footer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/hero.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/hero.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/nav.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/nav.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/productos.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/productos.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/tyc.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/tyc.ts" afterDir="false" />
-    </list>
+    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +76,7 @@
       <workItem from="1684082846494" duration="20084000" />
       <workItem from="1684164178817" duration="10955000" />
       <workItem from="1684273032362" duration="1181000" />
-      <workItem from="1684282513434" duration="10417000" />
+      <workItem from="1684282513434" duration="10722000" />
     </task>
     <servers />
   </component>
