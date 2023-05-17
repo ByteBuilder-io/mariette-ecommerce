@@ -33,6 +33,7 @@ import { useCounter } from "@/hooks/useContador";
 import Cookies from "js-cookie";
 import { graphQLClient } from "@/lib/shopify";
 import { IDataCart } from "@/components/cart";
+import { title } from "process";
 
 interface IDrawerProps {
   placement: "right" | "left";
@@ -149,7 +150,7 @@ export default function Navbar() {
                     <NavLink
                       key={e._key}
                       name={e.title}
-                      path={e.link.url!}
+                      path={e.title}
                       onClose={onClose}
                     />
                   );
