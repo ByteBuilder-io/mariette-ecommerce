@@ -81,8 +81,8 @@ const Footer = () => {
       const result = dataDetail.map(
         (item: { _key: string; nombre: string; url?: string }) => {
           return (
-            <Link href={item.url} key={item._key} fontSize="14px">
-              {item.nombre}
+            <Link href={item.url} key={item._key}>
+              <Text fontSize="14px" textAlign="center">{item.nombre}</Text>
             </Link>
           );
         }
@@ -116,7 +116,7 @@ const Footer = () => {
     >
       <Container as={Stack} maxW={"6xl"} py={10}>
         <SimpleGrid
-          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr 2fr" }}
+          templateColumns={{ sm: "1fr 1fr", md: "2fr 1fr 1fr" }}
           spacing={8}
         >
           <Stack
@@ -144,25 +144,12 @@ const Footer = () => {
               {data && renderSocialMedia()}
             </Stack>
           </Stack>
-          <Stack align={isMobile ? "center" : "flex-start"}>
+          <Stack align={isMobile ? "center" : "center"} mr={isMobile ? "" : "80px"}>
             {renderAboutUs("sobre_nosotros_apartado_1")}
           </Stack>
-          <Stack align={isMobile ? "center" : "flex-start"}>
+          <Stack align={isMobile ? "center" : "right"} style={{ textAlignLast: isMobile ? "center" : "right" }}>
             {renderAboutUs("sobre_nosotros_apartado_2")}
           </Stack>
-          {/*<Stack align={isMobile ? "center" : "flex-start"}>*/}
-          {/*  <ListHeader>Buscar</ListHeader>*/}
-          {/*  <Stack direction={"row"}>*/}
-          {/*    <Input*/}
-          {/*      placeholder={"Buscar..."}*/}
-          {/*      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}*/}
-          {/*      border={0}*/}
-          {/*      _focus={{*/}
-          {/*        bg: "whiteAlpha.300",*/}
-          {/*      }}*/}
-          {/*    />*/}
-          {/*  </Stack>*/}
-          {/*</Stack>*/}
         </SimpleGrid>
       </Container>
     </Box>

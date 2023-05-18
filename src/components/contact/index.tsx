@@ -1,4 +1,12 @@
-import { Container, Flex, Box, Wrap } from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Box,
+  Wrap,
+  Grid,
+  GridItem,
+  Stack,
+} from "@chakra-ui/react";
 
 import { useEffect, useState } from "react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
@@ -19,24 +27,22 @@ const Contact = () => {
   }, [width]);
 
   return (
-    <Container bg="#faf5f1" maxW="full" centerContent overflow="hidden" mt="30px" mb="30px">
-      <Flex>
-        <Box
-          bg="#846a5a"
-          color="white"
-          borderRadius="none"
-          m={{ sm: 4, md: 16, lg: 10 }}
-          p={{ sm: 5, md: 16, lg: 16 }}
+    <>
+      <Box bg="#846a5a" mt="80px" mb="80px">
+        <Flex
+          flexWrap={{ base: "wrap", md: "nowrap" }}
+          justifyContent="space-between"
+          alignItems="flex-start"
         >
-          <Box p={4}>
-            <Wrap spacing={{ base: 10, sm: 3, md: 5, lg: 20 }}>
-              <Detail isMobile={isMobile} />
-              <Form isMobile={isMobile} />
-            </Wrap>
+          <Box w={{ base: "100%", md: "37%" }}>
+            <Detail isMobile={isMobile} />
           </Box>
-        </Box>
-      </Flex>
-    </Container>
+          <Box w={{ base: "100%", md: "63%" }}>
+            <Form isMobile={isMobile} />
+          </Box>
+        </Flex>
+      </Box>
+    </>
   );
 };
 
