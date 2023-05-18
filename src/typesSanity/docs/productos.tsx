@@ -26,8 +26,8 @@ interface IProductOptions {
 }
 
 interface IVariantProduct {
-  _ref: string;
-  _type: string;
-  _key: string;
-  _weak: boolean;
+  data: {
+    option1: string;
+    option2: string;
+  };
 }

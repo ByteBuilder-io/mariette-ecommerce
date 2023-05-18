@@ -46,7 +46,17 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { count, setCount } = useCounter();
 
-  const query = `*[_type == "settings"]{navbar}`;
+  const query = `
+    *[_type == "settings"]{
+      'logo': navbar.logo,
+        'links': navbar.links[]{
+          ...,
+        'dataUrl': *[_id == ^.link.url._ref]{
+            'url': slug.current
+          }[0]
+        }
+    }
+  `;
   const [data, setData] = useState<IDataNav>();
   const [drawerProps, setDrawerProps] = useState<IDrawerProps>({
     placement: "left",
@@ -106,7 +116,7 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data[0].navbar);
+      setData(data[0]);
     }
 
     fetchData();
@@ -152,7 +162,7 @@ export default function Navbar() {
                     <NavLink
                       key={e._key}
                       name={e.title}
-                      path={e.title}
+                      path={e.dataUrl.url}
                       onClose={onClose}
                     />
                   );

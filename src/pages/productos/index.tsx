@@ -14,22 +14,27 @@ const Productos = () => {
 
   const { filter } = router.query;
   const query = `*[_type == 'product' && store.status != 'draft'] {
-    "createdAt": store.createdAt,
-    "descriptionHtml": store.descriptionHtml,
-    "gid": store.gid,
-    "id": store.id,
-    "isDeleted": store.isDeleted,
-    "options": store.options,
-    "previewImageUrl": store.previewImageUrl,
-    "priceRange": store.priceRange,
-    "productType": store.productType,
-    "slug": store.slug,
-    "status": store.status,
-    "tags": store.tags,
-    "title": store.title,
-    "variants": store.variants,
-    "vendor": store.vendor,
-  }`;
+  "createdAt": store.createdAt,
+  "descriptionHtml": store.descriptionHtml,
+  "gid": store.gid,
+  "id": store.id,
+  "isDeleted": store.isDeleted,
+  "options": store.options,
+  "previewImageUrl": store.previewImageUrl,
+  "priceRange": store.priceRange,
+  "productType": store.productType,
+  "slug": store.slug,
+  "status": store.status,
+  "tags": store.tags,
+  "title": store.title,
+  "variants": store.variants[] {
+    'data': *[_id == ^._ref]{
+      'option1': store.option1,
+      'option2': store.option2
+    }[0]
+  },
+  "vendor": store.vendor
+}`;
 
   useEffect(() => {
     async function fetchData() {
