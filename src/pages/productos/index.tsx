@@ -10,6 +10,7 @@ import Link from "next/link";
 
 const Productos = () => {
   const [data, setData] = useState<IDataProductos[]>();
+  const [dataAll, setDataAll] = useState<IDataProductos[]>();
   const router = useRouter();
 
   const { filter } = router.query;
@@ -34,7 +35,7 @@ const Productos = () => {
   useEffect(() => {
     async function fetchData() {
       const data: IDataProductos[] = await client.fetch(query);
-      console.log(filter);
+      setDataAll(data);
       if (filter != undefined && filter != "" && data) {
         const filteredData = data.filter(
           (item) => item.productType.toLowerCase() === filter
@@ -50,16 +51,9 @@ const Productos = () => {
 
   return (
     <Container py={10} maxW="1400px">
-      <Filter dataProduct={data}>
-        <SimpleGrid
-          spacing={4}
-          templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-        >
-          {data && data.length > 0 && (
-            <ProductCard products={data} totalRows={data.length / 4} />
-          )}
-        </SimpleGrid>
-      </Filter>
+      {data && data.length > 0 && dataAll && dataAll.length > 0 && (
+        <Filter dataProduct={data} dataAll={dataAll} />
+      )}
     </Container>
   );
 };

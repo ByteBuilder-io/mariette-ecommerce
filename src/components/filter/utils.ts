@@ -1,13 +1,15 @@
 export const d1 = [
   { text: "Anillos", subText: "(18)" },
   { text: "Aretes", subText: "(8)" },
+  { text: "Dijes", subText: "(8)" },
+  { text: "Pulseras", subText: "(8)" },
 ];
 
 export const d2 = [
-  { text: "Oro" },
+  { text: "Oro blanco 14k" },
+  { text: "Oro amarillo 14k" },
+  { text: "Oro rosa 14k" },
   { text: "Plata" },
-  { text: "Metal" },
-  { text: "Diamante" },
 ];
 
 export const d3 = [

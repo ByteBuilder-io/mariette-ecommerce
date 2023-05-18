@@ -8,8 +8,10 @@ import {
   Text,
   extendTheme,
   ChakraProvider,
+  Wrap,
+  SimpleGrid,
 } from "@chakra-ui/react";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { IoMdClose } from "react-icons/io";
@@ -23,6 +25,7 @@ import BreadCrumb from "./BreadCrum";
 import DrawerFilters from "./DrawerFilters";
 import { d1, d2, d3, d4, colors } from "./utils";
 import { useRouter } from "next/router";
+import ProductCard from "../productDetail/ProductGrid/ProductCard";
 
 const customTheme = extendTheme({
   components: {
@@ -31,8 +34,9 @@ const customTheme = extendTheme({
 });
 
 interface Props {
-  children: ReactNode;
-  dataProduct?: any
+  children?: ReactNode;
+  dataProduct?: any;
+  dataAll?: any;
 }
 
 interface IData {
@@ -44,7 +48,7 @@ interface IData {
   categoria: string[];
 }
 
-const Filter = ({ children, dataProduct }: Props) => {
+const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const router = useRouter();
   const { query } = router;
 
@@ -52,6 +56,7 @@ const Filter = ({ children, dataProduct }: Props) => {
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(true);
+  const [dataProductRender, setDataProductRender] = useState(dataProduct);
   const [data, setData] = useState<any>({
     producto: [],
     material: [],
@@ -130,11 +135,12 @@ const Filter = ({ children, dataProduct }: Props) => {
     return (
       <Stack spacing="6" mt="50px">
         <BasicCheckBox
-          title="Producto"
+          title="Categoria"
           options={d1}
           id="producto"
           onClick={handleCheckboxChange}
           data={data}
+          dataAll={dataAll}
         />
         <BasicCheckBox
           title="Material"
@@ -149,9 +155,14 @@ const Filter = ({ children, dataProduct }: Props) => {
         <CheckboxGroup>
           <Stack spacing="1">
             <ChakraProvider theme={customTheme}>
-              <HStack direction="row" spacing={2}>
+              <Wrap spacing={2}>
                 <ButtonOutline
                   text="4"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="4.5"
                   data={data}
                   onClick={handleCheckboxChange}
                 />
@@ -161,7 +172,17 @@ const Filter = ({ children, dataProduct }: Props) => {
                   onClick={handleCheckboxChange}
                 />
                 <ButtonOutline
+                  text="5.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
                   text="6"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="6.5"
                   data={data}
                   onClick={handleCheckboxChange}
                 />
@@ -171,7 +192,17 @@ const Filter = ({ children, dataProduct }: Props) => {
                   onClick={handleCheckboxChange}
                 />
                 <ButtonOutline
+                  text="7.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
                   text="8"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                />
+                <ButtonOutline
+                  text="8.5"
                   data={data}
                   onClick={handleCheckboxChange}
                 />
@@ -180,29 +211,17 @@ const Filter = ({ children, dataProduct }: Props) => {
                   data={data}
                   onClick={handleCheckboxChange}
                 />
-              </HStack>
+              </Wrap>
             </ChakraProvider>
           </Stack>
         </CheckboxGroup>
         <BasicCheckBox
-          title="Rango de precio"
-          options={d3}
-          id="rango_precio"
+          title="Gema"
+          options={d4}
+          id="categoria"
           onClick={handleCheckboxChange}
           data={data}
         />
-        <Box w="200px">
-          <Flex justifyContent="space-between">
-            <Text fontSize="14px">Desde: ${rango[0]}</Text>
-            <Text fontSize="14px">Hasta: ${rango[1]}</Text>
-          </Flex>
-          <RangeSlider
-            defaultValue={[100, 500]}
-            min={0}
-            max={1000}
-            onChange={handleChangeSlider}
-          />
-        </Box>
         <Text fontWeight="bold" fontSize="14px">
           Color
         </Text>
@@ -222,20 +241,22 @@ const Filter = ({ children, dataProduct }: Props) => {
             </HStack>
           </ChakraProvider>
         </Flex>
-        <BasicCheckBox
-          title="Categoria"
-          options={d4}
-          id="categoria"
-          onClick={handleCheckboxChange}
-          data={data}
-        />
       </Stack>
     );
   };
 
+  console.log(dataProductRender)
+
   useEffect(() => {
-    console.log(dataProduct, "dataProduct")
-  }, [dataProduct])
+    const filterValues = data.producto
+    const filteredData = dataAll.filter((item: any) => filterValues.includes(item.productType));
+    
+    if (filteredData.length === 0) {
+      setDataProductRender(dataAll)
+    } else {
+      setDataProductRender(filteredData)
+    }
+  }, [data, dataAll])
 
   useEffect(() => {
     if (query.filter) {
@@ -249,7 +270,7 @@ const Filter = ({ children, dataProduct }: Props) => {
         producto,
       });
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => {
@@ -309,7 +330,18 @@ const Filter = ({ children, dataProduct }: Props) => {
             {renderBadges("categoria")}
             {renderBadges("rango_precio")}
           </Stack>
-          {children}
+          <Text fontWeight="200">Resultados de la busqueda: {dataProductRender.length}</Text>
+          <SimpleGrid
+            spacing={4}
+            templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+          >
+            {dataProductRender && dataProductRender.length > 0 && (
+              <ProductCard
+                products={dataProductRender}
+                totalRows={dataProductRender.length / 4}
+              />
+            )}
+          </SimpleGrid>
         </Stack>
       </Stack>
     </Box>

@@ -259,19 +259,19 @@ const Form = ({ options, idProduct, setValue }: Props) => {
                   </Text>
                 </Box>
                 <Box>
-  <Wrap spacing={2}>
-                  {e.values.map((i) => {
-                    return (
-                      <ButtonOutline
-                        key={i}
-                        text={i}
-                        data={data}
-                        onClick={handleChange}
-                      />
-                    );
-                  })}
-                </Wrap>
-</Box>
+                  <Wrap spacing={2}>
+                    {e.values.map((i) => {
+                      return (
+                        <ButtonOutline
+                          key={i}
+                          text={i}
+                          data={data}
+                          onClick={handleChange}
+                        />
+                      );
+                    })}
+                  </Wrap>
+                </Box>
               </Box>
             );
             break;
@@ -348,7 +348,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
       <Button
         mb={4}
         onClick={handleAddToCart}
-        borderRadius="0px"
+        borderRadius="5px"
         bg="#997d6c"
         color="white"
         w="237px"

@@ -24,10 +24,19 @@ interface ContainerProps {
   onClick?: any;
   id: any;
   data: any;
+  dataAll?: any
 }
 
 const BasicCheckBox = (props: ContainerProps) => {
-  const { title, options, custom, onClick, id, data } = props;
+  const { title, options, custom, onClick, id, data, dataAll } = props;
+
+  const getCountPipe = (type: string) => {
+    const count = dataAll.filter((item: any) => {
+      return item.productType === type;
+    });
+
+    return count.length;
+  };
 
   const renderOptions = () => {
     const result = options.map(
@@ -39,12 +48,13 @@ const BasicCheckBox = (props: ContainerProps) => {
             key={index}
             isChecked={data[id].includes(item.text)}
             onChange={() => onClick(item.text, id)}
+            disabled={item.subText && getCountPipe(item.text) === 0 ? true : false}
           >
             <HStack>
               <Text fontSize="14px">{item.text}</Text>
               {item.subText && (
                 <Text fontSize="12px" color="gray.400">
-                  {item.subText}
+                  {`(${getCountPipe(item.text)})`}
                 </Text>
               )}
             </HStack>
