@@ -46,7 +46,7 @@ const DrawerCart = ({ isOpen, onOpen, onClose }: IDrawerCart) => {
             aria-label="Open Menu"
             onClick={isOpen ? onClose : onOpen}
           />
-          <Heading fontSize="2xl" fontFamily={"Castoro"}>
+          <Heading fontSize="2xl" fontFamily={"Castoro"} color={"#a47e6c"}>
             Carrito de compras
           </Heading>
         </HStack>

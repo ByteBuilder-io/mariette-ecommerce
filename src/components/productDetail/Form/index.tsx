@@ -26,6 +26,7 @@ import BasicCheckBox from "@/components/filter/BasicCheckBox";
 import ButtonOutline from "@/components/filter/ButtonOutline";
 import { graphQLClient } from "@/lib/shopify";
 import Cookies from "js-cookie";
+import { useCounter } from "@/hooks/useContador";
 
 interface IOptions {
   name: string;
@@ -62,6 +63,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [data, setData] = useState(myMap);
   const [dataQuery, setDataQuery] = useState<IDataQuery[]>(myDataquery);
+  const { count, setCount, increment } = useCounter();
 
   useEffect(() => {
     async function fetchData() {
@@ -211,13 +213,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
         resultCart.checkoutCreate.checkout.webUrl
       );
     }
-    const myCookieValue = Cookies.get("checkoutUrl");
-
-    console.log(myCookieValue);
-    const obj = {
-      ...data,
-      cantidad: quantity,
-    };
+    increment();
   };
 
   const handleAddToFavorites = () => {
@@ -259,19 +255,19 @@ const Form = ({ options, idProduct, setValue }: Props) => {
                   </Text>
                 </Box>
                 <Box>
-  <Wrap spacing={2}>
-                  {e.values.map((i) => {
-                    return (
-                      <ButtonOutline
-                        key={i}
-                        text={i}
-                        data={data}
-                        onClick={handleChange}
-                      />
-                    );
-                  })}
-                </Wrap>
-</Box>
+                  <Wrap spacing={2}>
+                    {e.values.map((i) => {
+                      return (
+                        <ButtonOutline
+                          key={i}
+                          text={i}
+                          data={data}
+                          onClick={handleChange}
+                        />
+                      );
+                    })}
+                  </Wrap>
+                </Box>
               </Box>
             );
             break;
