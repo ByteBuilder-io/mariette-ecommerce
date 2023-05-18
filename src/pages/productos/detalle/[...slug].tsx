@@ -40,7 +40,6 @@ const ProductoDetalle = () => {
           "variants": store.variants,
           "vendor": store.vendor,
         }`;
-        console.log(query);
         const data: IDataProductos[] = await client.fetch(query);
         setData(data);
         const s = `
@@ -64,7 +63,7 @@ const ProductoDetalle = () => {
     }
     fetchData();
   }, [slug]);
-  console.log(data, dataImages);
+  console.log(slug, dataImages);
   return (
     <Box>
       {data && dataImages && (

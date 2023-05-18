@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  Link,
   SimpleGrid,
   Stack,
   Text,
@@ -17,7 +16,7 @@ import {
   FaFacebook,
   FaTiktok,
 } from "react-icons/fa";
-import { IDataFooter } from "@/typesSanity/docs/footer";
+import { IDataFooter, IUrl } from "@/typesSanity/docs/footer";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import SocialButton from "../commons/socialMedia";
@@ -25,6 +24,7 @@ import SocialButton from "../commons/socialMedia";
 import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
 import { IconType } from "react-icons";
+import Link from "next/link";
 
 const ListHeader = ({ children }: { children: ReactNode }) => {
   return (
@@ -37,7 +37,23 @@ const ListHeader = ({ children }: { children: ReactNode }) => {
 const Footer = () => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
-  const query = `*[_type == "settings"]{footer}`;
+  const query = `*[_type == "settings"]{
+  'enlaces': footer.enlaces,
+    'derechos': footer.derechos,
+    'sobre_nosotros_apartado_1': footer.sobre_nosotros_apartado_1[]{
+      ...,
+      'dataUrl': *[_id == ^.url._ref]{
+        'url': slug.current
+      }[0]
+    },
+    'sobre_nosotros_apartado_2': footer.sobre_nosotros_apartado_2[]{
+      ...,
+      'dataUrl': *[_id == ^.url._ref]{
+        'url': slug.current
+      }[0]
+    },
+    'logo': footer.logo
+}`;
   const [data, setData] = useState<IDataFooter>();
 
   const iconos: { [nombre: string]: IconType } = {
@@ -77,12 +93,15 @@ const Footer = () => {
   ) => {
     if (data) {
       const dataDetail = data[type];
-
       const result = dataDetail.map(
-        (item: { _key: string; nombre: string; url?: string }) => {
+        (item: { _key: string; nombre: string; dataUrl: { url: string } }) => {
+          const url =
+            item.dataUrl.url === "PaginaDeInicio" ? "" : item.dataUrl.url;
           return (
-            <Link href={item.url} key={item._key}>
-              <Text fontSize="14px" textAlign="center">{item.nombre}</Text>
+            <Link href={"/" + url} key={item._key}>
+              <Text fontSize="14px" textAlign="center">
+                {item.nombre}
+              </Text>
             </Link>
           );
         }
@@ -95,7 +114,8 @@ const Footer = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data[0].footer);
+      console.log(data);
+      setData(data[0]);
     }
 
     fetchData();
@@ -144,10 +164,16 @@ const Footer = () => {
               {data && renderSocialMedia()}
             </Stack>
           </Stack>
-          <Stack align={isMobile ? "center" : "center"} mr={isMobile ? "" : "80px"}>
+          <Stack
+            align={isMobile ? "center" : "center"}
+            mr={isMobile ? "" : "80px"}
+          >
             {renderAboutUs("sobre_nosotros_apartado_1")}
           </Stack>
-          <Stack align={isMobile ? "center" : "right"} style={{ textAlignLast: isMobile ? "center" : "right" }}>
+          <Stack
+            align={isMobile ? "center" : "right"}
+            style={{ textAlignLast: isMobile ? "center" : "right" }}
+          >
             {renderAboutUs("sobre_nosotros_apartado_2")}
           </Stack>
         </SimpleGrid>

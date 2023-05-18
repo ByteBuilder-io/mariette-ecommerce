@@ -1,5 +1,6 @@
 import {
   Box,
+  Center,
   Flex,
   Heading,
   HStack,
@@ -152,47 +153,56 @@ const ShoppingCart = () => {
     await updateCart();
   };
   return (
-    <Box
-      maxW={{ base: "3xl", lg: "7xl" }}
-      mx="auto"
-      px={{ base: "4", md: "8", lg: "12" }}
-      py={{ base: "6", md: "8", lg: "12" }}
-    >
-      {dataCart && (
-        <Stack
-          direction={{ base: "column", lg: "column" }}
-          spacing={{ base: "8", md: "16" }}
-        >
-          <Stack spacing={{ base: "8", md: "10" }} flex="2">
-            <Stack spacing="6">
-              {dataCart.node.lineItems.edges.map((item) => (
-                <CartItem
-                  key={item.node.id}
-                  price={item.node.variant.priceV2.amount}
-                  name={item.node.title}
-                  currency={"MXN"}
-                  description={item.node.variant.title}
-                  imageUrl={item.node.variant.image.originalSrc}
-                  quantity={item.node.quatity}
-                  idProduct={item.node.id}
-                  onClickDelete={onDeleteProduct}
-                />
-              ))}
-            </Stack>
-          </Stack>
-
-          <Flex direction="column" align="center" flex="1">
-            <CartOrderSummary total={dataCart.node.totalPriceV2.amount} />
-            {/*<HStack mt="6" fontWeight="semibold">*/}
-            {/*  <p>o</p>*/}
-            {/*  <Link color="#846A5A" fontWeight="bold">*/}
-            {/*    Continuar comprando*/}
-            {/*  </Link>*/}
-            {/*</HStack>*/}
-          </Flex>
-        </Stack>
+    <>
+      {count === 0 ? (
+        <Center py={10}>
+          <Box>Tu carrito esta vacio :c</Box>
+        </Center>
+      ) : (
+        <></>
       )}
-    </Box>
+      {dataCart && (
+        <Box
+          maxW={{ base: "3xl", lg: "7xl" }}
+          mx="auto"
+          px={{ base: "4", md: "8", lg: "12" }}
+          py={{ base: "6", md: "8", lg: "12" }}
+        >
+          <Stack
+            direction={{ base: "column", lg: "column" }}
+            spacing={{ base: "8", md: "16" }}
+          >
+            <Stack spacing={{ base: "8", md: "10" }} flex="2">
+              <Stack spacing="6">
+                {dataCart.node.lineItems.edges.map((item) => (
+                  <CartItem
+                    key={item.node.id}
+                    price={item.node.variant.priceV2.amount}
+                    name={item.node.title}
+                    currency={"MXN"}
+                    description={item.node.variant.title}
+                    imageUrl={item.node.variant.image.originalSrc}
+                    quantity={item.node.quatity}
+                    idProduct={item.node.id}
+                    onClickDelete={onDeleteProduct}
+                  />
+                ))}
+              </Stack>
+            </Stack>
+
+            <Flex direction="column" align="center" flex="1">
+              <CartOrderSummary total={dataCart.node.totalPriceV2.amount} />
+              {/*<HStack mt="6" fontWeight="semibold">*/}
+              {/*  <p>o</p>*/}
+              {/*  <Link color="#846A5A" fontWeight="bold">*/}
+              {/*    Continuar comprando*/}
+              {/*  </Link>*/}
+              {/*</HStack>*/}
+            </Flex>
+          </Stack>
+        </Box>
+      )}
+    </>
   );
 };
 

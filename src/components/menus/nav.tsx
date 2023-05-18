@@ -34,6 +34,7 @@ import Cookies from "js-cookie";
 import { graphQLClient } from "@/lib/shopify";
 import { IDataCart } from "@/components/cart";
 import { title } from "process";
+import { number } from "prop-types";
 
 interface IDrawerProps {
   placement: "right" | "left";
@@ -45,7 +46,17 @@ export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { count, setCount } = useCounter();
 
-  const query = `*[_type == "settings"]{navbar}`;
+  const query = `
+    *[_type == "settings"]{
+      'logo': navbar.logo,
+        'links': navbar.links[]{
+          ...,
+        'dataUrl': *[_id == ^.link.url._ref]{
+            'url': slug.current
+          }[0]
+        }
+    }
+  `;
   const [data, setData] = useState<IDataNav>();
   const [drawerProps, setDrawerProps] = useState<IDrawerProps>({
     placement: "left",
@@ -105,7 +116,7 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      setData(data[0].navbar);
+      setData(data[0]);
     }
 
     fetchData();
@@ -151,7 +162,7 @@ export default function Navbar() {
                     <NavLink
                       key={e._key}
                       name={e.title}
-                      path={e.title}
+                      path={e.dataUrl.url}
                       onClose={onClose}
                     />
                   );
@@ -204,7 +215,60 @@ export default function Navbar() {
             <HStack spacing={5} pr={10}>
               <IconToInput />
               <Box>
-                {count}
+                <Flex alignItems="center">
+                  <Box position="relative">
+                    <Icon
+                      as={BiCartAlt}
+                      boxSize={6}
+                      cursor={"pointer"}
+                      onClick={() => {
+                        isOpen ? onClose() : onOpen();
+                        setDrawerProps({
+                          type: "cart",
+                          placement: "right",
+                          size: "lg",
+                        });
+                      }}
+                    />
+                    <Box
+                      position="absolute"
+                      top="-5px"
+                      right="-5px"
+                      w="16px"
+                      h="16px"
+                      bg="#a47e6c"
+                      borderRadius="50%"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      fontSize="10px"
+                      fontWeight="bold"
+                      color="white"
+                    >
+                      {count}
+                    </Box>
+                  </Box>
+                </Flex>
+                {/*<Icon*/}
+                {/*  as={BiCartAlt}*/}
+                {/*  boxSize={6}*/}
+                {/*  cursor={"pointer"}*/}
+                {/*  onClick={() => {*/}
+                {/*    isOpen ? onClose() : onOpen();*/}
+                {/*    setDrawerProps({*/}
+                {/*      type: "cart",*/}
+                {/*      placement: "right",*/}
+                {/*      size: "lg",*/}
+                {/*    });*/}
+                {/*  }}*/}
+                {/*/>*/}
+              </Box>
+            </HStack>
+          </HStack>
+
+          <HStack display={["inherit", "inherit", "none"]}>
+            <Flex alignItems="center" display={["inherit", "inherit", "none"]}>
+              <Box position="relative">
                 <Icon
                   as={BiCartAlt}
                   boxSize={6}
@@ -214,29 +278,29 @@ export default function Navbar() {
                     setDrawerProps({
                       type: "cart",
                       placement: "right",
-                      size: "xl",
+                      size: "full",
                     });
                   }}
                 />
+                <Box
+                  position="absolute"
+                  top="-5px"
+                  right="-5px"
+                  w="16px"
+                  h="16px"
+                  bg="#a47e6c"
+                  borderRadius="50%"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  fontSize="10px"
+                  fontWeight="bold"
+                  color="white"
+                >
+                  {count}
+                </Box>
               </Box>
-            </HStack>
-          </HStack>
-
-          <HStack display={["inherit", "inherit", "none"]}>
-            <Icon
-              as={BiCartAlt}
-              boxSize={6}
-              cursor={"pointer"}
-              display={["inherit", "inherit", "none"]}
-              onClick={() => {
-                isOpen ? onClose() : onOpen();
-                setDrawerProps({
-                  type: "cart",
-                  placement: "right",
-                  size: "full",
-                });
-              }}
-            />
+            </Flex>
             {!isOpen && (
               <IconButton
                 variant="ghost"

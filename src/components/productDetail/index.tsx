@@ -54,6 +54,11 @@ const ProductDetail = ({ producto, images }: Props) => {
     }
   }, [width]);
 
+  useEffect(() => {
+    setImgMain(images[0].node.originalSrc);
+    setData(images);
+  }, [images]);
+
   return (
     <Fragment>
       <Box
@@ -102,7 +107,7 @@ const ProductDetail = ({ producto, images }: Props) => {
             />
           </Stack>
         </Stack>
-        {/*<ProductGrid />*/}
+        <ProductGrid tag={producto.productType} currentProduct={producto.id} />
       </Box>
     </Fragment>
   );

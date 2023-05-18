@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="" />
+    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menus/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menus/navLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/navLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/productos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typesSanity/docs/footer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/footer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/typesSanity/docs/nav.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/nav.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -76,7 +84,8 @@
       <workItem from="1684082846494" duration="20084000" />
       <workItem from="1684164178817" duration="10955000" />
       <workItem from="1684273032362" duration="1181000" />
-      <workItem from="1684282513434" duration="10722000" />
+      <workItem from="1684282513434" duration="11465000" />
+      <workItem from="1684425889581" duration="8920000" />
     </task>
     <servers />
   </component>

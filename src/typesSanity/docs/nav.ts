@@ -19,6 +19,7 @@ interface ILinks {
     isSubmenu: boolean;
     submenu?: ISubMenu[];
   };
+  dataUrl: { url: string };
 }
 
 interface ISubMenu {
