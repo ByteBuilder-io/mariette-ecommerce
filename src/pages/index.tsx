@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { IHome } from "@/typesSanity/pages/home";
 import Contact from "@/components/contact";
 import Instagram from "@/components/instragram";
+import { RelatedProduct } from "@/components/relatedProduct";
 
 const Home = () => {
   const [data, setData] = useState<IHome>();
@@ -60,6 +61,7 @@ const Home = () => {
         ))}
       {data && (
         <Container w={"100%"} maxW={"1400px"}>
+          {/* <RelatedProduct /> */}
           <Instagram />
           <Contact />
         </Container>
