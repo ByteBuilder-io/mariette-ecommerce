@@ -45,8 +45,9 @@ const Hero = ({ dataHero }: IProps) => {
               </Box>
               <Text
                 position="absolute"
-                top="50%"
-                left="50%"
+                w={isMobile ? "300px" : "500px"}
+                top={isMobile ? "50%" : "25%"}
+                left={isMobile ? "50%" : "30%"}
                 transform="translate(-50%, -50%)"
                 color="white"
                 fontSize={isMobile ? "30px" : "50px"}

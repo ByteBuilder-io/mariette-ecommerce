@@ -22,6 +22,7 @@ import BasicCheckBox from "./BasicCheckBox";
 import BreadCrumb from "./BreadCrum";
 import DrawerFilters from "./DrawerFilters";
 import { d1, d2, d3, d4, colors } from "./utils";
+import { useRouter } from "next/router";
 
 const customTheme = extendTheme({
   components: {
@@ -31,6 +32,7 @@ const customTheme = extendTheme({
 
 interface Props {
   children: ReactNode;
+  dataProduct?: any
 }
 
 interface IData {
@@ -42,7 +44,10 @@ interface IData {
   categoria: string[];
 }
 
-const Filter = ({ children }: Props) => {
+const Filter = ({ children, dataProduct }: Props) => {
+  const router = useRouter();
+  const { query } = router;
+
   const { width, height } = useWindowDimensions();
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -120,8 +125,6 @@ const Filter = ({ children }: Props) => {
       return result;
     }
   };
-
-  console.log(data, "data form");
 
   const RenderFilters = () => {
     return (
@@ -229,6 +232,25 @@ const Filter = ({ children }: Props) => {
       </Stack>
     );
   };
+
+  useEffect(() => {
+    console.log(dataProduct, "dataProduct")
+  }, [dataProduct])
+
+  useEffect(() => {
+    if (query.filter) {
+      const textoCapitalizado =
+        query.filter.toString().charAt(0).toUpperCase() +
+        query.filter.toString().slice(1);
+
+      const producto = [...data.producto, textoCapitalizado];
+      setData({
+        ...data,
+        producto,
+      });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query]);
 
   useEffect(() => {
     if (width < 992) {

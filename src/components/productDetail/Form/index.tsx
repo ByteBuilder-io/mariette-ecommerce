@@ -10,6 +10,9 @@ import {
   InputRightElement,
   Button,
   useToast,
+  Stack,
+  VStack,
+  Wrap,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Select from "react-select";
@@ -255,7 +258,8 @@ const Form = ({ options, idProduct, setValue }: Props) => {
                     Talla
                   </Text>
                 </Box>
-                <HStack direction="row" spacing={2}>
+                <Box>
+  <Wrap spacing={2}>
                   {e.values.map((i) => {
                     return (
                       <ButtonOutline
@@ -266,7 +270,8 @@ const Form = ({ options, idProduct, setValue }: Props) => {
                       />
                     );
                   })}
-                </HStack>
+                </Wrap>
+</Box>
               </Box>
             );
             break;

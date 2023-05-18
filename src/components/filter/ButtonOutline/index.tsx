@@ -27,6 +27,8 @@ const ButtonActive = (props: ContainerProps) => {
       }}
       bg="#997d6c"
       color="white"
+      h="50px"
+      w="50px"
       _hover={{ backgroundColor: "#997d6c" }}
     >
       {text}
@@ -42,6 +44,8 @@ const ButtonNoActive = (props: ContainerProps) => {
       borderColor="#997d6c"
       variant="outline"
       color="#997d6c"
+      h="50px"
+      w="50px"
       onClick={() => {
         onClick(text, "Talla");
       }}

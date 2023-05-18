@@ -18,10 +18,10 @@ const Currency = (ContainerProps: ContainerProps) => {
 
   return (
     <Box display="inline-flex" alignItems="baseline" mb="20px">
-      <Text fontWeight="bold" mr="7px">
+      <Text fontWeight="bold" mr="7px" color="#846a5a">
         $
       </Text>
-      <Text>{format}</Text>
+      <Text color="#846a5a" fontWeight="400">{format}</Text>
     </Box>
   );
 };

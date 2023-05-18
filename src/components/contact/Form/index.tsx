@@ -33,12 +33,12 @@ const Form = (props: ContainerProps) => {
     email: "",
     message: "",
   });
-	const usersMariette = [
-		{ name: "Pepe Lim", email: "pepe.lim3@gmail.com" },
-		{ name: "Pepe Lim1", email: "pepe@bytebuilder.io" },
-		{ name: "Carlos", email: "jcarlos@bytebuilder.io" },
-		{ name: "Osvaldo", email: "osvaldo@bytebuilder.io" },
-	]
+  const usersMariette = [
+    { name: "Pepe Lim", email: "pepe.lim3@gmail.com" },
+    { name: "Pepe Lim1", email: "pepe@bytebuilder.io" },
+    { name: "Carlos", email: "jcarlos@bytebuilder.io" },
+    { name: "Osvaldo", email: "osvaldo@bytebuilder.io" },
+  ];
 
   const handleText = (e: any, type: "name" | "email" | "message") => {
     setData({
@@ -83,11 +83,11 @@ const Form = (props: ContainerProps) => {
     });
   };
 
-	const sendClientUser = async () => {
+  const sendClientUser = async () => {
     const text = data.message;
     let html = htmlUser.replace("{{msg}}", text);
     html = html.replace("{{name}}", data.name);
-		html = html.replace("{{email}}", data.email);
+    html = html.replace("{{email}}", data.email);
 
     const opts = {
       sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
@@ -125,7 +125,7 @@ const Form = (props: ContainerProps) => {
       if (validateEmail(data.email)) {
         setIsLoading(true);
         await sendClient();
-				await sendClientUser();
+        await sendClientUser();
         setIsLoading(false);
         toast({
           title: "Gracias.",
@@ -134,7 +134,7 @@ const Form = (props: ContainerProps) => {
           duration: 2000,
           isClosable: true,
         });
-				resetFormData()
+        resetFormData();
       } else {
         toast({
           title: "Error",
@@ -148,8 +148,16 @@ const Form = (props: ContainerProps) => {
   };
 
   return (
-    <WrapItem>
-      <Box bg="white" borderRadius="none" ml="8px" mb={isMobile ? "20px" : ""} w="500px">
+    <WrapItem justifyContent="center !important">
+      <Box
+        bg="white"
+        borderRadius="none"
+        ml={isMobile ? "" : "25px"}
+        mb="40px"
+        mt="40px"
+        w={!isMobile ? "700px" : ""}
+        justifyContent="center !important"
+      >
         <Box m={8} color="#0B0E3F">
           <VStack spacing={5}>
             <FormControl id="name">
@@ -164,7 +172,7 @@ const Form = (props: ContainerProps) => {
                   type="text"
                   size="md"
                   borderRadius="none"
-									value={data.name}
+                  value={data.name}
                   onChange={(e: any) => handleText(e, "name")}
                 />
               </InputGroup>
@@ -182,7 +190,7 @@ const Form = (props: ContainerProps) => {
                   size="md"
                   borderRadius="none"
                   onChange={(e: any) => handleText(e, "email")}
-									value={data.email}
+                  value={data.email}
                   borderColor={isEmail ? "gray.300" : "red.400"}
                 />
               </InputGroup>
@@ -191,12 +199,13 @@ const Form = (props: ContainerProps) => {
               <FormLabel>Mensaje</FormLabel>
               <Textarea
                 borderColor="gray.300"
+                rows={6}
                 borderRadius="none"
                 _hover={{
                   borderRadius: "gray.300",
                 }}
                 placeholder="Escribir un mensaje..."
-								value={data.message}
+                value={data.message}
                 onChange={(e: any) => handleText(e, "message")}
               />
             </FormControl>
