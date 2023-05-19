@@ -402,7 +402,8 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             <Text
               fontWeight="semibold"
               fontSize="12px"
-              mt="-2px"
+              mt="-2px !important"
+              mb="-2px !important"
               cursor="pointer"
               color="#846a5a"
               onClick={handleResetFilters}
