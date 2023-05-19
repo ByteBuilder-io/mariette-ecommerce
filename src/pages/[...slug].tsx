@@ -25,9 +25,6 @@ const Page = () => {
           `;
         const dataHome = await client.fetch(query);
         setData(dataHome);
-        setLoading(false)
-      } else {
-        setLoading(false)
       }
     }
 

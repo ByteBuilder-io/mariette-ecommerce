@@ -54,7 +54,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const router = useRouter();
   const { query } = router;
 
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true);
   const { width, height } = useWindowDimensions();
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -89,7 +89,8 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       | "rango_precio"
       | "talla"
       | "categoria"
-      | "color"
+      | "color",
+    event?: any
   ) => {
     setData((prevData: any) => ({
       ...prevData,
@@ -97,6 +98,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         ? prevData[id].filter((val: any) => val !== value)
         : [...prevData[id], value],
     }));
+    return false;
   };
 
   const renderBadges = (
@@ -232,7 +234,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
           onClick={handleCheckboxChange}
           data={data}
         />
-        <Text fontWeight="bold" fontSize="14px">
+        {/* <Text fontWeight="bold" fontSize="14px">
           Color
         </Text>
         <Flex alignItems="center" mb="4">
@@ -250,54 +252,69 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
               ))}
             </HStack>
           </ChakraProvider>
-        </Flex>
+        </Flex> */}
       </Stack>
     );
   };
 
-  const filterByMaterial = (material: any) => {
-    const result = dataProductRender.filter((item: any) => {
-      const variantes = item.variants.map((variante: any) => variante.data.option1);
-      // console.log(variantes, "variantes")
-      return material.every((opcion: any) => {
-        return variantes.includes(opcion)
-      });
+  const filterByMaterial = (material: any, filteredData: any) => {
+    const result = filteredData.filter((item: any) =>
+      item.variants.some((variant: any) =>
+        material.includes(variant.data.option1)
+      )
+    );
+    setDataProductRender(result);
+  };
+
+  const filterByTalla = (talla: any, filteredData: any) => {
+    const result = filteredData.filter((item: any) =>
+      item.variants.some((variant: any) => talla.includes(variant.data.option2))
+    );
+    setDataProductRender(result);
+  };
+
+  const getCountFilters = () => {
+    const mergedArray = data.producto.concat(data.talla, data.material);
+    return mergedArray.length;
+  };
+
+  const handleResetFilters = () => {
+    setData({
+      producto: [],
+      material: [],
+      talla: [],
+      rango_precio: [],
+      color: [],
+      categoria: [],
     });
-
-    setDataProductRender(result)
-  }
-
-  const filterByTalla = (talla: any) => {
-    const result = dataProductRender.filter((item: any) => {
-      const variantes = item.variants.map((variante: any) => variante.data.option2);
-      return talla.some((opcion: any) => {
-        return variantes.includes(opcion)
-      });
-    });
-
-    setDataProductRender(result)
-  }
-
-  console.log(dataProductRender, "dataRender")
+  };
 
   useEffect(() => {
-    const filterValues = data.producto
-    const filteredData = dataAll.filter((item: any) => filterValues.includes(item.productType));
-    
+    const filterValues = data.producto;
+    const filteredData = dataAll.filter((item: any) =>
+      filterValues.includes(item.productType)
+    );
+
     if (filteredData.length === 0) {
-      setDataProductRender(dataAll)
+      setDataProductRender(dataAll);
     } else {
-      setDataProductRender(filteredData)
+      setDataProductRender(filteredData);
     }
 
     if (data.material.length > 0) {
-      filterByMaterial(data.material)
+      filterByMaterial(
+        data.material,
+        filteredData.length === 0 ? dataAll : filteredData
+      );
     }
 
     if (data.talla.length > 0) {
-      filterByTalla(data.talla)
+      filterByTalla(
+        data.talla,
+        filteredData.length === 0 ? dataAll : filteredData
+      );
     }
-  }, [data, dataAll])
+  }, [data, dataAll]);
 
   useEffect(() => {
     if (query.filter) {
@@ -310,9 +327,9 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         ...data,
         producto,
       });
-      setLoading(false)
+      setLoading(false);
     } else {
-      setLoading(false)
+      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
@@ -326,9 +343,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   }, [width]);
 
   if (loading) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 
   return (
@@ -380,7 +395,21 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             {renderBadges("categoria")}
             {renderBadges("rango_precio")}
           </Stack>
-          <Text fontWeight="200">Resultados de la busqueda: {dataProductRender.length}</Text>
+          <Text fontWeight="200">
+            Resultados de la busqueda: {dataProductRender.length}
+          </Text>
+          {getCountFilters() > 0 && (
+            <Text
+              fontWeight="semibold"
+              fontSize="12px"
+              mt="-2px"
+              cursor="pointer"
+              color="#846a5a"
+              onClick={handleResetFilters}
+            >
+              Limpiar filtros
+            </Text>
+          )}
           <SimpleGrid
             spacing={4}
             templateColumns="repeat(auto-fill, minmax(200px, 1fr))"

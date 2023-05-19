@@ -6,11 +6,9 @@ import { IHome } from "@/typesSanity/pages/home";
 
 import Contact from "@/components/contact";
 import Instagram from "@/components/instragram";
-import Loading from "@/components/commons/Loading";
 
 const Home = () => {
   const [data, setData] = useState<IHome>();
-  const [loading, setLoading] = useState<boolean>(true)
   const query = `
     *[_type == "homeDoc"] {
       _id,
@@ -26,18 +24,11 @@ const Home = () => {
     async function fetchData() {
       const dataHome = await client.fetch(query);
       setData(dataHome);
-      setTimeout(() => {
-        setLoading(false)
-      }, 500);
     }
 
     fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  if (loading) {
-    <Loading />
-  }
 
   return (
     <>

@@ -24,7 +24,7 @@ const ButtonActive = (props: ContainerProps) => {
       borderColor="#997d6c"
       variant="outline"
       onClick={() => {
-        onClick(text, "talla");
+        onClick(text, isFilter ? "talla" : "Talla");
       }}
       bg="#997d6c"
       color="white"
@@ -39,6 +39,7 @@ const ButtonActive = (props: ContainerProps) => {
 
 const ButtonNoActive = (props: ContainerProps) => {
   const { text, onClick, isFilter } = props;
+  let type = isFilter ? "talla" : "Talla"
 
   return (
     <Button
@@ -48,7 +49,7 @@ const ButtonNoActive = (props: ContainerProps) => {
       h="50px"
       w="50px"
       onClick={() => {
-        onClick(text, isFilter ? "talla" : "Talla");
+        onClick(text, type);
       }}
     >
       {text}
@@ -67,9 +68,9 @@ const ButtonOutline = (props: ContainerProps) => {
   return (
     <>
       {getValidation() ? (
-        <ButtonActive text={text} onClick={onClick} data={data} />
+        <ButtonActive text={text} onClick={onClick} data={data} isFilter={isFilter}/>
       ) : (
-        <ButtonNoActive text={text} onClick={onClick} data={data} />
+        <ButtonNoActive text={text} onClick={onClick} data={data} isFilter={isFilter}/>
       )}
     </>
   );

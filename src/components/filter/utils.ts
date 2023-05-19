@@ -8,7 +8,7 @@ export const d1 = [
 export const d2 = [
   { text: "Oro Blanco 14K" },
   { text: "Oro Amarillo 14K" },
-  { text: "Oro Rosa 14K" },
+  { text: "Oro Rosado 14K" },
   { text: "Plata" },
 ];
 
@@ -22,12 +22,31 @@ export const d3 = [
 export const d4 = [
   { text: "Aguamarina" },
   { text: "Amatista" },
+  { text: "Apatita" },
   { text: "Citrino" },
+  { text: "Diamante" },
+  { text: "Diamante Negro" },
   { text: "Esmeralda" },
+  { text: "Granate" },
+  { text: "Lolita" },
+  { text: "Moissanita" },
+  { text: "Moonstone" },
+  { text: "Ópalo Australiano" },
+  { text: "Ópalo Etíope" },
+  { text: "Peridoto" },
+  { text: "Rhodolita" },
   { text: "Rubí" },
   { text: "Tanzanita" },
-  { text: "Tumalina" },
-  { text: "Zafiro Naranja" },
+  { text: "Topacio Blanco" },
+  { text: "Topacio London Blue" },
+  { text: "Topacio Místico" },
+  { text: "Topacio Sky Blue" },
+  { text: "Topacio Swiss Blue" },
+  { text: "Turmalina" },
+  { text: "Turquesa" },
+  { text: "Zafiro Azul" },
+  { text: "Zafiro Rosa" },
+  { text: "Zafiro Tea" },
 ];
 
 export const colors = [
