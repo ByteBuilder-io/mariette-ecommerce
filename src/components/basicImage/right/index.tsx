@@ -5,26 +5,20 @@ import { sanityImage } from "@/lib/sanity.image";
 import ImageText from "../Image";
 import { Box, Center, Container } from "@chakra-ui/react";
 
-const BasicImageRight = () => {
-  const query = `*[_type == "img_text"]`;
-  const [data, setData] = useState<any>();
+interface ContainerProps {
+  data: any
+}
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data);
-    }
-
-    fetchData();
-  }, [query]);
-
+const BasicImageRight = (props: ContainerProps) => {
+  const { data } = props
+  console.log(data, "data")
   return (
     <Box w="full">
       <Center>
-        {data && data.length > 1 && (
+        {data && (
           <ImageText
-            text={data[1].text}
-            imageUrl={sanityImage(data[1].img.asset._ref).url()}
+            text={data.text}
+            imageUrl={sanityImage(data.img.asset._ref).url()}
             position={1}
           />
         )}

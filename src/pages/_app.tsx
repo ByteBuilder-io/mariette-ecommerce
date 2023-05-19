@@ -5,6 +5,8 @@ import { Global, css } from "@emotion/react";
 import Footer from "@/components/footer";
 import WhatsAppButton from "@/components/commons/WhatsAppButton";
 import { CounterProvider } from "@/hooks/useContador";
+import { useState } from "react";
+import Loading from "@/components/commons/Loading";
 
 const theme = extendTheme({
   fonts: {
@@ -13,8 +15,15 @@ const theme = extendTheme({
   },
 });
 export default function App({ Component, pageProps }: AppProps) {
+  const [loading, setLoading] = useState(true);
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+
   return (
     <ChakraProvider theme={theme}>
+      {loading && <Loading />}
       <CounterProvider>
         <Global
           styles={css`

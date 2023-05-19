@@ -4,25 +4,19 @@ import { sanityImage } from "@/lib/sanity.image";
 
 import ImageText from "../Image";
 
-const BasicImageLeft = () => {
-  const query = `*[_type == "img_text"]`;
-  const [data, setData] = useState<any>();
+interface ContainerProps {
+  data: any
+}
 
-  useEffect(() => {
-    async function fetchData() {
-      const data = await client.fetch(query);
-      setData(data);
-    }
-
-    fetchData();
-  }, [query]);
+const BasicImageLeft = (props: ContainerProps) => {
+  const { data } = props
 
   return (
     <Fragment>
-      {data && data.length > 0 && (
+      {data && (
         <ImageText
-          text={data[0].text}
-          imageUrl={sanityImage(data[0].img.asset._ref).url()}
+          text={data.text}
+          imageUrl={sanityImage(data.img.asset._ref).url()}
           position={2}
         />
       )}
