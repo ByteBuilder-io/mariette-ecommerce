@@ -13,17 +13,18 @@ interface ContainerProps {
   text: string;
   onClick?: any;
   data: any;
+  isFilter?: boolean;
 }
 
 const ButtonActive = (props: ContainerProps) => {
-  const { text, onClick } = props;
+  const { text, onClick, isFilter } = props;
 
   return (
     <Button
       borderColor="#997d6c"
       variant="outline"
       onClick={() => {
-        onClick(text, "Talla");
+        onClick(text, "talla");
       }}
       bg="#997d6c"
       color="white"
@@ -37,7 +38,7 @@ const ButtonActive = (props: ContainerProps) => {
 };
 
 const ButtonNoActive = (props: ContainerProps) => {
-  const { text, onClick } = props;
+  const { text, onClick, isFilter } = props;
 
   return (
     <Button
@@ -47,7 +48,7 @@ const ButtonNoActive = (props: ContainerProps) => {
       h="50px"
       w="50px"
       onClick={() => {
-        onClick(text, "Talla");
+        onClick(text, isFilter ? "talla" : "Talla");
       }}
     >
       {text}
@@ -56,10 +57,10 @@ const ButtonNoActive = (props: ContainerProps) => {
 };
 
 const ButtonOutline = (props: ContainerProps) => {
-  const { text, onClick, data } = props;
+  const { text, onClick, data, isFilter } = props;
 
   const getValidation = () => {
-    const filter = data.Talla === text;
+    const filter = isFilter ? data.talla.includes(text) : data.Talla === text;
     return filter;
   };
 

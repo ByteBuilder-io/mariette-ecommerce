@@ -5,6 +5,7 @@ import { IDataProductos } from "@/typesSanity/docs/productos";
 import { client } from "@/lib/sanity.client";
 import ProductDetail from "@/components/productDetail";
 import { graphQLClient } from "@/lib/shopify";
+import Loading from "@/components/commons/Loading";
 
 export interface IDataImage {
   product: {
@@ -17,6 +18,7 @@ export interface IDataImage {
 const ProductoDetalle = () => {
   const [data, setData] = useState<IDataProductos[]>();
   const [dataImages, setDataImages] = useState<IDataImage>();
+  const [loading, setLoading] = useState<boolean>(true)
   const router = useRouter();
   const { slug } = router.query;
 
@@ -59,11 +61,18 @@ const ProductoDetalle = () => {
         // Utilizando el cliente GraphQL
         const image: IDataImage = await graphQLClient.request(s);
         setDataImages(image);
+        setLoading(false)
       }
     }
     fetchData();
   }, [slug]);
-  console.log(slug, dataImages);
+  
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
+
   return (
     <Box>
       {data && dataImages && (

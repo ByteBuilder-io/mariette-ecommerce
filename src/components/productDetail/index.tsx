@@ -11,6 +11,7 @@ import Description from "./Description";
 import ProductGrid from "./ProductGrid";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 import { IDataImage } from "@/pages/productos/detalle/[...slug]";
+import Loading from "../commons/Loading";
 
 interface Props {
   producto: IDataProductos;
@@ -18,6 +19,8 @@ interface Props {
 }
 const ProductDetail = ({ producto, images }: Props) => {
   const { width, height } = useWindowDimensions();
+  
+  const [loading, setLoading] = useState<boolean>(true)
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [data, setData] = useState(images);
   const [imgMain, setImgMain] = useState<string>(images[0].node.originalSrc);
@@ -57,7 +60,14 @@ const ProductDetail = ({ producto, images }: Props) => {
   useEffect(() => {
     setImgMain(images[0].node.originalSrc);
     setData(images);
+    setLoading(false)
   }, [images]);
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
 
   return (
     <Fragment>

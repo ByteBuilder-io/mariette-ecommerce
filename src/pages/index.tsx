@@ -1,21 +1,16 @@
-import { Box, Container } from "@chakra-ui/react";
-import Hero from "@/components/hero";
-import ProductDetail from "@/components/productDetail";
-import ShoppingCart from "@/components/cart";
-import Filter from "@/components/filter";
-import BasicImageRight from "@/components/basicImage/right";
-import BasicImageLeft from "@/components/basicImage/left";
-import CardCategory from "@/components/cards/cardCategory";
-import BasicImage from "@/components/basicImage";
+import { Container } from "@chakra-ui/react";
 import { client } from "@/lib/sanity.client";
 import { useEffect, useState } from "react";
+
 import { IHome } from "@/typesSanity/pages/home";
+
 import Contact from "@/components/contact";
 import Instagram from "@/components/instragram";
-import { RelatedProduct } from "@/components/relatedProduct";
+import Loading from "@/components/commons/Loading";
 
 const Home = () => {
   const [data, setData] = useState<IHome>();
+  const [loading, setLoading] = useState<boolean>(true)
   const query = `
     *[_type == "homeDoc"] {
       _id,
@@ -31,10 +26,19 @@ const Home = () => {
     async function fetchData() {
       const dataHome = await client.fetch(query);
       setData(dataHome);
+      setTimeout(() => {
+        setLoading(false)
+      }, 500);
     }
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (loading) {
+    <Loading />
+  }
+
   return (
     <>
       {/*<Hero />*/}
@@ -61,7 +65,6 @@ const Home = () => {
         ))}
       {data && (
         <Container w={"100%"} maxW={"1400px"}>
-          {/* <RelatedProduct /> */}
           <Instagram />
           <Contact />
         </Container>

@@ -6,9 +6,9 @@ export const d1 = [
 ];
 
 export const d2 = [
-  { text: "Oro blanco 14k" },
-  { text: "Oro amarillo 14k" },
-  { text: "Oro rosa 14k" },
+  { text: "Oro Blanco 14K" },
+  { text: "Oro Amarillo 14K" },
+  { text: "Oro Rosa 14K" },
   { text: "Plata" },
 ];
 
@@ -19,7 +19,16 @@ export const d3 = [
   { text: "Mas de $100" },
 ];
 
-export const d4 = [{ text: "Hombre" }, { text: "Mujer" }];
+export const d4 = [
+  { text: "Aguamarina" },
+  { text: "Amatista" },
+  { text: "Citrino" },
+  { text: "Esmeralda" },
+  { text: "Rubí" },
+  { text: "Tanzanita" },
+  { text: "Tumalina" },
+  { text: "Zafiro Naranja" },
+];
 
 export const colors = [
   { name: "Black", value: "black", label: "Negro" },

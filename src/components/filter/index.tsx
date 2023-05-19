@@ -11,7 +11,7 @@ import {
   Wrap,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { IoMdClose } from "react-icons/io";
@@ -19,13 +19,15 @@ import { IoMdClose } from "react-icons/io";
 import { checkboxTheme } from "./Checkbox";
 import BadgeFilter from "./BadgeFilter";
 import ButtonOutline from "./ButtonOutline";
-import RangeSlider from "./RangePrice";
 import BasicCheckBox from "./BasicCheckBox";
 import BreadCrumb from "./BreadCrum";
 import DrawerFilters from "./DrawerFilters";
-import { d1, d2, d3, d4, colors } from "./utils";
-import { useRouter } from "next/router";
 import ProductCard from "../productDetail/ProductGrid/ProductCard";
+
+import { useRouter } from "next/router";
+
+import { d1, d2, d3, d4, colors } from "./utils";
+import Loading from "../commons/Loading";
 
 const customTheme = extendTheme({
   components: {
@@ -52,6 +54,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const router = useRouter();
   const { query } = router;
 
+  const [loading, setLoading] = useState<boolean>(true)
   const { width, height } = useWindowDimensions();
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
@@ -65,10 +68,6 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     color: [],
     categoria: [],
   });
-
-  const handleChangeSlider = (nuevoRango: [number, number]) => {
-    setRango(nuevoRango);
-  };
 
   const handleFilterClose = () => {
     setIsOpenFilter(false);
@@ -160,56 +159,67 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
                   text="4"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="4.5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="5.5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="6"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="6.5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="7"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="7.5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="8"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="8.5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="9"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
               </Wrap>
             </ChakraProvider>
@@ -245,7 +255,30 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     );
   };
 
-  console.log(dataProductRender)
+  const filterByMaterial = (material: any) => {
+    const result = dataProductRender.filter((item: any) => {
+      const variantes = item.variants.map((variante: any) => variante.data.option1);
+      // console.log(variantes, "variantes")
+      return material.every((opcion: any) => {
+        return variantes.includes(opcion)
+      });
+    });
+
+    setDataProductRender(result)
+  }
+
+  const filterByTalla = (talla: any) => {
+    const result = dataProductRender.filter((item: any) => {
+      const variantes = item.variants.map((variante: any) => variante.data.option2);
+      return talla.some((opcion: any) => {
+        return variantes.includes(opcion)
+      });
+    });
+
+    setDataProductRender(result)
+  }
+
+  console.log(dataProductRender, "dataRender")
 
   useEffect(() => {
     const filterValues = data.producto
@@ -255,6 +288,14 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       setDataProductRender(dataAll)
     } else {
       setDataProductRender(filteredData)
+    }
+
+    if (data.material.length > 0) {
+      filterByMaterial(data.material)
+    }
+
+    if (data.talla.length > 0) {
+      filterByTalla(data.talla)
     }
   }, [data, dataAll])
 
@@ -269,6 +310,9 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         ...data,
         producto,
       });
+      setLoading(false)
+    } else {
+      setLoading(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
@@ -280,6 +324,12 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       setIsMobile(false);
     }
   }, [width]);
+
+  if (loading) {
+    return (
+      <Loading />
+    )
+  }
 
   return (
     <Box
