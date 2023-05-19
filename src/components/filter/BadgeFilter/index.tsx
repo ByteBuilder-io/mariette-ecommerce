@@ -24,7 +24,7 @@ const BadgeFilter = (props: ContainerProps) => {
       >
         <Text
           ml="10px"
-          mr="-5px"
+          mr={isFilter ? "8px" : "-5px" }
           pt="4px"
           pb="4px"
           fontWeight="light"
