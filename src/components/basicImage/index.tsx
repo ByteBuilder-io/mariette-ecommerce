@@ -6,9 +6,10 @@ interface IProps {
 }
 const BasicImage = ({ data }: IProps) => {
   if (data.side.opcion === "left") {
-    return <BasicImageLeft />;
+    return <BasicImageLeft data={data} />;
+  } else {
+    return <BasicImageRight data={data} />;
   }
-  return <BasicImageRight />;
 };
 
 export default BasicImage;
