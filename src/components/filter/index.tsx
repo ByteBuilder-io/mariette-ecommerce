@@ -8,6 +8,8 @@ import {
   Text,
   extendTheme,
   ChakraProvider,
+  Wrap,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
 
@@ -17,12 +19,15 @@ import { IoMdClose } from "react-icons/io";
 import { checkboxTheme } from "./Checkbox";
 import BadgeFilter from "./BadgeFilter";
 import ButtonOutline from "./ButtonOutline";
-import RangeSlider from "./RangePrice";
 import BasicCheckBox from "./BasicCheckBox";
 import BreadCrumb from "./BreadCrum";
 import DrawerFilters from "./DrawerFilters";
-import { d1, d2, d3, d4, colors } from "./utils";
+import ProductCard from "../productDetail/ProductGrid/ProductCard";
+
 import { useRouter } from "next/router";
+
+import { d1, d2, d3, d4, colors } from "./utils";
+import Loading from "../commons/Loading";
 
 const customTheme = extendTheme({
   components: {
@@ -31,8 +36,9 @@ const customTheme = extendTheme({
 });
 
 interface Props {
-  children: ReactNode;
-  dataProduct?: any
+  children?: ReactNode;
+  dataProduct?: any;
+  dataAll?: any;
 }
 
 interface IData {
@@ -44,14 +50,16 @@ interface IData {
   categoria: string[];
 }
 
-const Filter = ({ children, dataProduct }: Props) => {
+const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const router = useRouter();
   const { query } = router;
 
+  const [loading, setLoading] = useState<boolean>(true);
   const { width, height } = useWindowDimensions();
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(true);
+  const [dataProductRender, setDataProductRender] = useState(dataProduct);
   const [data, setData] = useState<any>({
     producto: [],
     material: [],
@@ -60,10 +68,6 @@ const Filter = ({ children, dataProduct }: Props) => {
     color: [],
     categoria: [],
   });
-
-  const handleChangeSlider = (nuevoRango: [number, number]) => {
-    setRango(nuevoRango);
-  };
 
   const handleFilterClose = () => {
     setIsOpenFilter(false);
@@ -85,7 +89,8 @@ const Filter = ({ children, dataProduct }: Props) => {
       | "rango_precio"
       | "talla"
       | "categoria"
-      | "color"
+      | "color",
+    event?: any
   ) => {
     setData((prevData: any) => ({
       ...prevData,
@@ -93,6 +98,7 @@ const Filter = ({ children, dataProduct }: Props) => {
         ? prevData[id].filter((val: any) => val !== value)
         : [...prevData[id], value],
     }));
+    return false;
   };
 
   const renderBadges = (
@@ -130,11 +136,12 @@ const Filter = ({ children, dataProduct }: Props) => {
     return (
       <Stack spacing="6" mt="50px">
         <BasicCheckBox
-          title="Producto"
+          title="Categoria"
           options={d1}
           id="producto"
           onClick={handleCheckboxChange}
           data={data}
+          dataAll={dataAll}
         />
         <BasicCheckBox
           title="Material"
@@ -149,61 +156,85 @@ const Filter = ({ children, dataProduct }: Props) => {
         <CheckboxGroup>
           <Stack spacing="1">
             <ChakraProvider theme={customTheme}>
-              <HStack direction="row" spacing={2}>
+              <Wrap spacing={2}>
                 <ButtonOutline
                   text="4"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
+                />
+                <ButtonOutline
+                  text="4.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="5"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
+                />
+                <ButtonOutline
+                  text="5.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="6"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
+                />
+                <ButtonOutline
+                  text="6.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="7"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
+                />
+                <ButtonOutline
+                  text="7.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="8"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
+                />
+                <ButtonOutline
+                  text="8.5"
+                  data={data}
+                  onClick={handleCheckboxChange}
+                  isFilter
                 />
                 <ButtonOutline
                   text="9"
                   data={data}
                   onClick={handleCheckboxChange}
+                  isFilter
                 />
-              </HStack>
+              </Wrap>
             </ChakraProvider>
           </Stack>
         </CheckboxGroup>
         <BasicCheckBox
-          title="Rango de precio"
-          options={d3}
-          id="rango_precio"
+          title="Gema"
+          options={d4}
+          id="categoria"
           onClick={handleCheckboxChange}
           data={data}
         />
-        <Box w="200px">
-          <Flex justifyContent="space-between">
-            <Text fontSize="14px">Desde: ${rango[0]}</Text>
-            <Text fontSize="14px">Hasta: ${rango[1]}</Text>
-          </Flex>
-          <RangeSlider
-            defaultValue={[100, 500]}
-            min={0}
-            max={1000}
-            onChange={handleChangeSlider}
-          />
-        </Box>
-        <Text fontWeight="bold" fontSize="14px">
+        {/* <Text fontWeight="bold" fontSize="14px">
           Color
         </Text>
         <Flex alignItems="center" mb="4">
@@ -221,21 +252,69 @@ const Filter = ({ children, dataProduct }: Props) => {
               ))}
             </HStack>
           </ChakraProvider>
-        </Flex>
-        <BasicCheckBox
-          title="Categoria"
-          options={d4}
-          id="categoria"
-          onClick={handleCheckboxChange}
-          data={data}
-        />
+        </Flex> */}
       </Stack>
     );
   };
 
+  const filterByMaterial = (material: any, filteredData: any) => {
+    const result = filteredData.filter((item: any) =>
+      item.variants.some((variant: any) =>
+        material.includes(variant.data.option1)
+      )
+    );
+    setDataProductRender(result);
+  };
+
+  const filterByTalla = (talla: any, filteredData: any) => {
+    const result = filteredData.filter((item: any) =>
+      item.variants.some((variant: any) => talla.includes(variant.data.option2))
+    );
+    setDataProductRender(result);
+  };
+
+  const getCountFilters = () => {
+    const mergedArray = data.producto.concat(data.talla, data.material);
+    return mergedArray.length;
+  };
+
+  const handleResetFilters = () => {
+    setData({
+      producto: [],
+      material: [],
+      talla: [],
+      rango_precio: [],
+      color: [],
+      categoria: [],
+    });
+  };
+
   useEffect(() => {
-    console.log(dataProduct, "dataProduct")
-  }, [dataProduct])
+    const filterValues = data.producto;
+    const filteredData = dataAll.filter((item: any) =>
+      filterValues.includes(item.productType)
+    );
+
+    if (filteredData.length === 0) {
+      setDataProductRender(dataAll);
+    } else {
+      setDataProductRender(filteredData);
+    }
+
+    if (data.material.length > 0) {
+      filterByMaterial(
+        data.material,
+        filteredData.length === 0 ? dataAll : filteredData
+      );
+    }
+
+    if (data.talla.length > 0) {
+      filterByTalla(
+        data.talla,
+        filteredData.length === 0 ? dataAll : filteredData
+      );
+    }
+  }, [data, dataAll]);
 
   useEffect(() => {
     if (query.filter) {
@@ -248,8 +327,11 @@ const Filter = ({ children, dataProduct }: Props) => {
         ...data,
         producto,
       });
+      setLoading(false);
+    } else {
+      setLoading(false);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
 
   useEffect(() => {
@@ -259,6 +341,10 @@ const Filter = ({ children, dataProduct }: Props) => {
       setIsMobile(false);
     }
   }, [width]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Box
@@ -309,7 +395,32 @@ const Filter = ({ children, dataProduct }: Props) => {
             {renderBadges("categoria")}
             {renderBadges("rango_precio")}
           </Stack>
-          {children}
+          <Text fontWeight="200">
+            Resultados de la busqueda: {dataProductRender.length}
+          </Text>
+          {getCountFilters() > 0 && (
+            <Text
+              fontWeight="semibold"
+              fontSize="12px"
+              mt="-2px"
+              cursor="pointer"
+              color="#846a5a"
+              onClick={handleResetFilters}
+            >
+              Limpiar filtros
+            </Text>
+          )}
+          <SimpleGrid
+            spacing={4}
+            templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
+          >
+            {dataProductRender && dataProductRender.length > 0 && (
+              <ProductCard
+                products={dataProductRender}
+                totalRows={dataProductRender.length / 4}
+              />
+            )}
+          </SimpleGrid>
         </Stack>
       </Stack>
     </Box>

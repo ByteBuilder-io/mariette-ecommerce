@@ -20,7 +20,19 @@ const Hero = ({ dataHero }: IProps) => {
   const [data, setData] = useState<IHero>(dataHero);
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);  
+
+  const getValue = () => {
+    if (width < 600) {
+      return "50%"
+    } 
+    if (width > 600 && width < 1800) {
+      return "22%"
+    } 
+    if (width > 1800) {
+      return "30%"
+    } 
+  }
 
   const renderSlider = () => {
     if (data) {
@@ -46,13 +58,13 @@ const Hero = ({ dataHero }: IProps) => {
               <Text
                 position="absolute"
                 w={isMobile ? "300px" : "500px"}
-                top={isMobile ? "50%" : "25%"}
-                left={isMobile ? "50%" : "30%"}
+                top={isMobile ? "30%" : "25%"}
+                left={getValue()}
                 transform="translate(-50%, -50%)"
                 color="white"
                 fontSize={isMobile ? "30px" : "50px"}
                 fontWeight="100"
-                textAlign="center"
+                textAlign="left"
                 fontFamily="Castoro Titling"
               >
                 {item.texto}
@@ -61,7 +73,7 @@ const Hero = ({ dataHero }: IProps) => {
                     fontWeight="300"
                     textAlign="center"
                     fontSize={isMobile ? "12px" : "20px"}
-                    borderRadius="none"
+                    borderRadius="5px"
                     bg="#997d6c"
                     color="white"
                     h={isMobile ? "40px" : "55px"}

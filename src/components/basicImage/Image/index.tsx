@@ -66,7 +66,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                   fontWeight="300"
                   textAlign="center"
                   fontSize={isMobile ? "12px" : "20px"}
-                  borderRadius="none"
+                  borderRadius="5px"
                   bg="#997d6c"
                   color="white"
                   h={isMobile ? "40px" : "55px"}
@@ -123,7 +123,7 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                   fontWeight="300"
                   textAlign="center"
                   fontSize={isMobile ? "12px" : "20px"}
-                  borderRadius="none"
+                  borderRadius="5px"
                   bg="#997d6c"
                   color="white"
                   h={isMobile ? "40px" : "55px"}

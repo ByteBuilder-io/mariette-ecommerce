@@ -1,4 +1,5 @@
 import {
+  Box,
   ChakraProvider,
   Checkbox,
   CheckboxGroup,
@@ -24,10 +25,21 @@ interface ContainerProps {
   onClick?: any;
   id: any;
   data: any;
+  dataAll?: any;
+  isScroll?: boolean;
 }
 
 const BasicCheckBox = (props: ContainerProps) => {
-  const { title, options, custom, onClick, id, data } = props;
+  const { title, options, custom, onClick, id, data, dataAll, isScroll } =
+    props;
+
+  const getCountPipe = (type: string) => {
+    const count = dataAll.filter((item: any) => {
+      return item.productType === type;
+    });
+
+    return count.length;
+  };
 
   const renderOptions = () => {
     const result = options.map(
@@ -38,13 +50,16 @@ const BasicCheckBox = (props: ContainerProps) => {
             size="md"
             key={index}
             isChecked={data[id].includes(item.text)}
-            onChange={() => onClick(item.text, id)}
+            onChange={(event) => onClick(item.text, id, event)}
+            disabled={
+              item.subText && getCountPipe(item.text) === 0 ? true : false
+            }
           >
             <HStack>
               <Text fontSize="14px">{item.text}</Text>
               {item.subText && (
                 <Text fontSize="12px" color="gray.400">
-                  {item.subText}
+                  {`(${getCountPipe(item.text)})`}
                 </Text>
               )}
             </HStack>
@@ -66,11 +81,26 @@ const BasicCheckBox = (props: ContainerProps) => {
       >
         {title}
       </Text>
-      <CheckboxGroup>
-        <Stack spacing="1" mb={custom ? "20px" : ""}>
-          <ChakraProvider theme={customTheme}>{renderOptions()}</ChakraProvider>
-        </Stack>
-      </CheckboxGroup>
+      {isScroll && (
+        <Box height="300px" overflowY="scroll">
+          <CheckboxGroup>
+            <Stack spacing="1" mb={custom ? "20px" : ""}>
+              <ChakraProvider theme={customTheme}>
+                {renderOptions()}
+              </ChakraProvider>
+            </Stack>
+          </CheckboxGroup>
+        </Box>
+      )}
+      {!isScroll && (
+        <CheckboxGroup>
+          <Stack spacing="1" mb={custom ? "20px" : ""}>
+            <ChakraProvider theme={customTheme}>
+              {renderOptions()}
+            </ChakraProvider>
+          </Stack>
+        </CheckboxGroup>
+      )}
     </Fragment>
   );
 };

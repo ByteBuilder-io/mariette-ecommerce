@@ -216,15 +216,6 @@ const Form = ({ options, idProduct, setValue }: Props) => {
     increment();
   };
 
-  const handleAddToFavorites = () => {
-    toast({
-      title: "Product added to favorites",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
-  };
-
   return (
     <Box pt="20px">
       {options.map((e) => {
@@ -277,7 +268,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
               gemaData = [...gemaData, { label: i, value: i }];
             });
             return (
-              <Box key={e._key}>
+              <Box key={e._key} mb="15px">
                 <Box mb="10px">
                   <Text fontWeight="bold" fontSize="14px">
                     Gema
@@ -344,7 +335,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
       <Button
         mb={4}
         onClick={handleAddToCart}
-        borderRadius="0px"
+        borderRadius="5px"
         bg="#997d6c"
         color="white"
         w="237px"
