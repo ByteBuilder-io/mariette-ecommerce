@@ -55,11 +55,7 @@ const Home = () => {
             data={componente}
           />
         ))}
-      {data && (
-        <Container w={"100%"} maxW={"1400px"}>
-          <Footer />
-        </Container>
-      )}
+      {data && <Footer />}
     </>
   );
 };

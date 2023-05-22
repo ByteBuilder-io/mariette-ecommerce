@@ -6,6 +6,7 @@ import { IDataProductos } from "@/typesSanity/docs/productos";
 import Filter from "@/components/filter";
 import Loading from "@/components/commons/Loading";
 import Footer from "@/components/footer";
+import NotFound from "@/components/cards/notFound";
 
 const Productos = () => {
   const [data, setData] = useState<IDataProductos[]>();
@@ -59,16 +60,19 @@ const Productos = () => {
   if (loading) {
     return <Loading />;
   }
+  console.log(data);
 
   return (
-    <Container py={10} maxW="1400px">
-      {data && data.length > 0 && dataAll && dataAll.length > 0 && (
-        <>
+    <>
+      <Container py={10} maxW="1400px">
+        {data && data.length > 0 && dataAll && dataAll.length > 0 && (
           <Filter dataProduct={data} dataAll={dataAll} />
-          <Footer />
-        </>
-      )}
-    </Container>
+        )}
+        {data && data.length == 0 && <NotFound />}
+      </Container>
+      {data && data.length > 0 && dataAll && dataAll.length > 0 && <Footer />}
+      {data && data.length == 0 && <Footer />}
+    </>
   );
 };
 

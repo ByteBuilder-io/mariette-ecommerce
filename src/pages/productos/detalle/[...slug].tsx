@@ -75,14 +75,12 @@ const ProductoDetalle = () => {
   return (
     <Box>
       {data && dataImages && (
-        <>
-          <ProductDetail
-            producto={data[0]}
-            images={dataImages.product.images.edges}
-          />
-          <Footer />
-        </>
+        <ProductDetail
+          producto={data[0]}
+          images={dataImages.product.images.edges}
+        />
       )}
+      {data && <Footer />}
     </Box>
   );
 };
