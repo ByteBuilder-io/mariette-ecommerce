@@ -67,6 +67,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     rango_precio: [],
     color: [],
     categoria: [],
+    gema: [],
   });
 
   const handleFilterClose = () => {
@@ -89,7 +90,8 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       | "rango_precio"
       | "talla"
       | "categoria"
-      | "color",
+      | "color"
+      | "gema",
     event?: any
   ) => {
     setData((prevData: any) => ({
@@ -109,13 +111,15 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       | "rango_precio"
       | "talla"
       | "color"
+      | "gema"
   ) => {
     if (
       type === "producto" ||
       type === "material" ||
       type === "color" ||
       type === "categoria" ||
-      type === "rango_precio"
+      type === "rango_precio" ||
+      type === "gema"
     ) {
       const result = data[type].map((item: string, index: number) => {
         return <BadgeFilter text={item} key={index} />;
@@ -230,7 +234,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         <BasicCheckBox
           title="Gema"
           options={d4}
-          id="categoria"
+          id="gema"
           onClick={handleCheckboxChange}
           data={data}
         />
@@ -257,7 +261,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     );
   };
 
-  const filterByMaterial = (material: any, filteredData: any) => {
+  const filterByMaterial = (material: string[], filteredData: any) => {
     const result = filteredData.filter((item: any) =>
       item.variants.some((variant: any) =>
         material.includes(variant.data.option1)
@@ -266,11 +270,20 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     setDataProductRender(result);
   };
 
-  const filterByTalla = (talla: any, filteredData: any) => {
+  const filterByTalla = (talla: string[], filteredData: any) => {
     const result = filteredData.filter((item: any) =>
       item.variants.some((variant: any) => talla.includes(variant.data.option2))
     );
     setDataProductRender(result);
+  };
+
+  const filterByGema = (gema: string[], filteredData: any) => {
+    const resultado = filteredData.filter((item: any) => {
+      const allOptionValues = item.options.flatMap((option: any) => option.values);
+      return allOptionValues.some((value: any) => gema.includes(value));
+    });
+    
+    setDataProductRender(resultado);
   };
 
   const getCountFilters = () => {
@@ -314,6 +327,13 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         filteredData.length === 0 ? dataAll : filteredData
       );
     }
+
+    if (data.gema.length > 0) {
+      filterByGema(
+        data.gema,
+        filteredData.length === 0 ? dataAll : filteredData
+      );
+    }
   }, [data, dataAll]);
 
   useEffect(() => {
@@ -327,9 +347,13 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         ...data,
         producto: [producto[producto.length - 1]],
       });
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     } else {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
@@ -415,10 +439,12 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             spacing={4}
             templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
           >
+            {loading && <Loading />}
             {dataProductRender && dataProductRender.length > 0 && (
               <ProductCard
                 products={dataProductRender}
                 totalRows={dataProductRender.length / 4}
+                loading={loading}
               />
             )}
           </SimpleGrid>
