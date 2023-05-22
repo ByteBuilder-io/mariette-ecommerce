@@ -3,7 +3,6 @@ import { Navigation, Pagination } from "swiper";
 import { Box, Image, Text, Button, Container } from "@chakra-ui/react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { useEffect, useState } from "react";
-import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -17,6 +16,7 @@ interface IProps {
 
 const Hero = ({ dataHero }: IProps) => {
   const maxH = "800px";
+  
   const [data, setData] = useState<IHero>(dataHero);
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
@@ -64,7 +64,7 @@ const Hero = ({ dataHero }: IProps) => {
                 top={isMobile ? "30%" : "25%"}
                 left={getValue()}
                 transform="translate(-50%, -50%)"
-                color="white"
+                color={item.color_titulo ? item.color_titulo.value : "white"}
                 fontSize={isMobile ? "30px" : "50px"}
                 fontWeight="100"
                 textAlign="left"
@@ -78,7 +78,7 @@ const Hero = ({ dataHero }: IProps) => {
                       textAlign="center"
                       fontSize={isMobile ? "12px" : "20px"}
                       borderRadius="5px"
-                      bg="#997d6c"
+                      bg={item.color_boton ? item.color_boton.value : "#997d6c"}
                       color="white"
                       h={isMobile ? "40px" : "55px"}
                       width={isMobile ? "120px" : "auto"}

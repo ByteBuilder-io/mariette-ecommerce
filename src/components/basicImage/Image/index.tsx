@@ -8,6 +8,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 
@@ -15,11 +16,13 @@ interface Props {
   text: string;
   imageUrl: string;
   position: number;
+  data: any;
 }
 
-const ImageText = ({ text, imageUrl, position }: Props) => {
+const ImageText = ({ text, imageUrl, position, data }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
+  const router = useRouter();
 
   useEffect(() => {
     if (width < 1024) {
@@ -28,6 +31,10 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
       setIsMobile(false);
     }
   }, [width]);
+
+  const goToPage = (item: string) => {
+    router.push(item);
+  };
 
   const renderText = () => {
     if (position === 1) {
@@ -59,23 +66,29 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                   fontFamily="Castoro Titling"
                   pl="35px"
                   pr="35px"
+                  color={data.color_texto ? data.color_texto.value : "black"}
                 >
                   {text}
                 </Text>
-                <Button
-                  fontWeight="300"
-                  textAlign="center"
-                  fontSize={isMobile ? "12px" : "20px"}
-                  borderRadius="5px"
-                  bg="#997d6c"
-                  color="white"
-                  h={isMobile ? "40px" : "55px"}
-                  width={isMobile ? "120px" : "auto"}
-                >
-                  <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
-                    Ver Mas
-                  </Text>
-                </Button>
+                {data.text_button && (
+                  <Button
+                    fontWeight="300"
+                    textAlign="center"
+                    fontSize={isMobile ? "12px" : "20px"}
+                    borderRadius="5px"
+                    bg={data.color_botton ? data.color_botton.value : "#997d6c"}
+                    color="white"
+                    h={isMobile ? "40px" : "55px"}
+                    width={isMobile ? "120px" : "auto"}
+                    onClick={() => {
+                      goToPage(data.text_button_slug);
+                    }}
+                  >
+                    <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                      {data.text_button}
+                    </Text>
+                  </Button>
+                )}
               </Stack>
             </Box>
             <Box w={{ base: "100%", md: "80%" }}>
@@ -116,23 +129,29 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                   fontFamily="Castoro Titling"
                   pl="35px"
                   pr="35px"
+                  color={data.color_texto ? data.color_texto.value : "black"}
                 >
                   {text}
                 </Text>
-                <Button
-                  fontWeight="300"
-                  textAlign="center"
-                  fontSize={isMobile ? "12px" : "20px"}
-                  borderRadius="5px"
-                  bg="#997d6c"
-                  color="white"
-                  h={isMobile ? "40px" : "55px"}
-                  width={isMobile ? "120px" : "auto"}
-                >
-                  <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
-                    Ver Mas
-                  </Text>
-                </Button>
+                {data.text_button && (
+                  <Button
+                    fontWeight="300"
+                    textAlign="center"
+                    fontSize={isMobile ? "12px" : "20px"}
+                    borderRadius="5px"
+                    bg={data.color_botton ? data.color_botton.value : "#997d6c"}
+                    color="white"
+                    h={isMobile ? "40px" : "55px"}
+                    width={isMobile ? "120px" : "auto"}
+                    onClick={() => {
+                      goToPage(data.text_button_slug);
+                    }}
+                  >
+                    <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                      {data.text_button}
+                    </Text>
+                  </Button>
+                )}
               </Stack>
             </Box>
           </Flex>

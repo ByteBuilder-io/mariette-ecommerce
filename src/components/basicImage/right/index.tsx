@@ -18,6 +18,7 @@ const BasicImageRight = (props: ContainerProps) => {
             text={data.text}
             imageUrl={sanityImage(data.img.asset._ref).url()}
             position={1}
+            data={data}
           />
         )}
       </Center>
