@@ -30,12 +30,11 @@ interface Props {
 const ProductCard = (props: Props) => {
   const { products, rootProps } = props;
   const [productImages, setProductImages] = useState<IDataImage[]>([]); // Estado local para almacenar las imágenes de los productos
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isImageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
   useEffect(() => {
     const fetchProductImages = async () => {
       // Realiza la consulta a la API de Shopify para obtener las imágenes de cada producto
@@ -80,12 +79,17 @@ const ProductCard = (props: Props) => {
         }
         const preloadedImage = document.createElement("img");
         preloadedImage.src = imageSrc;
+
         return (
           <Card cursor="pointer" boxShadow="lg" key={index}>
             <Link href={"/productos/detalle/" + product.id}>
               <CardHeader padding="0" margin="0">
                 <Box width="100%" height="auto">
-                  {imageLoaded ? (
+                  <Skeleton
+                    isLoaded={isImageLoaded}
+                    startColor="gray.200"
+                    endColor="white"
+                  >
                     <Image
                       _hover={{
                         content: `url(${imageSrc})`,
@@ -96,10 +100,7 @@ const ProductCard = (props: Props) => {
                       h="auto"
                       onLoad={handleImageLoad}
                     />
-                  ) : (
-                    <Skeleton w="100%"
-                    h="auto"/>
-                  )}
+                  </Skeleton>
                   <Image
                     src={product.previewImageUrl}
                     alt="Descripción de la imagen"
