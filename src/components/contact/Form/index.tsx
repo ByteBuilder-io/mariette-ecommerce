@@ -21,7 +21,7 @@ import { useCallback, useEffect, useState } from "react";
 
 interface ContainerProps {
   isMobile: boolean;
-  notificacion: string[]
+  notificacion: string[];
 }
 
 const Form = (props: ContainerProps) => {
@@ -34,7 +34,9 @@ const Form = (props: ContainerProps) => {
     email: "",
     message: "",
   });
-  const [usersMariette, setUsersMariette] = useState<{name: string, email: string}[]>([]);
+  const [usersMariette, setUsersMariette] = useState<
+    { name: string; email: string }[]
+  >([]);
 
   const handleText = (e: any, type: "name" | "email" | "message") => {
     setData({
@@ -146,17 +148,17 @@ const Form = (props: ContainerProps) => {
   const formatNotifications = useCallback(() => {
     if (notificacion.length > 0) {
       const result = notificacion.map((item: string) => {
-        const name = item.split("@")
-        return { name: name[0], email: item }
-      })
+        const name = item.split("@");
+        return { name: name[0], email: item };
+      });
 
-      setUsersMariette(result)
+      setUsersMariette(result);
     }
-  }, [notificacion])
+  }, [notificacion]);
 
   useEffect(() => {
-    formatNotifications()
-  }, [formatNotifications])
+    formatNotifications();
+  }, [formatNotifications]);
 
   return (
     <WrapItem justifyContent="center !important">
@@ -185,6 +187,7 @@ const Form = (props: ContainerProps) => {
                   borderRadius="none"
                   value={data.name}
                   onChange={(e: any) => handleText(e, "name")}
+                  id={"name"}
                 />
               </InputGroup>
             </FormControl>
@@ -203,6 +206,7 @@ const Form = (props: ContainerProps) => {
                   onChange={(e: any) => handleText(e, "email")}
                   value={data.email}
                   borderColor={isEmail ? "gray.300" : "red.400"}
+                  id={"email"}
                 />
               </InputGroup>
             </FormControl>
@@ -218,6 +222,7 @@ const Form = (props: ContainerProps) => {
                 placeholder="Escribir un mensaje..."
                 value={data.message}
                 onChange={(e: any) => handleText(e, "message")}
+                id={"message"}
               />
             </FormControl>
             <FormControl id="name" float="right">

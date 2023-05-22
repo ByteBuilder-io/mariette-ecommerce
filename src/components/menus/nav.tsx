@@ -140,7 +140,7 @@ export default function Navbar() {
                   src={sanityImage(data.logo.asset._ref).url()}
                   maxW="150px"
                   cursor={"pointer"}
-                  alt={data._id}
+                  alt={data.logo.asset._ref}
                 />
               </Link>
             )}
