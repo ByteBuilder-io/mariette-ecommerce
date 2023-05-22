@@ -5,6 +5,7 @@ import { Global, css } from "@emotion/react";
 import Footer from "@/components/footer";
 import WhatsAppButton from "@/components/commons/WhatsAppButton";
 import { CounterProvider } from "@/hooks/useContador";
+import { DrawerProvider } from "@/hooks/useDrawer";
 
 const theme = extendTheme({
   fonts: {
@@ -16,26 +17,29 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <CounterProvider>
-        <Global
-          styles={css`
-            @font-face {
-              font-family: "Castoro Titling";
-              src: url("/fonts/castoro-titling-regular.ttf") format("truetype");
-              font-weight: normal;
-              font-style: normal;
-            }
-            @font-face {
-              font-family: "Montserrat Regular";
-              src: url("/fonts/montserrat-regular.ttf") format("truetype");
-              font-weight: normal;
-              font-style: normal;
-            }
-          `}
-        />
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
-        <WhatsAppButton />
+        <DrawerProvider>
+          <Global
+            styles={css`
+              @font-face {
+                font-family: "Castoro Titling";
+                src: url("/fonts/castoro-titling-regular.ttf")
+                  format("truetype");
+                font-weight: normal;
+                font-style: normal;
+              }
+              @font-face {
+                font-family: "Montserrat Regular";
+                src: url("/fonts/montserrat-regular.ttf") format("truetype");
+                font-weight: normal;
+                font-style: normal;
+              }
+            `}
+          />
+          <Navbar />
+          <Component {...pageProps} />
+          <Footer />
+          <WhatsAppButton />
+        </DrawerProvider>
       </CounterProvider>
     </ChakraProvider>
   );

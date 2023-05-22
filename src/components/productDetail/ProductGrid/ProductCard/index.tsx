@@ -15,6 +15,9 @@ import { PriceTag } from "./PriceTag";
 import { Product } from "../utils";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { IDataImage } from "@/pages/productos/detalle/[...slug]";
+import { graphQLClient } from "@/lib/shopify";
 
 interface Props {
   totalRows: number;
@@ -24,10 +27,46 @@ interface Props {
 
 const ProductCard = (props: Props) => {
   const { products, rootProps } = props;
+  const [productImages, setProductImages] = useState<IDataImage[]>([]); // Estado local para almacenar las imágenes de los productos
+
+  useEffect(() => {
+    const fetchProductImages = async () => {
+      // Realiza la consulta a la API de Shopify para obtener las imágenes de cada producto
+      const imagePromises = products.map(async (product) => {
+        const s = `
+          query {
+            product(id: "${product.gid}") {
+              images(first: 10) {
+                edges {
+                  node {
+                    originalSrc
+                  }
+                }
+              }
+            }
+          }
+        `;
+        const image: IDataImage = await graphQLClient.request(s);
+        return image;
+      });
+
+      const images = await Promise.all(imagePromises);
+      setProductImages(images);
+    };
+
+    fetchProductImages();
+  }, [products]);
 
   const renderCards = () => {
-    if (products && products.length > 0) {
+    if (products && products.length > 0 && productImages.length > 0) {
       const result = products.map((product, index) => {
+        const productImage = productImages[index];
+        const imageSrc =
+          productImage.product.images.edges.length > 1
+            ? productImage.product.images.edges[1].node.originalSrc
+            : productImage.product.images.edges[0].node.originalSrc;
+        const preloadedImage = document.createElement("img");
+        preloadedImage.src = imageSrc;
         return (
           <Card cursor="pointer" boxShadow="lg" key={index}>
             <Link href={"/productos/detalle/" + product.id}>
@@ -35,7 +74,7 @@ const ProductCard = (props: Props) => {
                 <Box width="100%" height="auto">
                   <Image
                     _hover={{
-                      content: `url(${products[0].previewImageUrl})`,
+                      content: `url(${imageSrc})`,
                     }}
                     src={product.previewImageUrl}
                     alt="Imagen"
@@ -75,46 +114,7 @@ const ProductCard = (props: Props) => {
     }
   };
 
-  return (
-    <>{renderCards()}</>
-    // <Link href={"/productos/detalle/" + props.product.id}>
-    //   <Stack spacing={{ base: "4", md: "5" }} {...rootProps}>
-    //     {/*<AspectRatio ratio={props.totalRows >= 1 ? 4 / 3 : 10 / 3}>*/}
-    //     <Image
-    //       src={isHovered ? product.previewImageUrl : product.previewImageUrl}
-    //       alt={product.title}
-    //       draggable="false"
-    //       fallback={<Skeleton />}
-    //       cursor="pointer"
-    //       onMouseOver={handleMouseOver}
-    //       onMouseOut={handleMouseOut}
-    //       w={"280px"}
-    //       h={"210px"}
-    //     />
-    //     {/*</AspectRatio>*/}
-    //     <Stack>
-    //       <Stack spacing="1">
-    //         <Box textAlign="center">
-    //           {" "}
-    //           {/* Añadido: Centra el contenido */}
-    //           <Text
-    //             fontWeight="medium"
-    //             color={useColorModeValue("gray.700", "gray.400")}
-    //             fontSize="14px"
-    //           >
-    //             {product.title}
-    //           </Text>
-    //         </Box>
-    //         <PriceTag
-    //           price={product.priceRange.maxVariantPrice}
-    //           salePrice={0}
-    //           currency="USD"
-    //         />
-    //       </Stack>
-    //     </Stack>
-    //   </Stack>
-    // </Link>
-  );
+  return <>{renderCards()}</>;
 };
 
 export default ProductCard;

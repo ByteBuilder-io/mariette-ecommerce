@@ -35,6 +35,7 @@ import { graphQLClient } from "@/lib/shopify";
 import { IDataCart } from "@/components/cart";
 import { title } from "process";
 import { number } from "prop-types";
+import { useDrawer } from "@/hooks/useDrawer";
 
 interface IDrawerProps {
   placement: "right" | "left";
@@ -43,7 +44,7 @@ interface IDrawerProps {
 }
 
 export default function Navbar() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, drawerProps, setDrawerProps } = useDrawer();
   const { count, setCount } = useCounter();
 
   const query = `
@@ -58,11 +59,6 @@ export default function Navbar() {
     }
   `;
   const [data, setData] = useState<IDataNav>();
-  const [drawerProps, setDrawerProps] = useState<IDrawerProps>({
-    placement: "left",
-    type: "nav",
-    size: "lg",
-  });
   const [dataCart, setDataCart] = useState<IDataCart>();
 
   useEffect(() => {

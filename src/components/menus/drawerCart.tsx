@@ -46,12 +46,12 @@ const DrawerCart = ({ isOpen, onOpen, onClose }: IDrawerCart) => {
             aria-label="Open Menu"
             onClick={isOpen ? onClose : onOpen}
           />
-          <Heading fontSize="2xl" fontFamily={"Castoro"} color={"#a47e6c"}>
-            Carrito de compras
-          </Heading>
+          <Text mr="16px" color="#846a5a" fontWeight="semibold">
+            CARRITO DE COMRPAS
+          </Text>
         </HStack>
       </DrawerHeader>
-      <DrawerBody>
+      <DrawerBody bgColor={"#faf5f1"}>
         <ShoppingCart />
       </DrawerBody>
     </DrawerContent>

@@ -27,6 +27,7 @@ import ButtonOutline from "@/components/filter/ButtonOutline";
 import { graphQLClient } from "@/lib/shopify";
 import Cookies from "js-cookie";
 import { useCounter } from "@/hooks/useContador";
+import { useDrawer } from "@/hooks/useDrawer";
 
 interface IOptions {
   name: string;
@@ -64,6 +65,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
   const [data, setData] = useState(myMap);
   const [dataQuery, setDataQuery] = useState<IDataQuery[]>(myDataquery);
   const { count, setCount, increment } = useCounter();
+  const { isOpen, onOpen, onClose, drawerProps, setDrawerProps } = useDrawer();
 
   useEffect(() => {
     async function fetchData() {
@@ -214,6 +216,12 @@ const Form = ({ options, idProduct, setValue }: Props) => {
       );
     }
     increment();
+    isOpen ? onClose() : onOpen();
+    setDrawerProps({
+      type: "cart",
+      placement: "right",
+      size: "lg",
+    });
   };
 
   const handleAddToFavorites = () => {
@@ -276,6 +284,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
             e.values.map((i) => {
               gemaData = [...gemaData, { label: i, value: i }];
             });
+            let gema = gemaData[0];
             return (
               <Box key={e._key}>
                 <Box mb="10px">
@@ -284,9 +293,10 @@ const Form = ({ options, idProduct, setValue }: Props) => {
                   </Text>
                 </Box>
                 <Select
-                  value={gemaData[0]}
+                  defaultValue={gema}
                   onChange={(value) => {
                     handleSelectChange(value, e.name);
+                    gema = value!;
                   }}
                   placeholder="Selecciona..."
                   styles={customStyles}

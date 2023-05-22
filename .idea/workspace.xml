@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/RelatedProduct/RetaltedProduct.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/hooks/useDrawer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart/CartItem/PriceTag/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartItem/PriceTag/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart/CartItem/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartItem/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart/CartOrderSummary/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartOrderSummary/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menus/drawerCart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/drawerCart.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/menus/nav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/nav.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/menus/navLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/navLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/productos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/docs/footer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/footer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/typesSanity/docs/nav.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/typesSanity/docs/nav.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/Form/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/Form/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +90,8 @@
       <workItem from="1684164178817" duration="10955000" />
       <workItem from="1684273032362" duration="1181000" />
       <workItem from="1684282513434" duration="11465000" />
-      <workItem from="1684425889581" duration="8920000" />
+      <workItem from="1684425889581" duration="9710000" />
+      <workItem from="1684729393753" duration="5267000" />
     </task>
     <servers />
   </component>

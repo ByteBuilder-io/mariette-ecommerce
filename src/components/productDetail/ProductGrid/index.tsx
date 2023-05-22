@@ -5,6 +5,11 @@ import ProductGridCard from "./ProductGrid";
 import { useEffect, useState } from "react";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 import { client } from "@/lib/sanity.client";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import RelatedProduct from "@/components/productDetail/ProductGrid/ProductCard/RelatedProduct/RetaltedProduct";
 
 const ProductGrid = ({
   tag,
@@ -81,16 +86,17 @@ const ProductGrid = ({
           >
             Productos Relacionados
           </Heading>
-          <ProductGridCard>
-            <SimpleGrid
-              spacing={4}
-              templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-            >
-              {data && data.length > 0 && (
-                <ProductCard products={data} totalRows={data.length / 4} />
-              )}
-            </SimpleGrid>
-          </ProductGridCard>
+
+          {data && data.length > 0 && (
+            <RelatedProduct products={data} totalRows={data.length / 4} />
+          )}
+          {/*<Swiper pagination={true} modules={[Navigation, Pagination]}>*/}
+          {/*  {data && data.length > 0 && (*/}
+          {/*    <SwiperSlide>*/}
+          {/*      <ProductCard products={data} totalRows={data.length / 4} />*/}
+          {/*    </SwiperSlide>*/}
+          {/*  )}*/}
+          {/*</Swiper>*/}
         </Box>
       )}
     </>

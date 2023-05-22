@@ -36,7 +36,14 @@ interface IProps {
 const CartOrderSummary = ({ total }: IProps) => {
   const checkoutUrl = Cookies.get("checkoutUrl");
   return (
-    <Stack spacing="8" borderWidth="1px" rounded="lg" padding="8" width="full">
+    <Stack
+      spacing="8"
+      borderWidth="1px"
+      rounded="lg"
+      padding="8"
+      width="full"
+      bgColor={"white"}
+    >
       <Heading size="md">Resumen del pedido</Heading>
 
       <Stack spacing="6">
@@ -55,7 +62,7 @@ const CartOrderSummary = ({ total }: IProps) => {
           <Text fontSize="lg" fontWeight="semibold">
             Total
           </Text>
-          <Text fontSize="xl" fontWeight="extrabold">
+          <Text fontSize="xl" fontWeight="extrabold" color="#846a5a">
             {formatPrice(Number(total))} + IVA
           </Text>
         </Flex>

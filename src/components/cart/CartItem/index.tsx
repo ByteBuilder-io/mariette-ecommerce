@@ -58,6 +58,11 @@ const CartItem = (props: CartItemProps) => {
       direction={{ base: "column", md: "row" }}
       justify="space-between"
       align="center"
+      borderWidth="1px"
+      rounded="lg"
+      padding="2"
+      width="full"
+      bgColor={"white"}
     >
       <CartProductMeta
         name={name}

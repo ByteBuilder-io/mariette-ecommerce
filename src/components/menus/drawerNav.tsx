@@ -73,7 +73,7 @@ const DrawerNav = ({ data, isOpen, onOpen, onClose }: IDrawerNav) => {
                     <NavLink
                       key={e._key}
                       name={e.title}
-                      path={e.link.url!}
+                      path={e.dataUrl.url}
                       onClose={onClose}
                     />
                     {e.link.isSubmenu && <Divider />}
