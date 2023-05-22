@@ -98,7 +98,7 @@ const Footer = () => {
           const url =
             item.dataUrl.url === "PaginaDeInicio" ? "" : item.dataUrl.url;
           return (
-            <Link href={"/" + url} key={item._key}>
+            <Link href={url} key={item._key}>
               <Text fontSize="14px" textAlign="center">
                 {item.nombre}
               </Text>
@@ -114,7 +114,7 @@ const Footer = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      
+
       setData(data[0]);
     }
 

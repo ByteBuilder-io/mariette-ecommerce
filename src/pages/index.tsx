@@ -28,7 +28,7 @@ const Home = () => {
     }
 
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,8 +57,6 @@ const Home = () => {
         ))}
       {data && (
         <Container w={"100%"} maxW={"1400px"}>
-          <Instagram />
-          <Contact />
           <Footer />
         </Container>
       )}

@@ -16,7 +16,7 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
   return (
     <>
       {path && (
-        <Link href={"/" + path!} onClick={() => onClose()}>
+        <Link href={path!} onClick={() => onClose()}>
           <Text mr="16px" color="#846a5a" fontWeight="semibold">
             {name}
           </Text>
