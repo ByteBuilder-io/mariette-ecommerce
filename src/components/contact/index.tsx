@@ -17,6 +17,7 @@ import { client } from "@/lib/sanity.client";
 
 interface ContainerProps {
   noHeader?: boolean;
+  dataContacto: any;
 }
 
 interface IDataContacto {
@@ -35,18 +36,7 @@ const Contact = (props: ContainerProps) => {
   const { noHeader } = props;
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
-  const [data, setData] = useState<IDataContacto[]>();
-
-  const query = `*[_type == 'ContactoSanity']`;
-
-  useEffect(() => {
-    async function fetchData() {
-      const data: IDataContacto[] = await client.fetch(query);
-      setData(data);
-    }
-
-    fetchData();
-  }, [query]);
+  const [data, setData] = useState<IDataContacto>(props.dataContacto);
 
   useEffect(() => {
     if (width < 768) {
@@ -73,7 +63,7 @@ const Contact = (props: ContainerProps) => {
           </Box>
           <Box w={{ base: "100%", md: "63%" }}>
             {data && (
-              <Form isMobile={isMobile} notificacion={data[0].notificacion} />
+              <Form isMobile={isMobile} notificacion={data.notificacion} />
             )}
           </Box>
         </Flex>

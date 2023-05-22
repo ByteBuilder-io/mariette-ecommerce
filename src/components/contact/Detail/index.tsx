@@ -24,7 +24,7 @@ interface IDataContacto {
 
 interface ContainerProps {
   isMobile: boolean;
-  data: IDataContacto[];
+  data: IDataContacto;
 }
 
 const Detail = (props: ContainerProps) => {
@@ -52,13 +52,13 @@ const Detail = (props: ContainerProps) => {
             <HStack spacing="2" pl={isMobile ? "" : "60px"} cursor="pointer">
               <MdPhone color="white" size="20px" />
               <Text color="white" cursor="pointer">
-                <Link href={`tel:${data[0].telefono}`}>{data[0].telefono}</Link>
+                <Link href={`tel:${data.telefono}`}>{data.telefono}</Link>
               </Text>
             </HStack>
             <HStack spacing="2" pl={isMobile ? "" : "60px"} cursor="pointer">
               <MdEmail color="white" size="20px" />
               <Text color="white" cursor="pointer">
-                {data[0].correo}
+                {data.correo}
               </Text>
             </HStack>
             <HStack
@@ -71,11 +71,11 @@ const Detail = (props: ContainerProps) => {
               <Text color="white" cursor="pointer">
                 <Link
                   href={`https://www.google.com/maps?q=${encodeURIComponent(
-                    data[0].ubicacion
+                    data.ubicacion
                   )}`}
                   isExternal
                 >
-                  {data[0].ubicacion}
+                  {data.ubicacion}
                 </Link>
               </Text>
             </HStack>
