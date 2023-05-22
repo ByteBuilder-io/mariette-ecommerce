@@ -6,6 +6,7 @@ import { client } from "@/lib/sanity.client";
 import ProductDetail from "@/components/productDetail";
 import { graphQLClient } from "@/lib/shopify";
 import Loading from "@/components/commons/Loading";
+import Footer from "@/components/footer";
 
 export interface IDataImage {
   product: {
@@ -18,7 +19,7 @@ export interface IDataImage {
 const ProductoDetalle = () => {
   const [data, setData] = useState<IDataProductos[]>();
   const [dataImages, setDataImages] = useState<IDataImage>();
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
   const { slug } = router.query;
 
@@ -61,25 +62,26 @@ const ProductoDetalle = () => {
         // Utilizando el cliente GraphQL
         const image: IDataImage = await graphQLClient.request(s);
         setDataImages(image);
-        setLoading(false)
+        setLoading(false);
       }
     }
     fetchData();
   }, [slug]);
-  
+
   if (loading) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 
   return (
     <Box>
       {data && dataImages && (
-        <ProductDetail
-          producto={data[0]}
-          images={dataImages.product.images.edges}
-        />
+        <>
+          <ProductDetail
+            producto={data[0]}
+            images={dataImages.product.images.edges}
+          />
+          <Footer />
+        </>
       )}
     </Box>
   );

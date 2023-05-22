@@ -2,7 +2,6 @@ import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Navbar from "@/components/menus/nav";
 import { Global, css } from "@emotion/react";
-import Footer from "@/components/footer";
 import WhatsAppButton from "@/components/commons/WhatsAppButton";
 import { CounterProvider } from "@/hooks/useContador";
 import { DrawerProvider } from "@/hooks/useDrawer";
@@ -37,7 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
           />
           <Navbar />
           <Component {...pageProps} />
-          <Footer />
           <WhatsAppButton />
         </DrawerProvider>
       </CounterProvider>

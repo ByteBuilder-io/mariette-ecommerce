@@ -7,6 +7,7 @@ import {
   Button,
   Container,
   useBreakpointValue,
+  Skeleton,
 } from "@chakra-ui/react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { useEffect, useState } from "react";
@@ -32,6 +33,11 @@ const Hero = ({ dataHero }: IProps) => {
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   const query = `
     *[_id == '${data._id}']{
@@ -81,14 +87,17 @@ const Hero = ({ dataHero }: IProps) => {
               w="100%"
             >
               <Box h={maxH} w="100%">
-                <Image
-                  src={sanityImage(item.imagen.asset._ref).url()}
-                  alt={item._key}
-                  objectFit="cover"
-                  objectPosition="center"
-                  h={maxH}
-                  width={"100%"}
-                />
+                <Skeleton isLoaded={!isLoading} width={"100%"}>
+                  <Image
+                    src={sanityImage(item.imagen.asset._ref).url()}
+                    alt={item._key}
+                    objectFit="cover"
+                    objectPosition="center"
+                    h={maxH}
+                    width={"100%"}
+                    onLoad={handleImageLoad}
+                  />
+                </Skeleton>
               </Box>
               <Text
                 position="absolute"

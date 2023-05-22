@@ -325,7 +325,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       const producto = [...data.producto, textoCapitalizado];
       setData({
         ...data,
-        producto,
+        producto: [producto[producto.length - 1]],
       });
       setLoading(false);
     } else {

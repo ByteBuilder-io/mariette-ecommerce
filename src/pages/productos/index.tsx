@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 import Filter from "@/components/filter";
 import Loading from "@/components/commons/Loading";
+import Footer from "@/components/footer";
 
 const Productos = () => {
   const [data, setData] = useState<IDataProductos[]>();
@@ -62,7 +63,10 @@ const Productos = () => {
   return (
     <Container py={10} maxW="1400px">
       {data && data.length > 0 && dataAll && dataAll.length > 0 && (
-        <Filter dataProduct={data} dataAll={dataAll} />
+        <>
+          <Filter dataProduct={data} dataAll={dataAll} />
+          <Footer />
+        </>
       )}
     </Container>
   );
