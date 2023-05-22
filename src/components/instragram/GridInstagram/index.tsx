@@ -12,7 +12,12 @@ const GridInstagram = (props: ContainerProps) => {
   const renderInstagram = () => {
     const result = data.map(
       (
-        item: { media_type: string; media_url: string; thumbnail_url: string, permalink: string },
+        item: {
+          media_type: string;
+          media_url: string;
+          thumbnail_url: string;
+          permalink: string;
+        },
         index: number
       ) => {
         if (index < 8) {
@@ -30,7 +35,7 @@ const GridInstagram = (props: ContainerProps) => {
               <Box position="relative" height="339px" width="339px">
                 <Image
                   src={item.thumbnail_url ? item.thumbnail_url : item.media_url}
-                  alt="Descripción de la imagen"
+                  alt={item.media_type}
                   objectFit="cover"
                   height="100%"
                   width="100%"

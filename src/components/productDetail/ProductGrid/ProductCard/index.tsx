@@ -95,7 +95,7 @@ const ProductCard = (props: Props) => {
                         content: `url(${imageSrc})`,
                       }}
                       src={product.previewImageUrl}
-                      alt="Imagen"
+                      alt={product._id}
                       w="100%"
                       h="auto"
                       onLoad={handleImageLoad}
@@ -103,7 +103,7 @@ const ProductCard = (props: Props) => {
                   </Skeleton>
                   <Image
                     src={product.previewImageUrl}
-                    alt="Descripción de la imagen"
+                    alt={product._id}
                     onLoad={handleImageLoad}
                     style={{ display: "none" }}
                   />

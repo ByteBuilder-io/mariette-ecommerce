@@ -95,7 +95,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
               </Stack>
             </Box>
             <Box w={{ base: "100%", md: "80%" }}>
-              <Image src={imageUrl} alt="img" />
+              <Image src={imageUrl} alt={text} />
             </Box>
           </Flex>
         </Box>
@@ -108,7 +108,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
         >
           <Flex flexDirection={{ base: "column", md: "row" }}>
             <Box w={{ base: "100%", md: "80%" }}>
-              <Image src={imageUrl} alt="img" />
+              <Image src={imageUrl} alt={text} />
             </Box>
             <Box
               w={{ base: "100%", md: "100%" }}

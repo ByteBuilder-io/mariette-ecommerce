@@ -37,7 +37,7 @@ const SliderInstagram = (props: ContainerProps) => {
           >
             <Image
               src={item.thumbnail_url ? item.thumbnail_url : item.media_url}
-              alt="Image 1"
+              alt={item.media_type}
               w="100%"
               h="100%"
               objectFit="cover"

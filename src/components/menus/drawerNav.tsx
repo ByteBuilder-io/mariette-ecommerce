@@ -43,6 +43,7 @@ const DrawerNav = ({ data, isOpen, onOpen, onClose }: IDrawerNav) => {
               <Image
                 src={sanityImage(data.logo.asset._ref).url()}
                 maxW="150px"
+                alt={data._id}
               />
             )}
           </Box>

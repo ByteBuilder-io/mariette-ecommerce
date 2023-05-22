@@ -45,7 +45,7 @@ const RelatedProduct = (props: Props) => {
                         content: `url(${products[0].previewImageUrl})`,
                       }}
                       src={product.previewImageUrl}
-                      alt="Imagen"
+                      alt={product._id}
                       w="100%"
                       h="auto"
                     />

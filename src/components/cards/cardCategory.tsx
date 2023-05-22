@@ -31,7 +31,7 @@ interface ICategoryProps {
 
 const CardCategory = ({ dataCategory }: ICategoryProps) => {
   const [data, setData] = useState<IDataCategorias>(dataCategory);
-  
+
   return (
     <Container w={"100%"} maxW={"1400px"} py={10}>
       <Box display="flex" justifyContent="center" alignItems="center">
@@ -132,6 +132,7 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
           transition="opacity 0.2s ease"
           w="400px"
           h="200px"
+          alt={title}
         />
       </Flex>
     </Link>

@@ -64,7 +64,7 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchData() {
       const idCart = Cookies.get("idCart");
-      
+
       if (idCart) {
         const s = `
           query{
@@ -140,7 +140,7 @@ export default function Navbar() {
                   src={sanityImage(data.logo.asset._ref).url()}
                   maxW="150px"
                   cursor={"pointer"}
-                  alt="img"
+                  alt={data._id}
                 />
               </Link>
             )}
