@@ -19,6 +19,7 @@ const BasicImageLeft = (props: ContainerProps) => {
           text={data.text}
           imageUrl={sanityImage(data.img.asset._ref).url()}
           position={2}
+          data={data}
           idProduct={data.urlData.url}
         />
       )}

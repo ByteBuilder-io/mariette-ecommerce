@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   Box,
   Card,
@@ -7,6 +8,7 @@ import {
   StackProps,
   Text,
   CardBody,
+  Skeleton,
 } from "@chakra-ui/react";
 
 import { Rating } from "./Rating";
@@ -28,6 +30,11 @@ interface Props {
 const ProductCard = (props: Props) => {
   const { products, rootProps } = props;
   const [productImages, setProductImages] = useState<IDataImage[]>([]); // Estado local para almacenar las imágenes de los productos
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   useEffect(() => {
     const fetchProductImages = async () => {
@@ -78,14 +85,26 @@ const ProductCard = (props: Props) => {
             <Link href={"/productos/detalle/" + product.id}>
               <CardHeader padding="0" margin="0">
                 <Box width="100%" height="auto">
+                  {imageLoaded ? (
+                    <Image
+                      _hover={{
+                        content: `url(${imageSrc})`,
+                      }}
+                      src={product.previewImageUrl}
+                      alt="Imagen"
+                      w="100%"
+                      h="auto"
+                      onLoad={handleImageLoad}
+                    />
+                  ) : (
+                    <Skeleton w="100%"
+                    h="auto"/>
+                  )}
                   <Image
-                    _hover={{
-                      content: `url(${imageSrc})`,
-                    }}
                     src={product.previewImageUrl}
-                    alt="Imagen"
-                    w="100%"
-                    h="auto"
+                    alt="Descripción de la imagen"
+                    onLoad={handleImageLoad}
+                    style={{ display: "none" }}
                   />
                 </Box>
               </CardHeader>

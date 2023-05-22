@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IHome } from "@/typesSanity/pages/home";
 import { useRouter } from "next/router";
 import Loading from "@/components/commons/Loading";
+import Footer from "@/components/footer";
 
 const Page = () => {
   const router = useRouter();
@@ -48,6 +49,7 @@ const Page = () => {
             data={componente}
           />
         ))}
+        <Footer />
     </>
   );
 };
