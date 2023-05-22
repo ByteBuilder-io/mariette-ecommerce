@@ -47,7 +47,7 @@ const Contact = (props: ContainerProps) => {
   }, [width]);
 
   return (
-    <>
+    <Container w={"100%"} maxW={"1400px"}>
       <Box
         bg="#846a5a"
         mt={noHeader ? "30px" : "80px"}
@@ -68,7 +68,7 @@ const Contact = (props: ContainerProps) => {
           </Box>
         </Flex>
       </Box>
-    </>
+    </Container>
   );
 };
 

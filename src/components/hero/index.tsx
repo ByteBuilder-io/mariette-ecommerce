@@ -102,7 +102,7 @@ const Hero = ({ dataHero }: IProps) => {
               <Text
                 position="absolute"
                 w={isMobile ? "300px" : "500px"}
-                top={isMobile ? "30%" : "25%"}
+                top={isMobile ? "80%" : "25%"}
                 left={getValue()}
                 transform="translate(-50%, -50%)"
                 color={item.color_titulo ? item.color_titulo.value : "white"}

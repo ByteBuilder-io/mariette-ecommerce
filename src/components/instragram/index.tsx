@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Container, Text } from "@chakra-ui/react";
 
 import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
@@ -37,22 +37,26 @@ const Instagram = ({ data }: { data: any }) => {
   }, [loadInstagram]);
 
   return (
-    <Box>
-      <Text
-        textAlign="center"
-        fontSize="30px"
-        fontFamily="Castoro Titling"
-        color="#836a59"
-        fontWeight="semibold"
-        mb="40px"
-      >
-        FORMA PARTE DE NUESTRA COMUNIDAD EN INSTAGRAM
-      </Text>
-      {isMobile && <SliderInstagram data={dataInstagram} openLink={openLink} />}
-      {!isMobile && dataInstagram.length > 0 && (
-        <GridInstagram openLink={openLink} data={dataInstagram} />
-      )}
-    </Box>
+    <Container w={"100%"} maxW={"1400px"}>
+      <Box>
+        <Text
+          textAlign="center"
+          fontSize="30px"
+          fontFamily="Castoro Titling"
+          color="#836a59"
+          fontWeight="semibold"
+          mb="40px"
+        >
+          FORMA PARTE DE NUESTRA COMUNIDAD EN INSTAGRAM
+        </Text>
+        {isMobile && (
+          <SliderInstagram data={dataInstagram} openLink={openLink} />
+        )}
+        {!isMobile && dataInstagram.length > 0 && (
+          <GridInstagram openLink={openLink} data={dataInstagram} />
+        )}
+      </Box>
+    </Container>
   );
 };
 
