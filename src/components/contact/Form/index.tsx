@@ -17,14 +17,15 @@ import { BsPerson } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
 
 import { htmlClient, htmlUser } from "./utils";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface ContainerProps {
   isMobile: boolean;
+  notificacion: string[]
 }
 
 const Form = (props: ContainerProps) => {
-  const { isMobile } = props;
+  const { isMobile, notificacion } = props;
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isEmail, setIsEmail] = useState(true);
@@ -33,12 +34,7 @@ const Form = (props: ContainerProps) => {
     email: "",
     message: "",
   });
-  const usersMariette = [
-    { name: "Pepe Lim", email: "pepe.lim3@gmail.com" },
-    { name: "Pepe Lim1", email: "pepe@bytebuilder.io" },
-    { name: "Carlos", email: "jcarlos@bytebuilder.io" },
-    { name: "Osvaldo", email: "osvaldo@bytebuilder.io" },
-  ];
+  const [usersMariette, setUsersMariette] = useState<{name: string, email: string}[]>([]);
 
   const handleText = (e: any, type: "name" | "email" | "message") => {
     setData({
@@ -146,6 +142,21 @@ const Form = (props: ContainerProps) => {
       }
     }
   };
+
+  const formatNotifications = useCallback(() => {
+    if (notificacion.length > 0) {
+      const result = notificacion.map((item: string) => {
+        const name = item.split("@")
+        return { name: name[0], email: item }
+      })
+
+      setUsersMariette(result)
+    }
+  }, [notificacion])
+
+  useEffect(() => {
+    formatNotifications()
+  }, [formatNotifications])
 
   return (
     <WrapItem justifyContent="center !important">

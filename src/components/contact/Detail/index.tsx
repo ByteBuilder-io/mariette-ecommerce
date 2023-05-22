@@ -6,16 +6,29 @@ import {
   WrapItem,
   HStack,
   IconButton,
+  Link,
 } from "@chakra-ui/react";
 import { BsInstagram, BsTiktok } from "react-icons/bs";
 import { MdEmail, MdPhone, MdLocationOn, MdFacebook } from "react-icons/md";
 
+interface IDataContacto {
+  _createdAt: string;
+  correo: string;
+  _rev: string;
+  _type: string;
+  _id: string;
+  telefono: string;
+  _updatedAt: string;
+  ubicacion: string;
+}
+
 interface ContainerProps {
   isMobile: boolean;
+  data: IDataContacto[];
 }
 
 const Detail = (props: ContainerProps) => {
-  const { isMobile } = props;
+  const { isMobile, data } = props;
 
   return (
     <WrapItem>
@@ -23,7 +36,11 @@ const Detail = (props: ContainerProps) => {
         <Heading color="white" pl={isMobile ? "" : "60px"} pt="40px">
           Contáctanos
         </Heading>
-        <Text pl={isMobile ? "" : "60px"} mt={{ sm: 3, md: 3, lg: 5 }} color="white">
+        <Text
+          pl={isMobile ? "" : "60px"}
+          mt={{ sm: 3, md: 3, lg: 5 }}
+          color="white"
+        >
           Completa el siguiente formulario para contactarnos
         </Text>
         <Box py={{ base: 5, sm: 5, md: 8, lg: 10 }}>
@@ -35,19 +52,31 @@ const Detail = (props: ContainerProps) => {
             <HStack spacing="2" pl={isMobile ? "" : "60px"} cursor="pointer">
               <MdPhone color="white" size="20px" />
               <Text color="white" cursor="pointer">
-                +52 5610256694
+                <Link href={`tel:${data[0].telefono}`}>{data[0].telefono}</Link>
               </Text>
             </HStack>
             <HStack spacing="2" pl={isMobile ? "" : "60px"} cursor="pointer">
               <MdEmail color="white" size="20px" />
               <Text color="white" cursor="pointer">
-                hello@abc.com
+                {data[0].correo}
               </Text>
             </HStack>
-            <HStack spacing="2" mt="10px" pl={isMobile ? "" : "60px"} cursor="pointer">
+            <HStack
+              spacing="2"
+              mt="10px"
+              pl={isMobile ? "" : "60px"}
+              cursor="pointer"
+            >
               <MdLocationOn color="white" size="20px" />
               <Text color="white" cursor="pointer">
-                Guadalajara, Jalisco
+                <Link
+                  href={`https://www.google.com/maps?q=${encodeURIComponent(
+                    data[0].ubicacion
+                  )}`}
+                  isExternal
+                >
+                  {data[0].ubicacion}
+                </Link>
               </Text>
             </HStack>
           </VStack>
@@ -67,7 +96,7 @@ const Detail = (props: ContainerProps) => {
             color="white"
             size="lg"
             isRound={true}
-            _hover={{ }}
+            _hover={{}}
             icon={<MdFacebook size="28px" />}
           />
           <IconButton
@@ -76,17 +105,8 @@ const Detail = (props: ContainerProps) => {
             color="white"
             size="lg"
             isRound={true}
-            _hover={{ }}
+            _hover={{}}
             icon={<BsInstagram size="28px" />}
-          />
-          <IconButton
-            aria-label="discord"
-            variant="ghost"
-            color="white"
-            size="lg"
-            isRound={true}
-            _hover={{ }}
-            icon={<BsTiktok size="28px" />}
           />
         </HStack>
       </Box>

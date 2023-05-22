@@ -114,7 +114,7 @@ const Footer = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await client.fetch(query);
-      console.log(data);
+      
       setData(data[0]);
     }
 

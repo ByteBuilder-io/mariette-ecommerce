@@ -31,7 +31,7 @@ interface ICategoryProps {
 
 const CardCategory = ({ dataCategory }: ICategoryProps) => {
   const [data, setData] = useState<IDataCategorias>(dataCategory);
-  console.log(data);
+  
   return (
     <Container w={"100%"} maxW={"1400px"} py={10}>
       <Box display="flex" justifyContent="center" alignItems="center">

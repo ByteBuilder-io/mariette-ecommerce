@@ -116,7 +116,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
     fetchData();
   }, [data]);
   const handleSelectChange = (event: any, id: string) => {
-    console.log(event, id);
+    
     setData({ ...data, [id]: event.value });
   };
 
@@ -207,7 +207,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
     //       backgroundColor: "#D7C0b4",
     //     },
     //   });
-    console.log(resultCart);
+    
     if (idCart === undefined) {
       await Cookies.set("idCart", resultCart.checkoutCreate.checkout.id);
       await Cookies.set(
