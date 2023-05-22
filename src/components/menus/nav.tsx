@@ -64,7 +64,7 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchData() {
       const idCart = Cookies.get("idCart");
-      console.log(idCart);
+      
       if (idCart) {
         const s = `
           query{

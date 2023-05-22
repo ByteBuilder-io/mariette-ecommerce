@@ -53,7 +53,7 @@ const ShoppingCart = () => {
     async function fetchData() {
       const idCart = Cookies.get("idCart");
       setCardId(idCart);
-      console.log(idCart);
+      
       if (idCart) {
         const s = `
           query{

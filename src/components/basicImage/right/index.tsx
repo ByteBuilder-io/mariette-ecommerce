@@ -1,5 +1,3 @@
-import { Fragment, useEffect, useState } from "react";
-import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
 
 import ImageText from "../Image";
@@ -11,7 +9,7 @@ interface ContainerProps {
 
 const BasicImageRight = (props: ContainerProps) => {
   const { data } = props
-  console.log(data, "data")
+  
   return (
     <Box w="full">
       <Center>
