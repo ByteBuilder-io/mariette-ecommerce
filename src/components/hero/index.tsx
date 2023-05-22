@@ -1,6 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import { Box, Image, Text, Button, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  Button,
+  Container,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { useEffect, useState } from "react";
 import { client } from "@/lib/sanity.client";
@@ -16,7 +23,10 @@ interface IProps {
 }
 
 const Hero = ({ dataHero }: IProps) => {
-  const maxH = "800px";
+  const maxH = useBreakpointValue(
+    { base: "750px", lg: "800px" },
+    { ssr: false }
+  );
   const [data, setData] = useState<IHero>(dataHero);
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
@@ -48,14 +58,14 @@ const Hero = ({ dataHero }: IProps) => {
               height="100%"
               w="100%"
             >
-              <Box maxH={maxH} w="100%" h="100%">
+              <Box h={maxH} w="100%">
                 <Image
                   src={sanityImage(item.imagen.asset._ref).url()}
                   alt={item._key}
                   objectFit="cover"
                   objectPosition="center"
-                  w="100%"
-                  height="100%"
+                  h={maxH}
+                  width={"100%"}
                 />
               </Box>
               <Text
