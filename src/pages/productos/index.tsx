@@ -9,11 +9,11 @@ import Loading from "@/components/commons/Loading";
 const Productos = () => {
   const [data, setData] = useState<IDataProductos[]>();
   const [dataAll, setDataAll] = useState<IDataProductos[]>();
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
 
   const { filter } = router.query;
-  const query = `*[_type == 'product' && store.status != 'draft'] {
+  const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false] {
     "createdAt": store.createdAt,
     "descriptionHtml": store.descriptionHtml,
     "gid": store.gid,
@@ -45,10 +45,10 @@ const Productos = () => {
           (item) => item.productType.toLowerCase() === filter
         );
         setData(filteredData);
-        setLoading(false)
+        setLoading(false);
       } else {
         setData(data);
-        setLoading(false)
+        setLoading(false);
       }
     }
 
@@ -56,9 +56,7 @@ const Productos = () => {
   }, [filter, query]);
 
   if (loading) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 
   return (
