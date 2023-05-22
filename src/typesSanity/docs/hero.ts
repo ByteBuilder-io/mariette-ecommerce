@@ -15,6 +15,11 @@ export interface THero {
   texto: string;
   texto_button: string;
   _key: string;
+  url: {
+    _type: string;
+    _ref: string;
+  };
+  urlData?: { url: number };
 }
 
 export interface TContenido {

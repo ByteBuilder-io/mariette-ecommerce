@@ -10,14 +10,16 @@ import {
 import { useEffect, useState } from "react";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
+import Link from "next/link";
 
 interface Props {
   text: string;
   imageUrl: string;
   position: number;
+  idProduct: number;
 }
 
-const ImageText = ({ text, imageUrl, position }: Props) => {
+const ImageText = ({ text, imageUrl, position, idProduct }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
 
@@ -62,20 +64,22 @@ const ImageText = ({ text, imageUrl, position }: Props) => {
                 >
                   {text}
                 </Text>
-                <Button
-                  fontWeight="300"
-                  textAlign="center"
-                  fontSize={isMobile ? "12px" : "20px"}
-                  borderRadius="5px"
-                  bg="#997d6c"
-                  color="white"
-                  h={isMobile ? "40px" : "55px"}
-                  width={isMobile ? "120px" : "auto"}
-                >
-                  <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
-                    Ver Mas
-                  </Text>
-                </Button>
+                <Link href={"/productos/detalle/" + idProduct.toString()}>
+                  <Button
+                    fontWeight="300"
+                    textAlign="center"
+                    fontSize={isMobile ? "12px" : "20px"}
+                    borderRadius="5px"
+                    bg="#997d6c"
+                    color="white"
+                    h={isMobile ? "40px" : "55px"}
+                    width={isMobile ? "120px" : "auto"}
+                  >
+                    <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                      Ver Mas
+                    </Text>
+                  </Button>
+                </Link>
               </Stack>
             </Box>
             <Box w={{ base: "100%", md: "80%" }}>

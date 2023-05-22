@@ -3,21 +3,23 @@ import { client } from "@/lib/sanity.client";
 import { sanityImage } from "@/lib/sanity.image";
 
 import ImageText from "../Image";
+import { IBasicImage } from "@/typesSanity/docs/basicImage";
 
 interface ContainerProps {
-  data: any
+  data: IBasicImage;
 }
 
 const BasicImageLeft = (props: ContainerProps) => {
-  const { data } = props
+  const { data } = props;
 
   return (
     <Fragment>
-      {data && (
+      {data && data.urlData && (
         <ImageText
           text={data.text}
           imageUrl={sanityImage(data.img.asset._ref).url()}
           position={2}
+          idProduct={data.urlData.url}
         />
       )}
     </Fragment>

@@ -17,6 +17,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { styleSlider } from "./utils";
 import { IHero, THero } from "@/typesSanity/docs/hero";
+import Link from "next/link";
 
 interface IProps {
   dataHero: IHero;
@@ -31,6 +32,27 @@ const Hero = ({ dataHero }: IProps) => {
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const query = `
+    *[_id == '${data._id}']{
+        ...,
+        contenido[]{
+          ...,
+          'urlData': *[_id == ^.url._ref]{
+                  'url':store.id
+                }[0]
+        }
+      }[0]
+  `;
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await client.fetch(query);
+      setData(data);
+    }
+
+    fetchData();
+  }, []);
 
   const getValue = () => {
     if (width < 600) {
@@ -81,22 +103,28 @@ const Hero = ({ dataHero }: IProps) => {
                 fontFamily="Castoro Titling"
               >
                 {item.texto}
-                {item.texto_button && (
+                {item.texto_button && item.urlData && (
                   <Box>
-                    <Button
-                      fontWeight="300"
-                      textAlign="center"
-                      fontSize={isMobile ? "12px" : "20px"}
-                      borderRadius="5px"
-                      bg="#997d6c"
-                      color="white"
-                      h={isMobile ? "40px" : "55px"}
-                      width={isMobile ? "120px" : "auto"}
+                    <Link
+                      href={
+                        "/productos/detalle/" + item.urlData!.url.toString()
+                      }
                     >
-                      <Text pr="10px" pl="10px">
-                        {item.texto_button}
-                      </Text>
-                    </Button>
+                      <Button
+                        fontWeight="300"
+                        textAlign="center"
+                        fontSize={isMobile ? "12px" : "20px"}
+                        borderRadius="5px"
+                        bg="#997d6c"
+                        color="white"
+                        h={isMobile ? "40px" : "55px"}
+                        width={isMobile ? "120px" : "auto"}
+                      >
+                        <Text pr="10px" pl="10px">
+                          {item.texto_button}
+                        </Text>
+                      </Button>
+                    </Link>
                   </Box>
                 )}
               </Text>
