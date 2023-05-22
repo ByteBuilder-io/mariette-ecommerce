@@ -9,7 +9,7 @@ const Page = () => {
   const router = useRouter();
   const { slug } = router.query;
   const [data, setData] = useState<IHome>();
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -26,7 +26,7 @@ const Page = () => {
           `;
         const dataHome = await client.fetch(query);
         setData(dataHome);
-        setLoading(false)
+        setLoading(false);
       }
     }
 
@@ -34,9 +34,7 @@ const Page = () => {
   }, [slug]);
 
   if (loading) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 
   return (
@@ -49,7 +47,7 @@ const Page = () => {
             data={componente}
           />
         ))}
-        <Footer />
+      {data && <Footer />}
     </>
   );
 };

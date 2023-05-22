@@ -1,3 +1,4 @@
+import { useState, useEffect, lazy, Suspense } from "react";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import Navbar from "@/components/menus/nav";
@@ -5,6 +6,7 @@ import { Global, css } from "@emotion/react";
 import WhatsAppButton from "@/components/commons/WhatsAppButton";
 import { CounterProvider } from "@/hooks/useContador";
 import { DrawerProvider } from "@/hooks/useDrawer";
+import Footer from "@/components/footer";
 
 const theme = extendTheme({
   fonts: {
@@ -12,7 +14,14 @@ const theme = extendTheme({
     body: "Montserrat Regular, sans-serif",
   },
 });
+
 export default function App({ Component, pageProps }: AppProps) {
+  const [isComponentLoaded, setIsComponentLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsComponentLoaded(true);
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <CounterProvider>
@@ -35,8 +44,14 @@ export default function App({ Component, pageProps }: AppProps) {
             `}
           />
           <Navbar />
-          <Component {...pageProps} />
-          <WhatsAppButton />
+          <Suspense fallback={<div>Loading...</div>}>
+            {isComponentLoaded && <Component {...pageProps} />}
+          </Suspense>
+          {isComponentLoaded && (
+            <>
+              <WhatsAppButton />
+            </>
+          )}
         </DrawerProvider>
       </CounterProvider>
     </ChakraProvider>

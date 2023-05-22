@@ -174,13 +174,11 @@ const Form = (props: ContainerProps) => {
         <Box m={8} color="#0B0E3F">
           <VStack spacing={5}>
             <FormControl id="name">
-              <FormLabel>Tú nombre</FormLabel>
+              <FormLabel>Tu nombre</FormLabel>
               <InputGroup borderColor="#E0E1E7">
-                <InputLeftElement
-                  pointerEvents="none"
-                  // eslint-disable-next-line react/no-children-prop
-                  children={<BsPerson color="gray.800" />}
-                />
+                <InputLeftElement pointerEvents="none">
+                  <BsPerson color="gray.800" />
+                </InputLeftElement>
                 <Input
                   type="text"
                   size="md"
@@ -191,14 +189,12 @@ const Form = (props: ContainerProps) => {
                 />
               </InputGroup>
             </FormControl>
-            <FormControl id="name">
+            <FormControl id="email">
               <FormLabel>Correo</FormLabel>
               <InputGroup borderColor="#E0E1E7">
-                <InputLeftElement
-                  pointerEvents="none"
-                  // eslint-disable-next-line react/no-children-prop
-                  children={<MdOutlineEmail color="gray.800" />}
-                />
+                <InputLeftElement pointerEvents="none">
+                  <MdOutlineEmail color="gray.800" />
+                </InputLeftElement>
                 <Input
                   type="text"
                   size="md"
@@ -210,7 +206,7 @@ const Form = (props: ContainerProps) => {
                 />
               </InputGroup>
             </FormControl>
-            <FormControl id="name">
+            <FormControl id="message">
               <FormLabel>Mensaje</FormLabel>
               <Textarea
                 borderColor="gray.300"
@@ -225,7 +221,7 @@ const Form = (props: ContainerProps) => {
                 id={"message"}
               />
             </FormControl>
-            <FormControl id="name" float="right">
+            <FormControl id="submit" float="right">
               <Button
                 isLoading={isLoading}
                 variant="solid"
