@@ -215,7 +215,7 @@ const Form = (props: ContainerProps) => {
                 variant="solid"
                 bg="#846a5a"
                 color="white"
-                borderRadius="2px"
+                borderRadius="5px"
                 _hover={{}}
                 onClick={sendMail}
               >

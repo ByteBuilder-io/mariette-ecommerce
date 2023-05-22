@@ -11,7 +11,7 @@ const BadgeFilter = (props: ContainerProps) => {
   const { text, onClick, isFilter } = props;
 
   return (
-    <Box mb="10px">
+    <Box mb="10px !important">
       <Badge
         variant="outline"
         borderColor="gray.500"
@@ -23,30 +23,33 @@ const BadgeFilter = (props: ContainerProps) => {
         bg={!isFilter ? "gray.100" : ""}
       >
         <Text
-          pl="8px"
+          ml="10px"
+          mr={isFilter ? "8px" : "-5px" }
           pt="4px"
           pb="4px"
-          pr="5px"
           fontWeight="light"
           textTransform="none"
+          textAlign="center"
         >
           {text}
         </Text>
-        <Box
-          position="absolute"
-          top="0"
-          right="0"
-          h="100%"
-          display="flex"
-          alignItems="center"
-          pr="8px"
-          fontSize="sm"
-          color="gray.500"
-          cursor="pointer"
-          fontWeight="light"
-        >
-          {isFilter ? <BsFilterRight /> : "x"}
-        </Box>
+        {isFilter && (
+          <Box
+            position="absolute"
+            top="0"
+            right="0"
+            h="100%"
+            display="flex"
+            alignItems="center"
+            pr="8px"
+            fontSize="sm"
+            color="gray.500"
+            cursor="pointer"
+            fontWeight="light"
+          >
+            <BsFilterRight />
+          </Box>
+        )}
       </Badge>
     </Box>
   );

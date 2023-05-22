@@ -22,6 +22,18 @@ const Hero = ({ dataHero }: IProps) => {
   const [isPaginations, setIsPagination] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
+  const getValue = () => {
+    if (width < 600) {
+      return "50%";
+    }
+    if (width > 600 && width < 1800) {
+      return "22%";
+    }
+    if (width > 1800) {
+      return "30%";
+    }
+  };
+
   const renderSlider = () => {
     if (data) {
       const { contenido } = data;
@@ -34,44 +46,49 @@ const Hero = ({ dataHero }: IProps) => {
               alignItems="center"
               justifyContent="center"
               height="100%"
+              w="100%"
             >
-              <Box maxH={maxH}>
+              <Box maxH={maxH} w="100%" h="100%">
                 <Image
                   src={sanityImage(item.imagen.asset._ref).url()}
                   alt={item._key}
                   objectFit="cover"
                   objectPosition="center"
+                  w="100%"
+                  height="100%"
                 />
               </Box>
               <Text
                 position="absolute"
                 w={isMobile ? "300px" : "500px"}
-                top={isMobile ? "50%" : "25%"}
-                left={isMobile ? "50%" : "30%"}
+                top={isMobile ? "30%" : "25%"}
+                left={getValue()}
                 transform="translate(-50%, -50%)"
                 color="white"
                 fontSize={isMobile ? "30px" : "50px"}
                 fontWeight="100"
-                textAlign="center"
+                textAlign="left"
                 fontFamily="Castoro Titling"
               >
                 {item.texto}
-                <Box>
-                  <Button
-                    fontWeight="300"
-                    textAlign="center"
-                    fontSize={isMobile ? "12px" : "20px"}
-                    borderRadius="none"
-                    bg="#997d6c"
-                    color="white"
-                    h={isMobile ? "40px" : "55px"}
-                    width={isMobile ? "120px" : "auto"}
-                  >
-                    <Text pr="10px" pl="10px">
-                      {item.texto_button}
-                    </Text>
-                  </Button>
-                </Box>
+                {item.texto_button && (
+                  <Box>
+                    <Button
+                      fontWeight="300"
+                      textAlign="center"
+                      fontSize={isMobile ? "12px" : "20px"}
+                      borderRadius="5px"
+                      bg="#997d6c"
+                      color="white"
+                      h={isMobile ? "40px" : "55px"}
+                      width={isMobile ? "120px" : "auto"}
+                    >
+                      <Text pr="10px" pl="10px">
+                        {item.texto_button}
+                      </Text>
+                    </Button>
+                  </Box>
+                )}
               </Text>
             </Box>
           </SwiperSlide>
