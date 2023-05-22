@@ -63,7 +63,7 @@ const ProductCard = (props: Props) => {
         const productImage = productImages[index];
         console.log(productImage);
         let imageSrc = "";
-        if (productImage.product != null) {
+        if (productImage != undefined) {
           imageSrc =
             productImage.product.images.edges.length > 1
               ? productImage.product.images.edges[1].node.originalSrc
