@@ -11,15 +11,17 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
+import Link from "next/link";
 
 interface Props {
   text: string;
   imageUrl: string;
   position: number;
   data: any;
+  idProduct: number;
 }
 
-const ImageText = ({ text, imageUrl, position, data }: Props) => {
+const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
   const router = useRouter();
@@ -71,23 +73,24 @@ const ImageText = ({ text, imageUrl, position, data }: Props) => {
                   {text}
                 </Text>
                 {data.text_button && (
-                  <Button
-                    fontWeight="300"
-                    textAlign="center"
-                    fontSize={isMobile ? "12px" : "20px"}
-                    borderRadius="5px"
-                    bg={data.color_botton ? data.color_botton.value : "#997d6c"}
-                    color="white"
-                    h={isMobile ? "40px" : "55px"}
-                    width={isMobile ? "120px" : "auto"}
-                    onClick={() => {
-                      goToPage(data.text_button_slug);
-                    }}
-                  >
-                    <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
-                      {data.text_button}
-                    </Text>
-                  </Button>
+                  <Link href={"/productos/detalle/" + idProduct.toString()}>
+                    <Button
+                      fontWeight="300"
+                      textAlign="center"
+                      fontSize={isMobile ? "12px" : "20px"}
+                      borderRadius="5px"
+                      bg={
+                        data.color_botton ? data.color_botton.value : "#997d6c"
+                      }
+                      color="white"
+                      h={isMobile ? "40px" : "55px"}
+                      width={isMobile ? "120px" : "auto"}
+                    >
+                      <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                        {data.text_button}
+                      </Text>
+                    </Button>
+                  </Link>
                 )}
               </Stack>
             </Box>
@@ -134,23 +137,24 @@ const ImageText = ({ text, imageUrl, position, data }: Props) => {
                   {text}
                 </Text>
                 {data.text_button && (
-                  <Button
-                    fontWeight="300"
-                    textAlign="center"
-                    fontSize={isMobile ? "12px" : "20px"}
-                    borderRadius="5px"
-                    bg={data.color_botton ? data.color_botton.value : "#997d6c"}
-                    color="white"
-                    h={isMobile ? "40px" : "55px"}
-                    width={isMobile ? "120px" : "auto"}
-                    onClick={() => {
-                      goToPage(data.text_button_slug);
-                    }}
-                  >
-                    <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
-                      {data.text_button}
-                    </Text>
-                  </Button>
+                  <Link href={"/productos/detalle/" + idProduct.toString()}>
+                    <Button
+                      fontWeight="300"
+                      textAlign="center"
+                      fontSize={isMobile ? "12px" : "20px"}
+                      borderRadius="5px"
+                      bg={
+                        data.color_botton ? data.color_botton.value : "#997d6c"
+                      }
+                      color="white"
+                      h={isMobile ? "40px" : "55px"}
+                      width={isMobile ? "120px" : "auto"}
+                    >
+                      <Text pr="10px" pl="10px" fontFamily="Castoro Titling">
+                        {data.text_button}
+                      </Text>
+                    </Button>
+                  </Link>
                 )}
               </Stack>
             </Box>

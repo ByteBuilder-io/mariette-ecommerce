@@ -17,6 +17,11 @@ export interface THero {
   color_boton?: { value: string }
   color_titulo?: { value: string }
   _key: string;
+  url: {
+    _type: string;
+    _ref: string;
+  };
+  urlData?: { url: number };
 }
 
 export interface TContenido {

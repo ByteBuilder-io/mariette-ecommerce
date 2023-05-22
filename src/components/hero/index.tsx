@@ -1,6 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper";
-import { Box, Image, Text, Button, Container } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Text,
+  Button,
+  Container,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { useEffect, useState } from "react";
 import { sanityImage } from "@/lib/sanity.image";
@@ -9,18 +16,43 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { styleSlider } from "./utils";
 import { IHero, THero } from "@/typesSanity/docs/hero";
+import Link from "next/link";
+import { client } from "@/lib/sanity.client";
 
 interface IProps {
   dataHero: IHero;
 }
 
 const Hero = ({ dataHero }: IProps) => {
-  const maxH = "800px";
-  
+  const maxH = useBreakpointValue(
+    { base: "750px", lg: "800px" },
+    { ssr: false }
+  );
   const [data, setData] = useState<IHero>(dataHero);
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  const query = `
+    *[_id == '${data._id}']{
+        ...,
+        contenido[]{
+          ...,
+          'urlData': *[_id == ^.url._ref]{
+                  'url':store.id
+                }[0]
+        }
+      }[0]
+  `;
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await client.fetch(query);
+      setData(data);
+    }
+
+    fetchData();
+  }, [query]);
 
   const getValue = () => {
     if (width < 600) {
@@ -48,14 +80,14 @@ const Hero = ({ dataHero }: IProps) => {
               height="100%"
               w="100%"
             >
-              <Box maxH={maxH} w="100%" h="100%">
+              <Box h={maxH} w="100%">
                 <Image
                   src={sanityImage(item.imagen.asset._ref).url()}
                   alt={item._key}
                   objectFit="cover"
                   objectPosition="center"
-                  w="100%"
-                  height="100%"
+                  h={maxH}
+                  width={"100%"}
                 />
               </Box>
               <Text
@@ -71,22 +103,30 @@ const Hero = ({ dataHero }: IProps) => {
                 fontFamily="Castoro Titling"
               >
                 {item.texto}
-                {item.texto_button && (
+                {item.texto_button && item.urlData && (
                   <Box>
-                    <Button
-                      fontWeight="300"
-                      textAlign="center"
-                      fontSize={isMobile ? "12px" : "20px"}
-                      borderRadius="5px"
-                      bg={item.color_boton ? item.color_boton.value : "#997d6c"}
-                      color="white"
-                      h={isMobile ? "40px" : "55px"}
-                      width={isMobile ? "120px" : "auto"}
+                    <Link
+                      href={
+                        "/productos/detalle/" + item.urlData!.url.toString()
+                      }
                     >
-                      <Text pr="10px" pl="10px">
-                        {item.texto_button}
-                      </Text>
-                    </Button>
+                      <Button
+                        fontWeight="300"
+                        textAlign="center"
+                        fontSize={isMobile ? "12px" : "20px"}
+                        borderRadius="5px"
+                        bg={
+                          item.color_boton ? item.color_boton.value : "#997d6c"
+                        }
+                        color="white"
+                        h={isMobile ? "40px" : "55px"}
+                        width={isMobile ? "120px" : "auto"}
+                      >
+                        <Text pr="10px" pl="10px">
+                          {item.texto_button}
+                        </Text>
+                      </Button>
+                    </Link>
                   </Box>
                 )}
               </Text>

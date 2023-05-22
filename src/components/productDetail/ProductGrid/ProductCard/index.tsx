@@ -61,10 +61,16 @@ const ProductCard = (props: Props) => {
     if (products && products.length > 0 && productImages.length > 0) {
       const result = products.map((product, index) => {
         const productImage = productImages[index];
-        const imageSrc =
-          productImage.product.images.edges.length > 1
-            ? productImage.product.images.edges[1].node.originalSrc
-            : productImage.product.images.edges[0].node.originalSrc;
+        console.log(productImage);
+        let imageSrc = "";
+        if (productImage != undefined) {
+          imageSrc =
+            productImage.product.images.edges.length > 1
+              ? productImage.product.images.edges[1].node.originalSrc
+              : productImage.product.images.edges[0].node.originalSrc;
+        } else {
+          imageSrc = product.previewImageUrl;
+        }
         const preloadedImage = document.createElement("img");
         preloadedImage.src = imageSrc;
         return (
