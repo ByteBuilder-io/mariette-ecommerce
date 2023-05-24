@@ -12,6 +12,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
+import Select from "react-select";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { IoMdClose } from "react-icons/io";
@@ -26,7 +27,7 @@ import ProductCard from "../productDetail/ProductGrid/ProductCard";
 
 import { useRouter } from "next/router";
 
-import { d1, d2, d3, d4, colors } from "./utils";
+import { d1, d2, d3, d4, customStyles } from "./utils";
 import Loading from "../commons/Loading";
 
 const customTheme = extendTheme({
@@ -59,6 +60,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(true);
+  const [isOpenFilterMovil, setIsOpenFilterMovil] = useState<boolean>(false);
   const [dataProductRender, setDataProductRender] = useState(dataProduct);
   const [data, setData] = useState<any>({
     producto: [],
@@ -70,6 +72,10 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     gema: [],
   });
 
+  const handleFilterCloseMovil = () => {
+    setIsOpenFilterMovil(false);
+  };
+
   const handleFilterClose = () => {
     setIsOpenFilter(false);
   };
@@ -79,7 +85,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   };
 
   const handleFilterOpenDrawer = () => {
-    setIsOpenFilter(true);
+    setIsOpenFilterMovil(true);
   };
 
   const handleCheckboxChange = (
@@ -134,6 +140,13 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
 
       return result;
     }
+  };
+
+  const handleSelectChange = (selected: any) => {
+    setData({
+      ...data,
+      gema: selected
+    })
   };
 
   const RenderFilters = () => {
@@ -231,13 +244,27 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             </ChakraProvider>
           </Stack>
         </CheckboxGroup>
-        <BasicCheckBox
+        <Text fontWeight="bold" fontSize="14px">
+          Gema
+        </Text>
+        <Select
+          value={data.gema}
+          isMulti
+          name="gema"
+          options={d4}
+          className="basic-multi-select"
+          classNamePrefix="select"
+          closeMenuOnSelect={false}
+          styles={customStyles}
+          onChange={handleSelectChange}
+        />
+        {/* <BasicCheckBox
           title="Gema"
           options={d4}
           id="gema"
           onClick={handleCheckboxChange}
           data={data}
-        />
+        /> */}
         {/* <Text fontWeight="bold" fontSize="14px">
           Color
         </Text>
@@ -277,12 +304,18 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     setDataProductRender(result);
   };
 
-  const filterByGema = (gema: string[], filteredData: any) => {
+  const filterByGema = (gema: { value: string}[], filteredData: any) => {
+    const gemaFormat = gema.map((item: {value: string}) => {
+      return item.value
+    })
+
     const resultado = filteredData.filter((item: any) => {
-      const allOptionValues = item.options.flatMap((option: any) => option.values);
-      return allOptionValues.some((value: any) => gema.includes(value));
+      const allOptionValues = item.options.flatMap(
+        (option: any) => option.values
+      );
+      return allOptionValues.some((value: any) => gemaFormat.includes(value));
     });
-    
+
     setDataProductRender(resultado);
   };
 
@@ -383,7 +416,10 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         spacing={{ base: "8", md: "4" }}
       >
         {isMobile && (
-          <DrawerFilters isOpen={isOpenFilter} onClose={handleFilterClose}>
+          <DrawerFilters
+            isOpen={isOpenFilterMovil}
+            onClose={handleFilterCloseMovil}
+          >
             <RenderFilters />
           </DrawerFilters>
         )}
