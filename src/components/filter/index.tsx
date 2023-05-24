@@ -127,8 +127,12 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       type === "rango_precio" ||
       type === "gema"
     ) {
-      const result = data[type].map((item: string, index: number) => {
-        return <BadgeFilter text={item} key={index} />;
+      const result = data[type].map((item: any, index: number) => {
+        if (type === "gema") {
+          return <BadgeFilter text={item.value} key={index} />;
+        } else {
+          return <BadgeFilter text={item} key={index} />;
+        }
       });
 
       return result;
@@ -145,8 +149,8 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const handleSelectChange = (selected: any) => {
     setData({
       ...data,
-      gema: selected
-    })
+      gema: selected,
+    });
   };
 
   const RenderFilters = () => {
@@ -244,46 +248,6 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             </ChakraProvider>
           </Stack>
         </CheckboxGroup>
-        <Text fontWeight="bold" fontSize="14px">
-          Gema
-        </Text>
-        <Select
-          value={data.gema}
-          isMulti
-          name="gema"
-          options={d4}
-          className="basic-multi-select"
-          classNamePrefix="select"
-          closeMenuOnSelect={false}
-          styles={customStyles}
-          onChange={handleSelectChange}
-        />
-        {/* <BasicCheckBox
-          title="Gema"
-          options={d4}
-          id="gema"
-          onClick={handleCheckboxChange}
-          data={data}
-        /> */}
-        {/* <Text fontWeight="bold" fontSize="14px">
-          Color
-        </Text>
-        <Flex alignItems="center" mb="4">
-          <ChakraProvider theme={customTheme}>
-            <HStack direction="row" spacing={2}>
-              {colors.map((color, index) => (
-                <Checkbox
-                  variant={`circulasCustom${color.name}`}
-                  size="md"
-                  key={index}
-                  colorScheme="red"
-                  isChecked={data.color.includes(color.label)}
-                  onChange={() => handleCheckboxChange(color.label, "color")}
-                />
-              ))}
-            </HStack>
-          </ChakraProvider>
-        </Flex> */}
       </Stack>
     );
   };
@@ -304,10 +268,10 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     setDataProductRender(result);
   };
 
-  const filterByGema = (gema: { value: string}[], filteredData: any) => {
-    const gemaFormat = gema.map((item: {value: string}) => {
-      return item.value
-    })
+  const filterByGema = (gema: { value: string }[], filteredData: any) => {
+    const gemaFormat = gema.map((item: { value: string }) => {
+      return item.value;
+    });
 
     const resultado = filteredData.filter((item: any) => {
       const allOptionValues = item.options.flatMap(
@@ -421,6 +385,21 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             onClose={handleFilterCloseMovil}
           >
             <RenderFilters />
+            <Text fontWeight="bold" fontSize="14px" mt="20px" mb="20px">
+              Gema
+            </Text>
+            <Select
+              value={data.gema}
+              isMulti
+              name="gema"
+              options={d4}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              closeMenuOnSelect={false}
+              styles={customStyles}
+              menuPlacement={isMobile ? "top" : "auto"}
+              onChange={handleSelectChange}
+            />
           </DrawerFilters>
         )}
         {isOpenFilter && !isMobile && (
@@ -433,6 +412,21 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
               />
             </Box>
             <RenderFilters />
+            <Text fontWeight="bold" fontSize="14px" mt="20px" mb="20px">
+              Gema
+            </Text>
+            <Select
+              value={data.gema}
+              isMulti
+              name="gema"
+              options={d4}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              closeMenuOnSelect={false}
+              styles={customStyles}
+              menuPlacement={isMobile ? "top" : "auto"}
+              onChange={handleSelectChange}
+            />
           </Flex>
         )}
         <Stack spacing={{ base: "8", md: "4" }} flex="4">
@@ -453,7 +447,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             {renderBadges("material")}
             {renderBadges("color")}
             {renderBadges("categoria")}
-            {renderBadges("rango_precio")}
+            {renderBadges("gema")}
           </Stack>
           <Text fontWeight="200">
             Resultados de la busqueda: {dataProductRender.length}
