@@ -60,7 +60,6 @@ const Productos = () => {
   if (loading) {
     return <Loading />;
   }
-  console.log(data);
 
   return (
     <>

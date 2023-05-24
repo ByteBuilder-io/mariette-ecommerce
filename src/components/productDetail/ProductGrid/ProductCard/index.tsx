@@ -67,7 +67,6 @@ const ProductCard = (props: Props) => {
     if (products && products.length > 0 && productImages.length > 0) {
       const result = products.map((product, index) => {
         const productImage = productImages[index];
-        console.log(productImage);
         let imageSrc = "";
         if (productImage != undefined) {
           imageSrc =
@@ -79,7 +78,6 @@ const ProductCard = (props: Props) => {
         }
         const preloadedImage = document.createElement("img");
         preloadedImage.src = imageSrc;
-
         return (
           <Card cursor="pointer" boxShadow="lg" key={index}>
             <Link href={"/productos/detalle/" + product.id}>

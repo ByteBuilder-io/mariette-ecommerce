@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/cards/notFound.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/footer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/[...slug].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/[...slug].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/productos/detalle/[...slug].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/detalle/[...slug].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/ProductCard/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/productos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -88,7 +83,7 @@
       <workItem from="1684282513434" duration="11465000" />
       <workItem from="1684425889581" duration="9710000" />
       <workItem from="1684729393753" duration="6158000" />
-      <workItem from="1684772656763" duration="14042000" />
+      <workItem from="1684772656763" duration="17556000" />
     </task>
     <servers />
   </component>
