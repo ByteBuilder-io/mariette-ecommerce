@@ -40,7 +40,7 @@ const CardCategory = ({ dataCategory }: ICategoryProps) => {
         </Heading>
       </Box>
 
-      <Wrap spacing="30px" justify="center" py={10}>
+      <Wrap justify="center" py={10}>
         {data &&
           data.images.map((e) => {
             return (
@@ -84,8 +84,8 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
       }}
     >
       <Flex
-        w="425px"
-        h="200px"
+        w={"400px"}
+        h={"270px"}
         onMouseEnter={handleFlipStart}
         onMouseLeave={handleFlipEnd}
         position="relative"
@@ -131,7 +131,6 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
           opacity={{ base: 0.5, lg: blur ? 0.3 : 1 }}
           transition="opacity 0.2s ease"
           w="400px"
-          h="200px"
           alt={title}
         />
       </Flex>

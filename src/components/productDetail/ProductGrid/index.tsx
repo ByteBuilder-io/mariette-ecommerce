@@ -20,7 +20,7 @@ const ProductGrid = ({
 }) => {
   const [data, setData] = useState<IDataProductos[]>();
   const query = `
-  *[_type == 'product' && store.status != 'draft' && store.productType == "${tag}" && store.id != ${currentProduct}] {
+  *[_type == 'product' && store.status != 'draft' && store.productType == "${tag}" && store.isDeleted == false && store.id != ${currentProduct}] {
         "createdAt": store.createdAt,
         "descriptionHtml": store.descriptionHtml,
         "gid": store.gid,

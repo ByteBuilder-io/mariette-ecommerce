@@ -25,10 +25,11 @@ interface Props {
   totalRows: number;
   products: IDataProductos[];
   rootProps?: StackProps;
+  loading: boolean
 }
 
 const ProductCard = (props: Props) => {
-  const { products, rootProps } = props;
+  const { products, rootProps, loading } = props;
   const [productImages, setProductImages] = useState<IDataImage[]>([]); // Estado local para almacenar las imágenes de los productos
   const [isImageLoaded, setImageLoaded] = useState(false);
 
@@ -67,6 +68,7 @@ const ProductCard = (props: Props) => {
     if (products && products.length > 0 && productImages.length > 0) {
       const result = products.map((product, index) => {
         const productImage = productImages[index];
+
         let imageSrc = "";
         if (productImage != undefined) {
           imageSrc =
@@ -79,7 +81,7 @@ const ProductCard = (props: Props) => {
         const preloadedImage = document.createElement("img");
         preloadedImage.src = imageSrc;
         return (
-          <Card cursor="pointer" boxShadow="lg" key={index}>
+          <Card cursor="pointer" boxShadow="lg" key={index} display={loading ? "none" : ""}>
             <Link href={"/productos/detalle/" + product.id}>
               <CardHeader padding="0" margin="0">
                 <Box width="100%" height="auto">

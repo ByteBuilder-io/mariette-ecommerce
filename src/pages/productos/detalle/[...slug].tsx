@@ -26,7 +26,7 @@ const ProductoDetalle = () => {
   useEffect(() => {
     async function fetchData() {
       if (slug != undefined && slug != "") {
-        const query = `*[_type == 'product' && store.status != 'draft' && store.id == ${slug}] {
+        const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false && store.id == ${slug}] {
           "createdAt": store.createdAt,
           "descriptionHtml": store.descriptionHtml,
           "gid": store.gid,

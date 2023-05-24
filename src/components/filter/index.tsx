@@ -12,6 +12,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { ReactNode, useEffect, useState } from "react";
+import Select from "react-select";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 import { IoMdClose } from "react-icons/io";
@@ -26,7 +27,7 @@ import ProductCard from "../productDetail/ProductGrid/ProductCard";
 
 import { useRouter } from "next/router";
 
-import { d1, d2, d3, d4, colors } from "./utils";
+import { d1, d2, d3, d4, customStyles } from "./utils";
 import Loading from "../commons/Loading";
 
 const customTheme = extendTheme({
@@ -59,6 +60,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const [rango, setRango] = useState([100, 500]);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(true);
+  const [isOpenFilterMovil, setIsOpenFilterMovil] = useState<boolean>(false);
   const [dataProductRender, setDataProductRender] = useState(dataProduct);
   const [data, setData] = useState<any>({
     producto: [],
@@ -67,7 +69,12 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     rango_precio: [],
     color: [],
     categoria: [],
+    gema: [],
   });
+
+  const handleFilterCloseMovil = () => {
+    setIsOpenFilterMovil(false);
+  };
 
   const handleFilterClose = () => {
     setIsOpenFilter(false);
@@ -78,7 +85,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   };
 
   const handleFilterOpenDrawer = () => {
-    setIsOpenFilter(true);
+    setIsOpenFilterMovil(true);
   };
 
   const handleCheckboxChange = (
@@ -89,7 +96,8 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       | "rango_precio"
       | "talla"
       | "categoria"
-      | "color",
+      | "color"
+      | "gema",
     event?: any
   ) => {
     setData((prevData: any) => ({
@@ -109,16 +117,22 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       | "rango_precio"
       | "talla"
       | "color"
+      | "gema"
   ) => {
     if (
       type === "producto" ||
       type === "material" ||
       type === "color" ||
       type === "categoria" ||
-      type === "rango_precio"
+      type === "rango_precio" ||
+      type === "gema"
     ) {
-      const result = data[type].map((item: string, index: number) => {
-        return <BadgeFilter text={item} key={index} />;
+      const result = data[type].map((item: any, index: number) => {
+        if (type === "gema") {
+          return <BadgeFilter text={item.value} key={index} />;
+        } else {
+          return <BadgeFilter text={item} key={index} />;
+        }
       });
 
       return result;
@@ -130,6 +144,13 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
 
       return result;
     }
+  };
+
+  const handleSelectChange = (selected: any) => {
+    setData({
+      ...data,
+      gema: selected,
+    });
   };
 
   const RenderFilters = () => {
@@ -227,37 +248,11 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             </ChakraProvider>
           </Stack>
         </CheckboxGroup>
-        <BasicCheckBox
-          title="Gema"
-          options={d4}
-          id="categoria"
-          onClick={handleCheckboxChange}
-          data={data}
-        />
-        {/* <Text fontWeight="bold" fontSize="14px">
-          Color
-        </Text>
-        <Flex alignItems="center" mb="4">
-          <ChakraProvider theme={customTheme}>
-            <HStack direction="row" spacing={2}>
-              {colors.map((color, index) => (
-                <Checkbox
-                  variant={`circulasCustom${color.name}`}
-                  size="md"
-                  key={index}
-                  colorScheme="red"
-                  isChecked={data.color.includes(color.label)}
-                  onChange={() => handleCheckboxChange(color.label, "color")}
-                />
-              ))}
-            </HStack>
-          </ChakraProvider>
-        </Flex> */}
       </Stack>
     );
   };
 
-  const filterByMaterial = (material: any, filteredData: any) => {
+  const filterByMaterial = (material: string[], filteredData: any) => {
     const result = filteredData.filter((item: any) =>
       item.variants.some((variant: any) =>
         material.includes(variant.data.option1)
@@ -266,11 +261,26 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
     setDataProductRender(result);
   };
 
-  const filterByTalla = (talla: any, filteredData: any) => {
+  const filterByTalla = (talla: string[], filteredData: any) => {
     const result = filteredData.filter((item: any) =>
       item.variants.some((variant: any) => talla.includes(variant.data.option2))
     );
     setDataProductRender(result);
+  };
+
+  const filterByGema = (gema: { value: string }[], filteredData: any) => {
+    const gemaFormat = gema.map((item: { value: string }) => {
+      return item.value;
+    });
+
+    const resultado = filteredData.filter((item: any) => {
+      const allOptionValues = item.options.flatMap(
+        (option: any) => option.values
+      );
+      return allOptionValues.some((value: any) => gemaFormat.includes(value));
+    });
+
+    setDataProductRender(resultado);
   };
 
   const getCountFilters = () => {
@@ -314,6 +324,13 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         filteredData.length === 0 ? dataAll : filteredData
       );
     }
+
+    if (data.gema.length > 0) {
+      filterByGema(
+        data.gema,
+        filteredData.length === 0 ? dataAll : filteredData
+      );
+    }
   }, [data, dataAll]);
 
   useEffect(() => {
@@ -327,9 +344,13 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         ...data,
         producto: [producto[producto.length - 1]],
       });
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     } else {
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
@@ -359,8 +380,26 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         spacing={{ base: "8", md: "4" }}
       >
         {isMobile && (
-          <DrawerFilters isOpen={isOpenFilter} onClose={handleFilterClose}>
+          <DrawerFilters
+            isOpen={isOpenFilterMovil}
+            onClose={handleFilterCloseMovil}
+          >
             <RenderFilters />
+            <Text fontWeight="bold" fontSize="14px" mt="20px" mb="20px">
+              Gema
+            </Text>
+            <Select
+              value={data.gema}
+              isMulti
+              name="gema"
+              options={d4}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              closeMenuOnSelect={false}
+              styles={customStyles}
+              menuPlacement={isMobile ? "top" : "auto"}
+              onChange={handleSelectChange}
+            />
           </DrawerFilters>
         )}
         {isOpenFilter && !isMobile && (
@@ -373,6 +412,21 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
               />
             </Box>
             <RenderFilters />
+            <Text fontWeight="bold" fontSize="14px" mt="20px" mb="20px">
+              Gema
+            </Text>
+            <Select
+              value={data.gema}
+              isMulti
+              name="gema"
+              options={d4}
+              className="basic-multi-select"
+              classNamePrefix="select"
+              closeMenuOnSelect={false}
+              styles={customStyles}
+              menuPlacement={isMobile ? "top" : "auto"}
+              onChange={handleSelectChange}
+            />
           </Flex>
         )}
         <Stack spacing={{ base: "8", md: "4" }} flex="4">
@@ -393,7 +447,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             {renderBadges("material")}
             {renderBadges("color")}
             {renderBadges("categoria")}
-            {renderBadges("rango_precio")}
+            {renderBadges("gema")}
           </Stack>
           <Text fontWeight="200">
             Resultados de la busqueda: {dataProductRender.length}
@@ -415,10 +469,12 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
             spacing={4}
             templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
           >
+            {loading && <Loading />}
             {dataProductRender && dataProductRender.length > 0 && (
               <ProductCard
                 products={dataProductRender}
                 totalRows={dataProductRender.length / 4}
+                loading={loading}
               />
             )}
           </SimpleGrid>
