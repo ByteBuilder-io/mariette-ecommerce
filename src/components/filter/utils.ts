@@ -61,7 +61,7 @@ export const customStyles = {
     ...provided,
     fontSize: "14px", // cambiar tamaño de fuente aquí
     borderRadius: "none",
-    width: "300px",
+    width: "250px",
     borderColor: "#997d6c",
     borderTopColor: "#997d6c",
     borderBottomColor: "#997d6c",
@@ -73,12 +73,12 @@ export const customStyles = {
     ...provided,
     fontSize: "14px",
     borderColor: "#997d6c",
-    width: "300px",
+    width: "250px",
   }),
   menu: (provided: any, state: any) => ({
     ...provided,
     borderColor: "#997d6c",
-    width: "300px",
+    width: "250px",
   }),
 };
 
