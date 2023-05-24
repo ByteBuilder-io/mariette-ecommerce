@@ -6,7 +6,7 @@ import { Global, css } from "@emotion/react";
 import WhatsAppButton from "@/components/commons/WhatsAppButton";
 import { CounterProvider } from "@/hooks/useContador";
 import { DrawerProvider } from "@/hooks/useDrawer";
-import Footer from "@/components/footer";
+import { initGA, logPageView, logEvent } from '../utils/analytics';
 
 const theme = extendTheme({
   fonts: {
@@ -17,6 +17,12 @@ const theme = extendTheme({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isComponentLoaded, setIsComponentLoaded] = useState(false);
+
+  useEffect(() => {
+    initGA();
+    logPageView();
+    logEvent();
+  }, []);
 
   useEffect(() => {
     setIsComponentLoaded(true);
