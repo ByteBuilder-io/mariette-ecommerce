@@ -7,13 +7,12 @@ import useWindowDimensions from "@/hooks/useWindowDimensions";
 import SliderInstagram from "./SliderInstagram";
 import GridInstagram from "./GridInstagram";
 
-import { API_KEY } from "./utils";
-
 const Instagram = ({ data }: { data: any }) => {
   const { width, height } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [dataInstagram, setDataInstagram] = useState([]);
-  const URI = `https://graph.facebook.com/v16.0/17841402588128602/media?fields=media_url,media_type,thumbnail_url,permalink&access_token=${API_KEY}`;
+  const API_KEY = process.env.NEXT_PUBLIC_TOKEN_INSTAGRAM;
+  const URI = `https://graph.facebook.com/v16.0/${process.env.NEXT_PUBLIC_ID_INSTAGRAM}/media?fields=media_url,media_type,thumbnail_url,permalink&access_token=${API_KEY}`;
 
   const openLink = (link: string) => {
     window.open(link, "_blank");
