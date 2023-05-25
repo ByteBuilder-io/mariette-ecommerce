@@ -71,8 +71,7 @@ const Form = (props: ContainerProps) => {
       htmlContent: html,
     };
     const headers = {
-      "api-key":
-        "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",
+      "api-key": process.env.NEXT_PUBLIC_BREVO,
       "Content-Type": "application/json",
     };
 
@@ -95,8 +94,7 @@ const Form = (props: ContainerProps) => {
       htmlContent: html,
     };
     const headers = {
-      "api-key":
-        "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",
+      "api-key": process.env.NEXT_PUBLIC_BREVO,
       "Content-Type": "application/json",
     };
 
