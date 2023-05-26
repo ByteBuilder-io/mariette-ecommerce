@@ -296,6 +296,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       rango_precio: [],
       color: [],
       categoria: [],
+      gema: []
     });
   };
 
