@@ -16,11 +16,13 @@ const ProductGrid = ({
   currentProduct,
 }: {
   tag: string;
-  currentProduct: number;
+  currentProduct?: number;
 }) => {
   const [data, setData] = useState<IDataProductos[]>();
-  const query = `
-  *[_type == 'product' && store.status != 'draft' && store.productType == "${tag}" && store.isDeleted == false && store.id != ${currentProduct}] {
+  let query = `
+  *[_type == 'product' && store.status != 'draft' && store.isDeleted == false ${
+    tag != "all" ? '&& store.productType == "' + tag + '"' : ""
+  } ${currentProduct != undefined ? "&& store.id != " + currentProduct : ""}] {
         "createdAt": store.createdAt,
         "descriptionHtml": store.descriptionHtml,
         "gid": store.gid,
@@ -38,6 +40,7 @@ const ProductGrid = ({
         "vendor": store.vendor,
     }
     `;
+  console.log(query);
 
   useEffect(() => {
     async function fetchData() {

@@ -39,7 +39,7 @@ const RelatedProduct = (props: Props) => {
             <Card cursor="pointer" boxShadow="lg">
               <Link href={"/productos/detalle/" + product.id}>
                 <CardHeader padding="0" margin="0">
-                  <Box width="100%" height="auto">
+                  <Box width="100%" height="180px">
                     <Image
                       _hover={{
                         content: `url(${products[0].previewImageUrl})`,
