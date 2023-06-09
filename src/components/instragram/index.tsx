@@ -7,12 +7,11 @@ import useWindowDimensions from "@/hooks/useWindowDimensions";
 import SliderInstagram from "./SliderInstagram";
 import GridInstagram from "./GridInstagram";
 
-const NEXT_PUBLIC_TOKEN_INSTAGRAM =
-  "EAADNYgu0C1QBALkhoZADA770tewIjh4cX4K5lZBaJntk0s8hudZC14gVelZBzQUhOR6QXkE5yKr7dlExK07cZCyv2lZBC8qyDVOXxVLpv7yOPRXPMzQvRSu4ohEq5kkXvdKgCa7C0BJfyW8O3zBFWN2nX5jgLL9ZBuaNOrjmqFOpEIMUYvqsCCI";
-const NEXT_PUBLIC_ID_INSTAGRAM = "17841402588128602";
-const NEXT_PUBLIC_ID_PROJECT = "225820986837844";
+const NEXT_PUBLIC_TOKEN_INSTAGRAM = process.env.NEXT_PUBLIC_TOKEN_INSTAGRAM;
+const NEXT_PUBLIC_ID_INSTAGRAM = process.env.NEXT_PUBLIC_ID_INSTAGRAM;
+const NEXT_PUBLIC_ID_PROJECT = process.env.NEXT_PUBLIC_ID_PROJECT;
 const URI_FACEBOOK = "https://graph.facebook.com/v16.0";
-const APP_SECRET = "7c6329f285d30ffa27855abedcbd9969";
+const APP_SECRET = process.env.NEXT_PUBLIC_APP_SECRET;
 const QUERY_FACEBOOK =
   "media?fields=media_url,media_type,thumbnail_url,permalink&access_token=";
 
