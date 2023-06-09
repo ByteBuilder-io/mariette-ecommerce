@@ -7,6 +7,7 @@ import Filter from "@/components/filter";
 import Loading from "@/components/commons/Loading";
 import Footer from "@/components/footer";
 import NotFound from "@/components/cards/notFound";
+import CardsNoFilter from "@/components/cardsNoFilter";
 
 const Productos = () => {
   const [data, setData] = useState<IDataProductos[]>();
@@ -64,6 +65,7 @@ const Productos = () => {
   return (
     <>
       <Container py={10} maxW="1400px">
+        {/* <CardsNoFilter /> */}
         {data && data.length > 0 && dataAll && dataAll.length > 0 && (
           <Filter dataProduct={data} dataAll={dataAll} />
         )}
