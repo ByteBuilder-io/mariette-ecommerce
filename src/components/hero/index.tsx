@@ -168,6 +168,7 @@ const Hero = ({ dataHero }: IProps) => {
     <Box mb={isMobile ? "20px" : "35px"}>
       <style>{styleSlider}</style>
       <Swiper
+        style={{maxWidth: "3686px"}}
         navigation={!isPaginations}
         pagination={true}
         modules={[Navigation, Pagination]}
