@@ -65,7 +65,7 @@ const Productos = () => {
   return (
     <>
       <Container py={10} maxW="1400px">
-        {/* <CardsNoFilter /> */}
+        {/*<CardsNoFilter />*/}
         {data && data.length > 0 && dataAll && dataAll.length > 0 && (
           <Filter dataProduct={data} dataAll={dataAll} />
         )}
