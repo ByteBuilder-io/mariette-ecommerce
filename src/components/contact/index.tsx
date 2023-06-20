@@ -52,6 +52,7 @@ const Contact = (props: ContainerProps) => {
         bg="#846a5a"
         mt={noHeader ? "30px" : "80px"}
         mb={noHeader ? "30px" : "80px"}
+        borderRadius="5px"
       >
         <Flex
           flexWrap={{ base: "wrap", md: "nowrap" }}

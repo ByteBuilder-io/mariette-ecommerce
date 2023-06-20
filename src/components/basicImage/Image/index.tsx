@@ -50,6 +50,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
               w={{ base: "100%", md: "80%" }}
               mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
+              borderRadius="5px"
             >
               <Stack
                 align="center"
@@ -94,8 +95,8 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
                 )}
               </Stack>
             </Box>
-            <Box w={{ base: "100%", md: "80%" }}>
-              <Image src={imageUrl} alt={text} />
+            <Box w={{ base: "100%", md: "80%" }} borderRadius="5px">
+              <Image src={imageUrl} alt={text} borderTopRightRadius="5px" borderBottomRightRadius="5px"/>
             </Box>
           </Flex>
         </Box>
@@ -108,12 +109,13 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
         >
           <Flex flexDirection={{ base: "column", md: "row" }}>
             <Box w={{ base: "100%", md: "80%" }}>
-              <Image src={imageUrl} alt={text} />
+              <Image src={imageUrl} alt={text} borderTopLeftRadius="5px" borderBottomLeftRadius="5px" />
             </Box>
             <Box
               w={{ base: "100%", md: "100%" }}
               mb={{ base: "0", md: "0" }}
               bg="#f4eee7"
+              borderRadius="5px"
             >
               <Stack
                 align="center"
