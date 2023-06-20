@@ -92,6 +92,7 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
         justifyContent="center"
         alignItems="center"
         textAlign="center"
+        borderRadius="5px"
       >
         {breakpoint == "base" ? (
           <Text
@@ -131,6 +132,7 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
           opacity={{ base: 0.5, lg: blur ? 0.3 : 1 }}
           transition="opacity 0.2s ease"
           w="400px"
+          borderRadius="5px"
           alt={title}
         />
       </Flex>

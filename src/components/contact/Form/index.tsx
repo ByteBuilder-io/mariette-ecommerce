@@ -162,7 +162,7 @@ const Form = (props: ContainerProps) => {
     <WrapItem justifyContent="center !important">
       <Box
         bg="white"
-        borderRadius="none"
+        borderRadius="5px"
         ml={isMobile ? "" : "25px"}
         mb="40px"
         mt="40px"
