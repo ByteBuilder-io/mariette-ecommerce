@@ -3,7 +3,8 @@ import Instagram from "@/components/instragram";
 import CardsNoFilter from "@/components/cardsNoFilter";
 
 const CardsNoFilterSanity = ({ data }: { data: any }) => {
-  return <CardsNoFilter />;
+  console.log(data.title);
+  return <CardsNoFilter title={data.title} />;
 };
 
 export default CardsNoFilterSanity;

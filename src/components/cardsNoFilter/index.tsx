@@ -7,12 +7,12 @@ import { useEffect, useState } from "react";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 import { client } from "@/lib/sanity.client";
 
-const CardsNoFilter = () => {
+const CardsNoFilter = ({ title }: { title: string }) => {
   const [dataAll, setDataAll] = useState<IDataProductos[]>();
   const { width, height } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false && store.productType == 'Gemas'] {
+  const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false && store.productType == '${title}'] {
     "createdAt": store.createdAt,
     "descriptionHtml": store.descriptionHtml,
     "gid": store.gid,

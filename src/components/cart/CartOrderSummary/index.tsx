@@ -63,7 +63,7 @@ const CartOrderSummary = ({ total }: IProps) => {
             Total
           </Text>
           <Text fontSize="xl" fontWeight="extrabold" color="#846a5a">
-            {formatPrice(Number(total))} + IVA
+            {formatPrice(Number(total))}
           </Text>
         </Flex>
       </Stack>

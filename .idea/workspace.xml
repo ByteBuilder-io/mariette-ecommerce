@@ -5,10 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/componentsSanity/CardsNoFilterSanity.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/cardsNoFilter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cardsNoFilter/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/productos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart/CartOrderSummary/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartOrderSummary/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,26 +26,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "C:/Users/jcarl/Documents/bytebuilder/mariette-ecommerce/src/components/componentsSanity",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\jcarl\\Documents\\bytebuilder\\mariette-ecommerce\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "settings.javascript.prettier",
-    "ts.external.directory.path": "C:\\Users\\jcarl\\Documents\\bytebuilder\\mariette-ecommerce\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jcarl/Documents/bytebuilder/mariette-ecommerce/src/components/componentsSanity&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\jcarl\\Documents\\bytebuilder\\mariette-ecommerce\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\jcarl\\Documents\\bytebuilder\\mariette-ecommerce\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jcarl\Documents\bytebuilder\mariette-ecommerce\src\components\componentsSanity" />
@@ -91,7 +89,9 @@
       <workItem from="1685597088253" duration="1510000" />
       <workItem from="1685682426261" duration="601000" />
       <workItem from="1685982798068" duration="617000" />
-      <workItem from="1686602206055" duration="1731000" />
+      <workItem from="1686602206055" duration="2457000" />
+      <workItem from="1686776366459" duration="1218000" />
+      <workItem from="1687311070400" duration="641000" />
     </task>
     <servers />
   </component>
