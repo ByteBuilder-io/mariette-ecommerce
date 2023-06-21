@@ -14,9 +14,11 @@ import RelatedProduct from "@/components/productDetail/ProductGrid/ProductCard/R
 const ProductGrid = ({
   tag,
   currentProduct,
+  title,
 }: {
   tag: string;
   currentProduct?: number;
+  title?: string;
 }) => {
   const [data, setData] = useState<IDataProductos[]>();
   let query = `
@@ -87,7 +89,7 @@ const ProductGrid = ({
             size="md"
             fontFamily="Castoro Titling"
           >
-            Productos Relacionados
+            {title ? title : "Productos Relacionados"}
           </Heading>
 
           {data && data.length > 0 && (
