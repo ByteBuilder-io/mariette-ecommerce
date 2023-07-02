@@ -30,27 +30,29 @@ const ProductDetail = ({ producto, images }: Props) => {
   const [options, setOptions] = useState<IOptions[]>(producto.options);
 
   useEffect(() => {
-    setOptions([
-      {
-        name: "Talla",
-        values: [
-          "4",
-          "4.5",
-          "5",
-          "5.5",
-          "6",
-          "6.5",
-          "7",
-          "7.5",
-          "8",
-          "8.5",
-          "9",
-        ],
-        _key: "Talla",
-        _type: "option",
-      },
-      ...options,
-    ]);
+    if (producto.productType === "Anillos") {
+      setOptions([
+        {
+          name: "Talla",
+          values: [
+            "4",
+            "4.5",
+            "5",
+            "5.5",
+            "6",
+            "6.5",
+            "7",
+            "7.5",
+            "8",
+            "8.5",
+            "9",
+          ],
+          _key: "Talla",
+          _type: "option",
+        },
+        ...options,
+      ]);
+    }
   }, []);
   const MainImage = ({ src }: any) => (
     <Zoom
