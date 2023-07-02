@@ -29,7 +29,7 @@ import Cookies from "js-cookie";
 import { useCounter } from "@/hooks/useContador";
 import { useDrawer } from "@/hooks/useDrawer";
 
-interface IOptions {
+export interface IOptions {
   name: string;
   values: string[];
   _key: string;
@@ -40,6 +40,7 @@ interface Props {
   options: IOptions[];
   idProduct: string;
   setValue: React.Dispatch<React.SetStateAction<number>>;
+  type: string;
 }
 interface MyMapInterface {
   [key: string]: string;
@@ -50,10 +51,11 @@ interface IDataQuery {
   value: string;
 }
 
-const Form = ({ options, idProduct, setValue }: Props) => {
+const Form = ({ options, idProduct, setValue, type }: Props) => {
   const myMap: MyMapInterface = options.reduce((prev, curr) => {
     return { ...prev, [curr.name]: curr.values[0] };
   }, {});
+  console.log(options);
 
   let myDataquery: IDataQuery[] = [];
   options.map((e) => {
@@ -66,11 +68,13 @@ const Form = ({ options, idProduct, setValue }: Props) => {
   const [dataQuery, setDataQuery] = useState<IDataQuery[]>(myDataquery);
   const { count, setCount, increment } = useCounter();
   const { isOpen, onOpen, onClose, drawerProps, setDrawerProps } = useDrawer();
+  const [productName, setProductName] = useState<string>();
 
   useEffect(() => {
     async function fetchData() {
       if (dataQuery) {
         const selectedOptionsQuery = dataQuery
+          .filter((option) => option.name !== "Talla")
           .map(
             (option) =>
               `{name: ${JSON.stringify(option.name)}, value: ${JSON.stringify(
@@ -78,6 +82,8 @@ const Form = ({ options, idProduct, setValue }: Props) => {
               )}}`
           )
           .join(", ");
+
+        console.log(selectedOptionsQuery);
 
         const query = `
           query {
@@ -89,13 +95,21 @@ const Form = ({ options, idProduct, setValue }: Props) => {
                 priceV2 {
                   amount
                 }
+                product {
+                  title
+                }
               }
             }
           }
         `;
         // Utilizando el cliente GraphQL
         const data: any = await graphQLClient.request(query);
+        console.log(
+          query,
+          data.product.variantBySelectedOptions.priceV2.amount
+        );
         setValue(Number(data.product.variantBySelectedOptions.priceV2.amount));
+        setProductName(data.product.variantBySelectedOptions.product.title);
       }
     }
     fetchData();
@@ -116,7 +130,6 @@ const Form = ({ options, idProduct, setValue }: Props) => {
     fetchData();
   }, [data]);
   const handleSelectChange = (event: any, id: string) => {
-    
     setData({ ...data, [id]: event.value });
   };
 
@@ -151,6 +164,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
     setDataQuery(myDataquery);
     const dq: any = await getLastPrice(idProduct, myDataquery);
     const idCart = Cookies.get("idCart");
+    const products = Cookies.get("products");
     const queryCart =
       idCart != undefined
         ? `
@@ -207,13 +221,25 @@ const Form = ({ options, idProduct, setValue }: Props) => {
     //       backgroundColor: "#D7C0b4",
     //     },
     //   });
-    
+
     if (idCart === undefined) {
       await Cookies.set("idCart", resultCart.checkoutCreate.checkout.id);
       await Cookies.set(
         "checkoutUrl",
         resultCart.checkoutCreate.checkout.webUrl
       );
+    }
+    const dataProduct = {
+      id: dq.product.variantBySelectedOptions.id,
+      product: productName,
+      detail: data,
+    };
+    if (products === undefined) {
+      const finalData = [dataProduct];
+      await Cookies.set("products", JSON.stringify(finalData));
+    } else {
+      const finalData = [dataProduct, ...JSON.parse(products)];
+      await Cookies.set("products", JSON.stringify(finalData));
     }
     increment();
     isOpen ? onClose() : onOpen();
@@ -277,7 +303,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
             });
             let gema = gemaData[0];
             return (
-              <Box key={e._key} mb="15px">
+              <Box key={e._key} mb="15px" mt={5}>
                 <Box mb="10px">
                   <Text fontWeight="bold" fontSize="14px">
                     Gema
@@ -370,6 +396,7 @@ const Form = ({ options, idProduct, setValue }: Props) => {
 
 const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
   const selectedOptionsQuery = myDataquery
+    .filter((option) => option.name !== "Talla")
     .map(
       (option) =>
         `{name: ${JSON.stringify(option.name)}, value: ${JSON.stringify(

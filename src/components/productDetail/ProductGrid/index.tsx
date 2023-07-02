@@ -42,7 +42,6 @@ const ProductGrid = ({
         "vendor": store.vendor,
     }
     `;
-  console.log(query);
 
   useEffect(() => {
     async function fetchData() {

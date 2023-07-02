@@ -45,6 +45,16 @@ export interface IDataCart {
     lineItems: { edges: IItemsData[] };
   };
 }
+
+interface Product {
+  id: string;
+  product: string;
+  detail: {
+    Metal?: string;
+    Gema?: string;
+    Talla?: string;
+  };
+}
 const ShoppingCart = () => {
   const { count, setCount } = useCounter();
   const [dataCart, setDataCart] = useState<IDataCart>();
@@ -53,13 +63,11 @@ const ShoppingCart = () => {
     async function fetchData() {
       const idCart = Cookies.get("idCart");
       setCardId(idCart);
-      
+
       if (idCart) {
         const s = `
-          query{
-            node(
-              id: "${idCart}"
-            ) {
+          {
+            node(id: "${idCart}") {
               ... on Checkout {
                 id
                 lineItems(first: 10) {
@@ -76,6 +84,9 @@ const ShoppingCart = () => {
                         }
                         priceV2 {
                           amount
+                        }
+                        product {
+                          id
                         }
                       }
                     }
@@ -139,7 +150,7 @@ const ShoppingCart = () => {
     return;
   };
 
-  const onDeleteProduct = async (productId: string) => {
+  const onDeleteProduct = async (productId: string, variantId: string) => {
     const queryDeleteProduct = `
         mutation deleteCartItem {
           checkoutLineItemsRemove(checkoutId: "${cartId}", lineItemIds: "${productId}") {
@@ -151,6 +162,13 @@ const ShoppingCart = () => {
     `;
     await graphQLClient.request(queryDeleteProduct);
     await updateCart();
+    const products = Cookies.get("products");
+
+    if (products != undefined) {
+      let data = JSON.parse(products);
+      data = data.filter((obj: Product) => obj.id != variantId);
+      await Cookies.set("products", JSON.stringify(data));
+    }
   };
   return (
     <>
@@ -184,6 +202,7 @@ const ShoppingCart = () => {
                     imageUrl={item.node.variant.image.originalSrc}
                     quantity={item.node.quatity}
                     idProduct={item.node.id}
+                    variantId={item.node.variant.id}
                     onClickDelete={onDeleteProduct}
                   />
                 ))}

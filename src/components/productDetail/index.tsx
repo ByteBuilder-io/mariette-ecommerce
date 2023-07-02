@@ -4,7 +4,7 @@ import { Box, Flex, Text, Stack } from "@chakra-ui/react";
 import Zoom from "react-img-zoom";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 
-import Form from "./Form";
+import Form, { IOptions } from "./Form";
 import Currency from "./Currency";
 import SmallImages from "./SmallImages";
 import Description from "./Description";
@@ -19,14 +19,41 @@ interface Props {
 }
 const ProductDetail = ({ producto, images }: Props) => {
   const { width, height } = useWindowDimensions();
-  
-  const [loading, setLoading] = useState<boolean>(true)
+
+  const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [data, setData] = useState(images);
   const [imgMain, setImgMain] = useState<string>(images[0].node.originalSrc);
   const [value, setValue] = useState<number>(
     producto.priceRange.maxVariantPrice
   );
+  const [options, setOptions] = useState<IOptions[]>(producto.options);
+
+  useEffect(() => {
+    if (producto.productType === "Anillos") {
+      setOptions([
+        {
+          name: "Talla",
+          values: [
+            "4",
+            "4.5",
+            "5",
+            "5.5",
+            "6",
+            "6.5",
+            "7",
+            "7.5",
+            "8",
+            "8.5",
+            "9",
+          ],
+          _key: "Talla",
+          _type: "option",
+        },
+        ...options,
+      ]);
+    }
+  }, []);
   const MainImage = ({ src }: any) => (
     <Zoom
       img={src}
@@ -60,13 +87,11 @@ const ProductDetail = ({ producto, images }: Props) => {
   useEffect(() => {
     setImgMain(images[0].node.originalSrc);
     setData(images);
-    setLoading(false)
+    setLoading(false);
   }, [images]);
 
   if (loading) {
-    return (
-      <Loading />
-    )
+    return <Loading />;
   }
 
   return (
@@ -107,9 +132,10 @@ const ProductDetail = ({ producto, images }: Props) => {
             </Text>
             <Currency value={value} />
             <Form
-              options={producto.options}
+              options={options}
               idProduct={producto.gid}
               setValue={setValue}
+              type={producto.productType}
             />
             {/*<Description />*/}
             <Box
