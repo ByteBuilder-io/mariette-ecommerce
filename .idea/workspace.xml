@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/pages/productos/after-checkout/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart/CartItem/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/CartItem/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/Form/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/Form/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/ProductGrid/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/productDetail/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/productDetail/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +96,10 @@
       <workItem from="1685982798068" duration="617000" />
       <workItem from="1686602206055" duration="2457000" />
       <workItem from="1686776366459" duration="1218000" />
-      <workItem from="1687311070400" duration="1399000" />
+      <workItem from="1687311070400" duration="2170000" />
+      <workItem from="1688085998215" duration="5696000" />
+      <workItem from="1688230432570" duration="864000" />
+      <workItem from="1688315027401" duration="8178000" />
     </task>
     <servers />
   </component>

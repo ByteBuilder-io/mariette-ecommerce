@@ -19,8 +19,9 @@ type CartItemProps = {
   imageUrl: string;
   onChangeQuantity?: (quantity: number) => void;
   onClickGiftWrapping?: () => void;
-  onClickDelete: (productId: string) => Promise<void>;
+  onClickDelete: (productId: string, variantId: string) => Promise<void>;
   idProduct: string;
+  variantId: string;
 };
 
 const QuantitySelect = (props: SelectProps) => {
@@ -51,6 +52,7 @@ const CartItem = (props: CartItemProps) => {
     idProduct,
     onChangeQuantity,
     onClickDelete,
+    variantId,
   } = props;
 
   return (
@@ -87,7 +89,7 @@ const CartItem = (props: CartItemProps) => {
         <CloseButton
           aria-label={`Delete ${name} from cart`}
           onClick={() => {
-            onClickDelete(idProduct);
+            onClickDelete(idProduct, variantId);
           }}
         />
       </Flex>
