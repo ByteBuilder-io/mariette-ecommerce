@@ -8,7 +8,6 @@ export const htmlClient = `
         /* Estilos para el encabezado */
         header {
             text-align: center;
-            background-color: #d7c0b4;
             padding: 20px;
         }
 
@@ -20,13 +19,17 @@ export const htmlClient = `
         /* Estilos para el pie de página */
         footer {
             text-align: center;
-            background-color: #d7c0b4;
             padding: 20px;
         }
 
         img {
             width: 250px;
             height: 100px;
+        }
+
+        .img-icon {
+            width: 30px !important;
+            height: 30px !important;
         }
 
         .fondo-gris {
@@ -45,12 +48,12 @@ export const htmlClient = `
         <p>Hola: {{name}}</p>
         <p>Gracias por ponerte en contacto con nosotros. En breve nos pondremos en contacto contigo.</p>
         <p>Cuerpo de mensaje</p>
-        <p class="fondo-gris"><em>{{cuerpo_msg}}</em></p>
+        <p><em>{{cuerpo_msg}}</em></p>
     </main>
     <footer>
         <a href="https://www.facebook.com/tu_pagina" target="_blank"><i class="fab fa-facebook"
                 style="color: white; font-size: 30px; margin-right: 10px;"></i></a>
-        <a href="https://www.instagram.com/tu_pagina" target="_blank"><i class="fab fa-instagram"
+        <a href="https://www.instagram.com/mariette.jewelry" target="_blank"><i class="fab fa-instagram"
                 style="color: white; font-size: 30px;"></i></a>
         <p>
             <a href="https://www.ejemplo.com">Pagina Web</a>
@@ -74,7 +77,6 @@ export const htmlUser = `
         /* Estilos para el encabezado */
         header {
             text-align: center;
-            background-color: #d7c0b4;
             padding: 20px;
         }
 
@@ -86,7 +88,6 @@ export const htmlUser = `
         /* Estilos para el pie de página */
         footer {
             text-align: center;
-            background-color: #d7c0b4;
             padding: 20px;
         }
 
@@ -114,7 +115,7 @@ export const htmlUser = `
         <p><b>Correo</b></p>
         <p>{{email}}</p>
         <p><b>Mensaje</b></p>
-        <p class="fondo-gris"><em>{{msg}}</em></p>
+        <p><em>{{msg}}</em></p>
     </main>
     <footer>
         <a href="https://www.facebook.com/tu_pagina" target="_blank"><i class="fab fa-facebook"

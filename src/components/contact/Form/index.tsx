@@ -64,7 +64,7 @@ const Form = (props: ContainerProps) => {
     html = html.replace("{{name}}", data.name);
 
     const opts = {
-      sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
+      sender: { name: "Mariette", email: "norepleyshine@mariette.io" },
       to: [{ email: data.email, name: data.name }],
       replyTo: { email: "hecntdev1@gmail.com" },
       subject: "Gracias por contactarnos - Mariette",
@@ -87,7 +87,7 @@ const Form = (props: ContainerProps) => {
     html = html.replace("{{email}}", data.email);
 
     const opts = {
-      sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
+      sender: { name: "Mariette", email: "norepleyshine@mariette.io" },
       to: usersMariette,
       replyTo: { email: "hecntdev1@gmail.com" },
       subject: "Nuevo mensaje - Mariette",
