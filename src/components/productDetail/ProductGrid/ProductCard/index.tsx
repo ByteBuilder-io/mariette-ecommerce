@@ -98,6 +98,7 @@ const ProductCard = (props: Props) => {
                       alt={product._id}
                       w="100%"
                       h="auto"
+                      borderTopRadius="5px"
                       onLoad={handleImageLoad}
                     />
                   </Skeleton>
