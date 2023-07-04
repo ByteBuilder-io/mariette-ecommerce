@@ -36,7 +36,7 @@ const RelatedProduct = (props: Props) => {
       const result = products.map((product, index) => {
         return (
           <SwiperSlide key={index}>
-            <Card cursor="pointer" boxShadow="lg">
+            <Card cursor="pointer" boxShadow="lg" mb="20px"> 
               <Link href={"/productos/detalle/" + product.id}>
                 <CardHeader padding="0" margin="0">
                   <Box width="100%" height="180px">
@@ -46,6 +46,7 @@ const RelatedProduct = (props: Props) => {
                       }}
                       src={product.previewImageUrl}
                       alt={product._id}
+                      borderTopRadius="5px"
                       w="100%"
                       h="auto"
                     />
