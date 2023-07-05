@@ -49,7 +49,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
             <Box
               w={{ base: "100%", md: "80%" }}
               mb={{ base: "0", md: "0" }}
-              bg="#f4eee7"
+              bg={data.color_fondo ? data.color_fondo.hex : "#f4eee7" }
               borderRadius="5px"
             >
               <Stack
@@ -72,6 +72,19 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
                   color={data.color_texto ? data.color_texto.value : "black"}
                 >
                   {text}
+                </Text>
+                <Text
+                  align="center"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  fontSize={isMobile ? "14px" : "20px"}
+                  fontFamily="Castoro Titling"
+                  pl="35px"
+                  pr="35px"
+                  color={data.color_texto ? data.color_texto.value : "black"}
+                >
+                  {data.text_subtitulo}
                 </Text>
                 {data.text_button && (
                   <Link href={"/productos/detalle/" + idProduct.toString()}>
@@ -114,7 +127,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
             <Box
               w={{ base: "100%", md: "100%" }}
               mb={{ base: "0", md: "0" }}
-              bg="#f4eee7"
+              bg={data.color_fondo ? data.color_fondo.hex : "#f4eee7" }
               borderRadius="5px"
             >
               <Stack
@@ -137,6 +150,19 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
                   color={data.color_texto ? data.color_texto.value : "black"}
                 >
                   {text}
+                </Text>
+                <Text
+                  align="center"
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  fontSize={isMobile ? "14px" : "20px"}
+                  fontFamily="Castoro Titling"
+                  pl="35px"
+                  pr="35px"
+                  color={data.color_texto ? data.color_texto.value : "black"}
+                >
+                  {data.text_subtitulo}
                 </Text>
                 {data.text_button && (
                   <Link href={"/productos/detalle/" + idProduct.toString()}>
