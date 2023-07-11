@@ -28,6 +28,7 @@ import { graphQLClient } from "@/lib/shopify";
 import Cookies from "js-cookie";
 import { useCounter } from "@/hooks/useContador";
 import { useDrawer } from "@/hooks/useDrawer";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 export interface IOptions {
   name: string;
@@ -69,6 +70,16 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
   const { count, setCount, increment } = useCounter();
   const { isOpen, onOpen, onClose, drawerProps, setDrawerProps } = useDrawer();
   const [productName, setProductName] = useState<string>();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const { width, height } = useWindowDimensions();
+
+  useEffect(() => {
+    if (width < 1024) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [width]);
 
   useEffect(() => {
     async function fetchData() {
@@ -273,7 +284,7 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
             break;
           case "Talla":
             return (
-              <Box>
+              <Box width={isMobile ? "auto" : "350px"}>
                 <Box w="60px">
                   <Text fontWeight="bold" fontSize="14px" mb="10px">
                     Talla
