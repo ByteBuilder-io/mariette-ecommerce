@@ -45,7 +45,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
           maxW={{ base: "3xl", lg: "1336px" }}
           py={{ base: "6", md: "8", lg: "12" }}
         >
-          <Flex flexDirection={{ base: "column", md: "row" }}>
+          <Flex flexDirection={{ base: "column", md: "row" }} boxShadow="0 8px 20px rgba(0, 0, 0, 0.2)">
             <Box
               w={{ base: "100%", md: "80%" }}
               mb={{ base: "0", md: "0" }}
@@ -120,7 +120,7 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
           maxW={{ base: "3xl", lg: "1336px" }}
           py={{ base: "6", md: "8", lg: "12" }}
         >
-          <Flex flexDirection={{ base: "column", md: "row" }}>
+          <Flex flexDirection={{ base: "column", md: "row" }} boxShadow="0 8px 20px rgba(0, 0, 0, 0.2)">
             <Box w={{ base: "100%", md: "80%" }}>
               <Image src={imageUrl} alt={text} borderTopLeftRadius="5px" borderBottomLeftRadius="5px" />
             </Box>
