@@ -56,7 +56,7 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
   const myMap: MyMapInterface = options.reduce((prev, curr) => {
     return { ...prev, [curr.name]: curr.values[0] };
   }, {});
-  console.log(options);
+  // console.log(options);
 
   let myDataquery: IDataQuery[] = [];
   options.map((e) => {
@@ -94,7 +94,7 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
           )
           .join(", ");
 
-        console.log(selectedOptionsQuery);
+        // console.log(selectedOptionsQuery);
 
         const query = `
           query {
@@ -115,10 +115,10 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
         `;
         // Utilizando el cliente GraphQL
         const data: any = await graphQLClient.request(query);
-        console.log(
-          query,
-          data.product.variantBySelectedOptions.priceV2.amount
-        );
+        // console.log(
+        //   query,
+        //   data.product.variantBySelectedOptions.priceV2.amount
+        // );
         setValue(Number(data.product.variantBySelectedOptions.priceV2.amount));
         setProductName(data.product.variantBySelectedOptions.product.title);
       }
