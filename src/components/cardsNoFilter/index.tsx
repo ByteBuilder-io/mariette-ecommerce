@@ -12,7 +12,7 @@ const CardsNoFilter = ({ title }: { title: string }) => {
   const { width, height } = useWindowDimensions();
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false && store.productType == '${title}'] {
+  const query = `*[_type == 'product' && store.status != 'draft' && store.status != 'archived' && store.isDeleted == false && store.productType == 'Gemas'] {
     "createdAt": store.createdAt,
     "descriptionHtml": store.descriptionHtml,
     "gid": store.gid,
