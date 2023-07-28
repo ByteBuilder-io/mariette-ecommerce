@@ -174,80 +174,82 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
         <Text fontWeight="bold" fontSize="14px">
           Talla
         </Text>
-        <CheckboxGroup>
-          <Stack spacing="1">
-            <ChakraProvider theme={customTheme}>
-              <Wrap spacing={2}>
-                <ButtonOutline
-                  text="4"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="4.5"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="5"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="5.5"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="6"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="6.5"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="7"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="7.5"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="8"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="8.5"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-                <ButtonOutline
-                  text="9"
-                  data={data}
-                  onClick={handleCheckboxChange}
-                  isFilter
-                />
-              </Wrap>
-            </ChakraProvider>
-          </Stack>
-        </CheckboxGroup>
+        <Box width={isMobile ? "auto" : "300px"}>
+          <CheckboxGroup>
+            <Stack spacing="1">
+              <ChakraProvider theme={customTheme}>
+                <Wrap spacing={2}>
+                  <ButtonOutline
+                    text="4"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="4.5"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="5"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="5.5"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="6"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="6.5"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="7"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="7.5"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="8"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="8.5"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                  <ButtonOutline
+                    text="9"
+                    data={data}
+                    onClick={handleCheckboxChange}
+                    isFilter
+                  />
+                </Wrap>
+              </ChakraProvider>
+            </Stack>
+          </CheckboxGroup>
+        </Box>
       </Stack>
     );
   };
@@ -296,7 +298,7 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
       rango_precio: [],
       color: [],
       categoria: [],
-      gema: []
+      gema: [],
     });
   };
 

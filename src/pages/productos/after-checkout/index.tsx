@@ -1,26 +1,27 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 import Cookies from "js-cookie";
+
 import {
   Box,
-  Container,
   Heading,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
   Text,
-  Tfoot,
   Th,
   Thead,
   Tr,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import CardAviso from "@/components/cards/cardAviso";
-import ReactMarkdown from "react-markdown";
+
+import ContainerSample from "@/components/commons/ContainerSample";
+import CheckOutMaps from "@/components/checkOutMaps";
+import Footer from "@/components/footer";
+
 import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 interface IProducts {
@@ -124,7 +125,8 @@ const htmlTemplate = (product: IProducts[], pId: string | string[]) => {
 const AfterCheckout = () => {
   const [dataProducts, setDataProducts] = useState<IProducts[]>();
   const router = useRouter();
-  const { pId } = router.query;
+  const { pId, address } = router.query;
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     if (pId != undefined && pId != "") {
@@ -163,17 +165,12 @@ const AfterCheckout = () => {
       };
       sendEmail();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pId]);
-  const { width, height } = useWindowDimensions();
+
   return (
     <>
-      <Container
-        py={10}
-        maxW="1200px"
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
+      <ContainerSample>
         <VStack>
           <Box>
             <Heading
@@ -191,7 +188,7 @@ const AfterCheckout = () => {
               textAlign={"center"}
               fontFamily={"heading"}
             >
-              Nuestro equipo dara seguiemiento a tu pedido
+              Nuestro equipo dara seguimiento a tu pedido
             </Text>
           </Box>
           <Box py={10} w={"100%"}>
@@ -246,7 +243,10 @@ const AfterCheckout = () => {
             </Box>
           </Box>
         </VStack>
-      </Container>
+      </ContainerSample>
+      <ContainerSample isBottom>
+        {address && <CheckOutMaps address={address} />}
+      </ContainerSample>
       <Box
         backgroundColor={"#faf5f1"}
         h={"100%"}
@@ -256,6 +256,7 @@ const AfterCheckout = () => {
         w="100%"
         zIndex={-2}
       />
+      <Footer />
     </>
   );
 };

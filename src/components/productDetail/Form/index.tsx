@@ -266,25 +266,34 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
       {options.map((e) => {
         switch (e.name) {
           case "Metal":
-            let metal: { text: string }[] = [];
+            let metal: { label: string; value: string }[] = [];
             e.values.map((i) => {
-              metal = [...metal, { text: i }];
+              metal = [...metal, { label: i, value: i }];
             });
+            let metalDefault = metal[0];
             return (
-              <BasicCheckBox
-                key={e._key}
-                title="Material"
-                options={metal}
-                custom
-                id="Metal"
-                onClick={handleChange}
-                data={data}
-              />
+              <Box key={e._key} mb="15px" mt={5}>
+                <Box mb="10px">
+                  <Text fontWeight="bold" fontSize="14px">
+                    Material
+                  </Text>
+                </Box>
+                <Select
+                  defaultValue={metalDefault}
+                  onChange={(value) => {
+                    handleSelectChange(value, e.name);
+                    metalDefault = value!;
+                  }}
+                  placeholder="Selecciona..."
+                  styles={customStyles}
+                  options={metal}
+                />
+              </Box>
             );
             break;
           case "Talla":
             return (
-              <Box width={isMobile ? "auto" : "350px"}>
+              <Box width={isMobile ? "auto" : "300px"}>
                 <Box w="60px">
                   <Text fontWeight="bold" fontSize="14px" mb="10px">
                     Talla
@@ -335,7 +344,7 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
             break;
         }
       })}
-      <Box pt="40px">
+      <Box pt="10px">
         <Text mb="8px" fontWeight="bold" fontSize="14px">
           Cantidad
         </Text>

@@ -53,7 +53,9 @@ const ProductDetail = ({ producto, images }: Props) => {
         ...options,
       ]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const MainImage = ({ src }: any) => (
     <Zoom
       img={src}

@@ -10,14 +10,12 @@ import {
   CardBody,
   Skeleton,
 } from "@chakra-ui/react";
-
-import { Rating } from "./Rating";
-import { FavouriteButton } from "./FavouriteButton";
-import { PriceTag } from "./PriceTag";
-import { Product } from "../utils";
-import { IDataProductos } from "@/typesSanity/docs/productos";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import { PriceTag } from "./PriceTag";
+import { IDataProductos } from "@/typesSanity/docs/productos";
+
+import Link from "next/link";
 import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 import { graphQLClient } from "@/lib/shopify";
 
@@ -25,12 +23,12 @@ interface Props {
   totalRows: number;
   products: IDataProductos[];
   rootProps?: StackProps;
-  loading: boolean
+  loading: boolean;
 }
 
 const ProductCard = (props: Props) => {
   const { products, rootProps, loading } = props;
-  const [productImages, setProductImages] = useState<IDataImage[]>([]); // Estado local para almacenar las imágenes de los productos
+  const [productImages, setProductImages] = useState<IDataImage[]>([]);
   const [isImageLoaded, setImageLoaded] = useState(false);
 
   const handleImageLoad = () => {
@@ -72,16 +70,21 @@ const ProductCard = (props: Props) => {
         let imageSrc = "";
         if (productImage != undefined) {
           imageSrc =
-            productImage.product.images.edges.length > 1
+            productImage.product?.images.edges.length > 1
               ? productImage.product.images.edges[1].node.originalSrc
-              : productImage.product.images.edges[0].node.originalSrc;
+              : productImage.product?.images.edges[0].node.originalSrc;
         } else {
           imageSrc = product.previewImageUrl;
         }
         const preloadedImage = document.createElement("img");
         preloadedImage.src = imageSrc;
         return (
-          <Card cursor="pointer" boxShadow="lg" key={index} display={loading ? "none" : ""}>
+          <Card
+            cursor="pointer"
+            boxShadow="lg"
+            key={index}
+            display={loading ? "none" : ""}
+          >
             <Link href={"/productos/detalle/" + product.id}>
               <CardHeader padding="0" margin="0">
                 <Box width="100%" height="auto">

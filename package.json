@@ -17,6 +17,7 @@
     "@fontsource/castoro": "^4.5.9",
     "@fontsource/montserrat": "^4.5.14",
     "@portabletext/react": "^3.0.0",
+    "@react-google-maps/api": "^2.19.0",
     "@sanity/image-url": "^1.0.2",
     "@shopify/shopify-api": "^7.1.0",
     "@types/node-fetch": "^2.6.3",
