@@ -1,9 +1,9 @@
 export const dataGema: any = [
-  { value: 'diamante', label: 'Diamante' },
-  { value: 'esmeralda', label: 'Esmeralda' },
-  { value: 'rubí', label: 'Rubí' },
-  { value: 'zafiro', label: 'Zafiro' },
-  { value: 'topacio', label: 'Topacio' }
+  { value: "diamante", label: "Diamante" },
+  { value: "esmeralda", label: "Esmeralda" },
+  { value: "rubí", label: "Rubí" },
+  { value: "zafiro", label: "Zafiro" },
+  { value: "topacio", label: "Topacio" },
 ];
 
 export const d2 = [
@@ -31,6 +31,11 @@ export const customStyles = {
     fontSize: "14px",
     borderColor: "#997d6c",
     width: "200px",
+    "&:hover": {
+      backgroundColor: "rgba(195, 212, 224, 0.5)",
+      color: "black"
+    },
+    backgroundColor: state.isSelected ? "#997d6c" : "transparent",
   }),
   menu: (provided: any, state: any) => ({
     ...provided,
