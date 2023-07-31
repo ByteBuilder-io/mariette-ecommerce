@@ -75,7 +75,6 @@ const CartOrderSummary = ({ total }: IProps) => {
         fontSize="md"
         as={"a"}
         href={checkoutUrl}
-        target={"_blank"}
         rightIcon={<FaArrowRight />}
       >
         Checkout
