@@ -1,72 +1,70 @@
-import {
-  GoogleMap,
-  InfoWindow,
-  LoadScript,
-  MarkerF,
-} from "@react-google-maps/api";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Map, { Marker, Popup } from "react-map-gl";
+import mapboxgl from "mapbox-gl";
+
+const API_MAPBOX = process.env.NEXT_PUBLIC_MAPBOX_API_KEY || "";
+mapboxgl.accessToken = API_MAPBOX;
 
 import getCoordinatesFromAddress from "@/utils/getCoordinatesFromAddress";
+import { Box } from "@chakra-ui/react";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 interface ContainerProps {
   address?: string | string[] | undefined;
 }
 
-const API_KEY = "AIzaSyDoM4MIFPmnqDDF_5beFzcX-A3uMF9_Nnk";
-
 const CheckOutMaps = (props: ContainerProps) => {
   const { address } = props;
-  const [coordenates, setCoordenates] = useState<{ lat: number; lng: number }>({
-    lat: 0,
-    lng: 0,
-  });
+  const mapContainer = useRef(null);
+  const map = useRef<any>(null);
+  const marker = useRef<any>(null);
+  const [lng, setLng] = useState(0);
+  const [lat, setLat] = useState(0);
+  const [zoom, setZoom] = useState(14);
 
-  const mapStyles = {
-    height: "400px",
-    width: "100%",
-  };
-
-  const loadData = useCallback(async () => {
+  const loadMap = async () => {
     const data = await getCoordinatesFromAddress(
       address?.toString() || "",
-      API_KEY
+      process.env.NEXT_PUBLIC_MAPBOX_API_KEY || ""
     );
     console.log(data, "data");
-    setCoordenates({
-      lat: data.lat,
-      lng: data.lon,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setLng(data.lng);
+    setLat(data.lat);
+  };
 
   useEffect(() => {
-    loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (map.current) return;
+    loadMap();
   }, []);
 
   return (
     <>
-      {address && coordenates.lat !== 0 && coordenates.lng !== 0 && (
-        <LoadScript googleMapsApiKey={API_KEY}>
-          <GoogleMap
-            mapContainerStyle={mapStyles}
-            zoom={12}
-            center={coordenates}
+      {lng !== 0 && (
+        <Box width="100%" height="400px">
+          <Map
+            mapboxAccessToken={API_MAPBOX}
+            initialViewState={{
+              longitude: lng,
+              latitude: lat,
+              zoom: 15,
+            }}
+            mapStyle="mapbox://styles/mapbox/streets-v9"
           >
-            <MarkerF position={coordenates}>
-              {address && coordenates.lat !== 0 && coordenates.lng !== 0 && (
-                <InfoWindow position={coordenates}>
-                  <div style={{ backgroundColor: "white" }}>
-                    <h3 style={{ textAlign: "center", paddingBottom: "5px" }}>
-                      <b>Direccion de entrega</b>
-                    </h3>
-                    <p style={{ textAlign: "center" }}>{address}</p>
-                  </div>
-                </InfoWindow>
-              )}
-            </MarkerF>
-          </GoogleMap>
-        </LoadScript>
+            <Marker longitude={lng} latitude={lat} anchor="top"></Marker>
+            <Popup
+              latitude={lat}
+              longitude={lng}
+              closeButton={false} 
+              closeOnClick={false} 
+              anchor="bottom" 
+            >
+              <div>
+                <p><b>Dirección de envio</b></p>
+                <p>{address}</p>
+              </div>
+            </Popup>
+          </Map>
+        </Box>
       )}
     </>
   );
