@@ -125,7 +125,7 @@ const htmlTemplate = (product: IProducts[], pId: string | string[]) => {
 const AfterCheckout = () => {
   const [dataProducts, setDataProducts] = useState<IProducts[]>();
   const router = useRouter();
-  const { pId, address } = router.query;
+  const { pId, adress } = router.query;
   const { width, height } = useWindowDimensions();
 
   useEffect(() => {
@@ -245,7 +245,7 @@ const AfterCheckout = () => {
         </VStack>
       </ContainerSample>
       <ContainerSample isBottom>
-        {address && <CheckOutMaps address={address} />}
+        {adress && <CheckOutMaps address={adress} />}
       </ContainerSample>
       <Box
         backgroundColor={"#faf5f1"}
