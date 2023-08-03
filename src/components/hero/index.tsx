@@ -26,7 +26,7 @@ interface IProps {
 
 const Hero = ({ dataHero }: IProps) => {
   const maxH = useBreakpointValue(
-    { base: "750px", lg: "800px" },
+    { lg: "900px" },
     { ssr: false }
   );
   const [data, setData] = useState<IHero>(dataHero);
@@ -62,10 +62,10 @@ const Hero = ({ dataHero }: IProps) => {
 
   const getValue = () => {
     if (width < 600) {
-      return "50%";
+      return "45%";
     }
     if (width > 600 && width < 1800) {
-      return "22%";
+      return "32%";
     }
     if (width > 1800) {
       return "30%";
@@ -102,11 +102,11 @@ const Hero = ({ dataHero }: IProps) => {
               <Text
                 position="absolute"
                 w={isMobile ? "300px" : "500px"}
-                top={isMobile ? "80%" : "25%"}
+                top={isMobile ? "30%" : "25%"}
                 left={getValue()}
                 transform="translate(-50%, -50%)"
                 color={item.color_titulo ? item.color_titulo.value : "white"}
-                fontSize={isMobile ? "30px" : "50px"}
+                fontSize={isMobile ? "25px" : "50px"}
                 fontWeight="100"
                 textAlign="left"
                 fontFamily="Castoro Titling"
