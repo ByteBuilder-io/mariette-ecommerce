@@ -49,7 +49,7 @@ const Faq = ({ dataFaq }: { dataFaq: IDataFaq }) => {
             </VStack>
           </Container>
           <Box
-            backgroundColor={"#f7fafc"}
+            backgroundColor={"#F4F4F4"}
             h="100%"
             position={"absolute"}
             top={0}
