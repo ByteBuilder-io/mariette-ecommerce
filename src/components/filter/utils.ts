@@ -9,6 +9,9 @@ export const d2 = [
   { text: "Oro Blanco 14K" },
   { text: "Oro Amarillo 14K" },
   { text: "Oro Rosa 14K" },
+  { text: "Oro Blanco 10K" },
+  { text: "Oro Amarillo 10K" },
+  { text: "Oro Rosa 10K" },
   { text: "Plata" },
 ];
 
