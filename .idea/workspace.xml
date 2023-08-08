@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/simplePages/aviso.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/simplePages/aviso.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/simplePages/faq.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/simplePages/faq.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/simplePages/tyc.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/simplePages/tyc.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/productos/after-checkout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/after-checkout/index.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +98,7 @@
       <workItem from="1689264931483" duration="1187000" />
       <workItem from="1690487497838" duration="974000" />
       <workItem from="1690777287800" duration="2171000" />
-      <workItem from="1691107186845" duration="308000" />
+      <workItem from="1691107186845" duration="1156000" />
     </task>
     <servers />
   </component>
