@@ -1,29 +1,18 @@
 import {
   Box,
-  Card,
-  CardBody,
-  Center,
   Container,
   Flex,
-  Grid,
-  GridItem,
   Heading,
   Image,
-  keyframes,
-  LinkBox,
-  LinkOverlay,
-  SimpleGrid,
   Text,
   useBreakpoint,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { IDataTyc } from "@/typesSanity/docs/tyc";
-import { client } from "@/lib/sanity.client";
-import { IDataCategorias } from "@/typesSanity/docs/categorias";
-import { sanityImage } from "@/lib/sanity.image";
+import { useState } from "react";
 import Link from "next/link";
+import { sanityImage } from "@/lib/sanity.image";
+import { IDataCategorias } from "@/typesSanity/docs/categorias";
 
 interface ICategoryProps {
   dataCategory: IDataCategorias;
@@ -48,7 +37,8 @@ const CardCategory = ({ dataCategory }: ICategoryProps) => {
                 <BlurCard
                   image={e.image.asset._ref}
                   title={e.title}
-                  filter={e.title.toLowerCase()}
+                  filter={e.isPage ? "" : e.title.toLowerCase()}
+                  path={e.isPage ? e.page || "" : "/productos"}
                 />
               </WrapItem>
             );
@@ -62,9 +52,10 @@ interface ICardProp {
   image: string;
   title: string;
   filter: string;
+  path: string;
 }
 
-const BlurCard = ({ image, title, filter }: ICardProp) => {
+const BlurCard = ({ image, title, filter, path }: ICardProp) => {
   const breakpoint = useBreakpoint();
   const [blur, setBlur] = useState(false);
 
@@ -79,8 +70,8 @@ const BlurCard = ({ image, title, filter }: ICardProp) => {
   return (
     <Link
       href={{
-        pathname: "/productos",
-        query: { filter: filter },
+        pathname: path,
+        query: filter.length > 0 ? { filter: filter } : {},
       }}
     >
       <Flex

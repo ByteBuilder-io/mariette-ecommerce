@@ -12,6 +12,8 @@ export interface IDataCategorias extends SanityBody {
 interface ICategoryImages {
   title: string;
   _key: string;
+  isPage?: boolean;
+  page?: string;
   image: {
     _type: string;
     asset: {
