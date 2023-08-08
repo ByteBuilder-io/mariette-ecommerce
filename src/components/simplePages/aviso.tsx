@@ -45,7 +45,7 @@ const Aviso = ({ dataAviso }: { dataAviso: IDataTyc }) => {
             </VStack>
           </Container>
           <Box
-            backgroundColor={"#F4F4F4"}
+            backgroundColor={"#F9F9F9"}
             h={"100%"}
             position={"absolute"}
             top={0}
