@@ -13,6 +13,8 @@ import {
   Stack,
   VStack,
   Wrap,
+  AlertIcon,
+  Alert,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Select from "react-select";
@@ -42,6 +44,8 @@ interface Props {
   idProduct: string;
   setValue: React.Dispatch<React.SetStateAction<number>>;
   type: string;
+
+  setAvailable: (data: boolean) => void;
 }
 interface MyMapInterface {
   [key: string]: string;
@@ -52,11 +56,10 @@ interface IDataQuery {
   value: string;
 }
 
-const Form = ({ options, idProduct, setValue, type }: Props) => {
+const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
   const myMap: MyMapInterface = options.reduce((prev, curr) => {
     return { ...prev, [curr.name]: curr.values[0] };
   }, {});
-  // console.log(options);
 
   let myDataquery: IDataQuery[] = [];
   options.map((e) => {
@@ -72,6 +75,7 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
   const [productName, setProductName] = useState<string>();
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const { width, height } = useWindowDimensions();
+  const [validateProduct, setValidateProduct] = useState<boolean>(false);
 
   useEffect(() => {
     if (width < 1024) {
@@ -94,8 +98,6 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
           )
           .join(", ");
 
-        // console.log(selectedOptionsQuery);
-
         const query = `
           query {
             product(id: "${idProduct}") {
@@ -115,12 +117,16 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
         `;
         // Utilizando el cliente GraphQL
         const data: any = await graphQLClient.request(query);
-        // console.log(
-        //   query,
-        //   data.product.variantBySelectedOptions.priceV2.amount
-        // );
-        setValue(Number(data.product.variantBySelectedOptions.priceV2.amount));
+
+        if (data.product.variantBySelectedOptions === null) {
+          setAvailable(false);
+          setValue(0);
+          setValidateProduct(true);
+          return;
+        }
         setProductName(data.product.variantBySelectedOptions.product.title);
+        setValue(Number(data.product.variantBySelectedOptions.priceV2.amount));
+        setValidateProduct(false);
       }
     }
     fetchData();
@@ -135,7 +141,14 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
         });
         setDataQuery(myDataquery);
         const dq: any = await getLastPrice(idProduct, myDataquery);
+        if (dq.product.variantBySelectedOptions === null) {
+          setAvailable(false);
+          setValue(0);
+          setValidateProduct(true);
+          return;
+        }
         setValue(Number(dq.product.variantBySelectedOptions.priceV2.amount));
+        setValidateProduct(false);
       }
     }
     fetchData();
@@ -388,18 +401,33 @@ const Form = ({ options, idProduct, setValue, type }: Props) => {
           {/*</InputGroup>*/}
         </HStack>
       </Flex>
-      <Button
-        mb={4}
-        onClick={handleAddToCart}
-        borderRadius="5px"
-        bg="#997d6c"
-        color="white"
-        w="237px"
-        h="50px"
-        fontSize="12px"
-      >
-        AÑADIR AL CARRITO
-      </Button>
+      {validateProduct ? (
+        <Box pb={5}>
+          <Alert
+            status="info"
+            w="237px"
+            h="50px"
+            fontSize="12px"
+            bg="#997d6c"
+            color={"white"}
+          >
+            <AlertIcon color={"white"} />
+            Producto no disponible
+          </Alert>
+        </Box>
+      ) : (
+        <Button
+          mb={4}
+          onClick={handleAddToCart}
+          borderRadius="5px"
+          bg="#997d6c"
+          color="white"
+          w="237px"
+          h="50px"
+        >
+          AÑADIR AL CARRITO
+        </Button>
+      )}
       <Flex>
         <HStack spacing={2}>
           <SocialButton label={"instagrams"} href={"#"} size={10}>

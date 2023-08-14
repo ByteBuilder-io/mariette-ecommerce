@@ -19,7 +19,7 @@ interface Props {
 }
 const ProductDetail = ({ producto, images }: Props) => {
   const { width, height } = useWindowDimensions();
-
+  const [available, setAvailable] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [data, setData] = useState(images);
@@ -53,7 +53,7 @@ const ProductDetail = ({ producto, images }: Props) => {
         ...options,
       ]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const MainImage = ({ src }: any) => (
@@ -138,6 +138,7 @@ const ProductDetail = ({ producto, images }: Props) => {
               idProduct={producto.gid}
               setValue={setValue}
               type={producto.productType}
+              setAvailable={(e) => setAvailable(e)}
             />
             {/*<Description />*/}
             <Box
@@ -145,7 +146,7 @@ const ProductDetail = ({ producto, images }: Props) => {
             />
           </Stack>
         </Stack>
-        <ProductGrid tag={producto.productType} currentProduct={producto.id} />
+        <ProductGrid tag={producto.tags} currentProduct={producto.id} />
       </Box>
     </Fragment>
   );

@@ -26,6 +26,8 @@ const ProductoDetalle = () => {
   useEffect(() => {
     async function fetchData() {
       if (slug != undefined && slug != "") {
+        setData(undefined);
+        setDataImages(undefined);
         const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false && store.id == ${slug}] {
           "createdAt": store.createdAt,
           "descriptionHtml": store.descriptionHtml,
@@ -45,6 +47,7 @@ const ProductoDetalle = () => {
         }`;
         const data: IDataProductos[] = await client.fetch(query);
         setData(data);
+        if (data === undefined || data.length === 0) return;
         const s = `
           query {
             product(id: "${data[0].gid}") {

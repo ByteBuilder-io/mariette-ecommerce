@@ -24,7 +24,6 @@ import { client } from "@/lib/sanity.client";
 import { IDataNav } from "@/typesSanity/docs/nav";
 import { sanityImage } from "@/lib/sanity.image";
 import { BiCartAlt } from "react-icons/bi";
-import { IconToInput } from "@/components/inputs/searchInput";
 import Link from "next/link";
 import DrawerNav from "@/components/menus/drawerNav";
 import NavLink from "@/components/menus/navLink";
@@ -36,6 +35,7 @@ import { IDataCart } from "@/components/cart";
 import { title } from "process";
 import { number } from "prop-types";
 import { useDrawer } from "@/hooks/useDrawer";
+import AlgoliaSearch from "@/components/inputs/searchInput";
 
 interface IDrawerProps {
   placement: "right" | "left";
@@ -209,7 +209,7 @@ export default function Navbar() {
               })}
 
             <HStack spacing={5} pr={10}>
-              <IconToInput />
+              <AlgoliaSearch />
               <Box>
                 <Flex alignItems="center">
                   <Box position="relative">

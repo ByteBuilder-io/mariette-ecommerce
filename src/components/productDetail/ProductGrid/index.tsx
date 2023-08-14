@@ -20,29 +20,40 @@ const ProductGrid = ({
   currentProduct?: number;
   title?: string;
 }) => {
+  const result = tag.replace(/\s+/g, "").split(","); // ['a', 'b', 'c', 'd']
   const [data, setData] = useState<IDataProductos[]>();
-  let query = `
-  *[_type == 'product' && store.status != 'draft' && store.isDeleted == false ${
-    tag != "all" ? '&& store.productType == "' + tag + '"' : ""
-  } ${currentProduct != undefined ? "&& store.id != " + currentProduct : ""}] {
-        "createdAt": store.createdAt,
-        "descriptionHtml": store.descriptionHtml,
-        "gid": store.gid,
-        "id": store.id,
-        "isDeleted": store.isDeleted,
-        "options": store.options,
-        "previewImageUrl": store.previewImageUrl,
-        "priceRange": store.priceRange,
-        "productType": store.productType,
-        "slug": store.slug,
-        "status": store.status,
-        "tags": store.tags,
-        "title": store.title,
-        "variants": store.variants,
-        "vendor": store.vendor,
-    }
-    `;
+  const conditionForTags =
+    tag !== "all"
+      ? result
+          .map(
+            (e, index) => `${index === 0 ? "" : "||"} store.tags match "${e}"`
+          )
+          .join(" ")
+      : "";
 
+  const conditionForCurrentProduct = currentProduct
+    ? "&& store.id != " + currentProduct
+    : "";
+
+  const query = `
+*[_type == 'product' && store.status != 'draft' && store.isDeleted == false ${conditionForCurrentProduct} && (${conditionForTags})] {
+  "createdAt": store.createdAt,
+  "descriptionHtml": store.descriptionHtml,
+  "gid": store.gid,
+  "id": store.id,
+  "isDeleted": store.isDeleted,
+  "options": store.options,
+  "previewImageUrl": store.previewImageUrl,
+  "priceRange": store.priceRange,
+  "productType": store.productType,
+  "slug": store.slug,
+  "status": store.status,
+  "tags": store.tags,
+  "title": store.title,
+  "variants": store.variants,
+  "vendor": store.vendor,
+}
+`;
   useEffect(() => {
     async function fetchData() {
       const data: IDataProductos[] = await client.fetch(query);

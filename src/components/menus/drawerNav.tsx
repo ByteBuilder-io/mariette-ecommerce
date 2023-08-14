@@ -25,6 +25,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { SearchIcon } from "@chakra-ui/icons";
 import NavLink from "@/components/menus/navLink";
+import AlgoliaSearch from "@/components/inputs/searchInput";
 
 interface IDrawerNav {
   data: IDataNav;
@@ -59,12 +60,7 @@ const DrawerNav = ({ data, isOpen, onOpen, onClose }: IDrawerNav) => {
       </DrawerHeader>
       <DrawerBody>
         <Stack as="nav" spacing={2}>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none">
-              <SearchIcon color="gray.300" />
-            </InputLeftElement>
-            <Input type="search" placeholder="Buscar..." />
-          </InputGroup>
+          <AlgoliaSearch />
           <Divider />
           {data &&
             data.links.map((e) => {
