@@ -430,10 +430,20 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
       )}
       <Flex>
         <HStack spacing={2}>
-          <SocialButton label={"instagrams"} href={"#"} size={10}>
+          <SocialButton
+            label={"instagrams"}
+            href={"https://www.instagram.com/mariette.jewelry"}
+            size={10}
+          >
             <FaInstagram />
           </SocialButton>
-          <SocialButton label={"facebook"} href={"#"} size={10}>
+          <SocialButton
+            label={"facebook"}
+            href={
+              "https://www.facebook.com/profile.php?id=100081953648446&mibextid=LQQJ4d"
+            }
+            size={10}
+          >
             <FaFacebook />
           </SocialButton>
         </HStack>
