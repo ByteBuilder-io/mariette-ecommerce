@@ -44,11 +44,16 @@ const Productos = () => {
       const data: IDataProductos[] = await client.fetch(query);
       setDataAll(data);
       if (filter != undefined && filter != "" && data) {
-        const filteredData = data.filter(
-          (item) => item.productType.toLowerCase() === filter
-        );
+        const filteredData = data.filter((item) => {
+          if (item.tags && typeof item.tags === "string") {
+            // @ts-ignore
+            return item.tags.toLowerCase().includes(filter.toLowerCase());
+          }
+          return false;
+        });
         setData(filteredData);
         setLoading(false);
+        console.log(filteredData, "//////");
       } else {
         setData(data);
         setLoading(false);

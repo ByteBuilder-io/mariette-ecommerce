@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="d8e5699e-05d7-42de-a7d6-8b74545395e9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/inputs/searchInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/inputs/searchInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/basicImage/Image/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/basicImage/Image/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cards/cardCategory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards/cardCategory.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/filter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/filter/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/menus/navLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/menus/navLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/productos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/productos/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +108,10 @@
       <workItem from="1691107186845" duration="1156000" />
       <workItem from="1691453682939" duration="809000" />
       <workItem from="1691959176383" duration="13743000" />
-      <workItem from="1692057691789" duration="2956000" />
+      <workItem from="1692057691789" duration="6873000" />
+      <workItem from="1692947196777" duration="24000" />
+      <workItem from="1692947253821" duration="594000" />
+      <workItem from="1693615234094" duration="359000" />
     </task>
     <servers />
   </component>
