@@ -65,7 +65,6 @@ const RelatedProduct = (props: Props) => {
 
   const renderCards = () => {
     if (products && products.length > 0 && productImages.length > 0) {
-      
       const result = products.map((product, index) => {
         const productImage = productImages[index];
 
@@ -90,7 +89,7 @@ const RelatedProduct = (props: Props) => {
                         content: `url(${imageSrc})`,
                       }}
                       src={product.previewImageUrl}
-                      alt={product._id}
+                      alt={"Related Product"}
                       borderTopRadius="5px"
                       w="100%"
                       h="auto"
