@@ -115,8 +115,6 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
               <Image
                 src={imageUrl}
                 alt={text}
-                w={"670px"}
-                h={"445px"}
                 borderTopRightRadius="5px"
                 borderBottomRightRadius="5px"
               />
@@ -140,8 +138,6 @@ const ImageText = ({ text, imageUrl, position, idProduct, data }: Props) => {
                 alt={text}
                 borderTopLeftRadius="5px"
                 borderBottomLeftRadius="5px"
-                w={"670px"}
-                h={"445px"}
               />
             </Box>
             <Box
