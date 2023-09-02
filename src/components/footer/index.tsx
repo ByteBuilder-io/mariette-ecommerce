@@ -151,6 +151,8 @@ const Footer = () => {
                   src={sanityImage(data.logo.asset._ref).url()}
                   maxW="150px"
                   alt={data.logo.asset._ref}
+                  w={"150px"}
+                  h={"45"}
                 />
               )}
             </Box>

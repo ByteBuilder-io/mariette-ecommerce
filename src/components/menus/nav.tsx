@@ -139,6 +139,8 @@ export default function Navbar() {
                 <Image
                   src={sanityImage(data.logo.asset._ref).url()}
                   maxW="150px"
+                  w={"150px"}
+                  h={"45"}
                   cursor={"pointer"}
                   alt={data.logo.asset._ref}
                 />

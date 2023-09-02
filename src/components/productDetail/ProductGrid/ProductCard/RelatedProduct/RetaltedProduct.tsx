@@ -92,7 +92,7 @@ const RelatedProduct = (props: Props) => {
                       alt={"Related Product"}
                       borderTopRadius="5px"
                       w="100%"
-                      h="auto"
+                      h="170px"
                     />
                   </Box>
                 </CardHeader>
