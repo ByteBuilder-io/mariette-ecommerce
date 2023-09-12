@@ -25,10 +25,7 @@ interface IProps {
 }
 
 const Hero = ({ dataHero }: IProps) => {
-  const maxH = useBreakpointValue(
-    { lg: "900px" },
-    { ssr: false }
-  );
+  const maxH = useBreakpointValue({ lg: "900px" }, { ssr: false });
   const [data, setData] = useState<IHero>(dataHero);
   const { width, height } = useWindowDimensions();
   const [isPaginations, setIsPagination] = useState<boolean>(false);
@@ -91,8 +88,6 @@ const Hero = ({ dataHero }: IProps) => {
                   <Image
                     src={sanityImage(item.imagen.asset._ref).url()}
                     alt={item._key}
-                    objectFit="cover"
-                    objectPosition="center"
                     h={maxH}
                     width={"100%"}
                     onLoad={handleImageLoad}
@@ -168,7 +163,7 @@ const Hero = ({ dataHero }: IProps) => {
     <Box mb={isMobile ? "20px" : "35px"}>
       <style>{styleSlider}</style>
       <Swiper
-        style={{maxWidth: "3686px"}}
+        style={{ maxWidth: "3686px" }}
         navigation={!isPaginations}
         pagination={true}
         modules={[Navigation, Pagination]}

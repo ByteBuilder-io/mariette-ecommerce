@@ -50,6 +50,12 @@ const ProductDetail = ({ producto, images }: Props) => {
           _key: "Talla",
           _type: "option",
         },
+        {
+          name: "Color",
+          values: ["Rosa", "Amarillo", "Blanco"],
+          _key: "Color",
+          _type: "option",
+        },
         ...options,
       ]);
     }

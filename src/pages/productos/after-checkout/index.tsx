@@ -31,13 +31,14 @@ interface IProducts {
     Metal: string;
     Talla: string;
     Gema: string;
+    Color: string;
   };
 }
 
 const htmlTemplate = (product: IProducts[], pId: string | string[]) => {
   const generateTable = (products: IProducts[]): string => {
     let tableHTML =
-      '<table style="border-collapse: collapse; width: 100%;">\n<thead>\n<tr style="background-color: #f2f2f2;"><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Producto</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Metal</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Talla</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Gema</th></tr>\n</thead>\n<tbody>\n';
+      '<table style="border-collapse: collapse; width: 100%;">\n<thead>\n<tr style="background-color: #f2f2f2;"><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Producto</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Metal</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Talla</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Gema</th><th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Color</th></tr>\n</thead>\n<tbody>\n';
 
     products.forEach((product) => {
       tableHTML += `<tr style="border: 1px solid #dddddd;"><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${
@@ -48,6 +49,8 @@ const htmlTemplate = (product: IProducts[], pId: string | string[]) => {
         product.detail.Talla === undefined ? "N/A" : product.detail.Talla
       }</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${
         product.detail.Gema === undefined ? "N/A" : product.detail.Gema
+      }</td><td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">${
+        product.detail.Color === undefined ? "N/A" : product.detail.Color
       }</td></tr>\n`;
     });
 
@@ -210,6 +213,7 @@ const AfterCheckout = () => {
                         <Th>Metal</Th>
                         <Th>Talla</Th>
                         <Th>Gema</Th>
+                        <Th>Color</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
@@ -232,6 +236,11 @@ const AfterCheckout = () => {
                                 {e.detail.Gema === undefined
                                   ? "N/A"
                                   : e.detail.Gema}
+                              </Td>
+                              <Td>
+                                {e.detail.Color === undefined
+                                  ? "N/A"
+                                  : e.detail.Color}
                               </Td>
                             </Tr>
                           );

@@ -89,7 +89,9 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
     async function fetchData() {
       if (dataQuery) {
         const selectedOptionsQuery = dataQuery
-          .filter((option) => option.name !== "Talla")
+          .filter(
+            (option) => option.name !== "Talla" && option.name !== "Color"
+          )
           .map(
             (option) =>
               `{name: ${JSON.stringify(option.name)}, value: ${JSON.stringify(
@@ -304,6 +306,33 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
               </Box>
             );
             break;
+          case "Color":
+            let color: { label: string; value: string }[] = [];
+            e.values.map((i) => {
+              color = [...color, { label: i, value: i }];
+            });
+            let defaultColor = color[0];
+            return (
+              <Box key={e._key} mb="15px" mt={5}>
+                <Box mb="10px">
+                  <Text fontWeight="bold" fontSize="14px">
+                    Color
+                  </Text>
+                </Box>
+                <Select
+                  defaultValue={defaultColor}
+                  onChange={(value) => {
+                    handleSelectChange(value, e.name);
+                    defaultColor = value!;
+                  }}
+                  placeholder="Selecciona..."
+                  styles={customStyles}
+                  // @ts-ignore
+                  options={color}
+                />
+              </Box>
+            );
+            break;
           case "Talla":
             return (
               <Box width={isMobile ? "auto" : "300px"}>
@@ -454,7 +483,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
 
 const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
   const selectedOptionsQuery = myDataquery
-    .filter((option) => option.name !== "Talla")
+    .filter((option) => option.name !== "Talla" && option.name !== "Color")
     .map(
       (option) =>
         `{name: ${JSON.stringify(option.name)}, value: ${JSON.stringify(
@@ -462,6 +491,7 @@ const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
         )}}`
     )
     .join(", ");
+  console.log(selectedOptionsQuery, "<<<<");
 
   const query = `
           query {
