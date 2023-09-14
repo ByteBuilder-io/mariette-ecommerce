@@ -12,15 +12,18 @@ import ProductGrid from "./ProductGrid";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 import Loading from "../commons/Loading";
+import VideoComponent from "../videoComponent";
 
 interface Props {
   producto: IDataProductos;
   images: { node: { originalSrc: string } }[];
 }
+
 const ProductDetail = ({ producto, images }: Props) => {
   const { width, height } = useWindowDimensions();
   const [available, setAvailable] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isVideoMain, setIsVideoMain] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [data, setData] = useState(images);
   const [imgMain, setImgMain] = useState<string>(images[0].node.originalSrc);
@@ -56,17 +59,21 @@ const ProductDetail = ({ producto, images }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const MainImage = ({ src }: any) => (
-    <Zoom
-      img={src}
-      zoomScale={3}
-      height={337}
-      width={isMobile ? 405 : 505}
-      transitionTime={0.5}
-    />
-  );
+  const MainImage = ({ src, isMobile }: any) => {
+    return (
+      <Zoom
+        img={src}
+        zoomScale={3}
+        height={337}
+        alt="Main image"
+        width={isMobile ? 405 : 505}
+        transitionTime={0.5}
+      />
+    );
+  };
 
-  const handleImageClick = (index: number) => {
+  const handleImageClick = (index: number, isVideo?: boolean) => {
+    setIsVideoMain(isVideo ? true : false);
     setImgMain(data[index].node.originalSrc);
     const newData = data.map((item, i) => {
       if (i === index) {
@@ -110,14 +117,12 @@ const ProductDetail = ({ producto, images }: Props) => {
           spacing={{ base: "8", md: "16" }}
         >
           <Flex direction="column" align="center" flex="1">
-            <MainImage
-              src={imgMain}
-              alt="Main image"
-              zoomScale={3}
-              transitionTime={0.5}
-              width="100%"
-              maxWidth="100%"
-            />
+            {!isVideoMain && <MainImage src={imgMain} isMobile={isMobile} />}
+            {isVideoMain && (
+              <Box width="100%" maxWidth="100%" minW="505px">
+                <VideoComponent url={imgMain} />
+              </Box>
+            )}
             <SmallImages data={data} handleImageClick={handleImageClick} />
           </Flex>
           <Stack

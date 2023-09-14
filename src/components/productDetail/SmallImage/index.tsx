@@ -1,15 +1,17 @@
 import { Box } from "@chakra-ui/react";
 import { useState } from "react";
+import { FaInstagram, FaPlayCircle } from "react-icons/fa";
 
 interface ContainerProps {
   src: string;
   isSelected: boolean;
-  handleImageClick: (item: number) => void;
+  handleImageClick: (item: number, isVideo?: boolean) => void;
   itemIndex: number;
+  isVideo: boolean;
 }
 
 const SmallImage = (props: ContainerProps) => {
-  const { src, isSelected, handleImageClick, itemIndex } = props;
+  const { src, isSelected, handleImageClick, itemIndex, isVideo } = props;
 
   const [isHover, setIsHover] = useState(false);
 
@@ -23,11 +25,9 @@ const SmallImage = (props: ContainerProps) => {
 
   return (
     <Box
-      as="img"
-      src={src}
-      width="calc((100% - 80px) / 3)" // establece el ancho de la imagen pequeña en función del ancho de la imagen principal
+      position="relative"
+      width="calc((100% - 80px) / 3)"
       height="98px"
-      objectFit="cover"
       mb="2"
       mt="2"
       cursor="pointer"
@@ -37,10 +37,21 @@ const SmallImage = (props: ContainerProps) => {
       padding={isSelected || isHover ? "3px" : ""}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => {
-        handleImageClick(itemIndex);
-      }}
-    />
+      onClick={() => handleImageClick(itemIndex, isVideo)}
+    >
+      <Box as="img" src={src} width="100%" height="100%" objectFit="cover" />
+      {isVideo && (
+        <Box
+          as={FaPlayCircle}
+          size="24px"
+          position="absolute"
+          top="50%"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          color="white"
+        />
+      )}
+    </Box>
   );
 };
 
