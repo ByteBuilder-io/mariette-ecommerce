@@ -1,25 +1,47 @@
 import { Box } from "@chakra-ui/react";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SmallImage from "../SmallImage";
 
 interface ContainerProps {
   data: any;
-  handleImageClick: (item: number) => void;
+  handleImageClick: (item: number, isVideo?: boolean) => void;
 }
 
 const SmallImages = (props: ContainerProps) => {
   const { data, handleImageClick } = props;
 
+  const [dataImg, setDataImg] = useState<any>([]);
+
   const renderImgs = useCallback(() => {
-    const result = data.map(
+    const uniqueData = dataImg.reduce(
+      (accumulator: any, current: any) => {
+        if (!accumulator.seen[current.node.originalSrc]) {
+          accumulator.result.push(current);
+          accumulator.seen[current.node.originalSrc] = true;
+        }
+        return accumulator;
+      },
+      { seen: {}, result: [] }
+    ).result;
+
+    const result = uniqueData.map(
       (
-        item: { node: { originalSrc: string }; isSelected: boolean },
+        item: {
+          node: { originalSrc: string };
+          isSelected: boolean;
+          isVideo: boolean;
+        },
         index: number
       ) => {
         return (
           <SmallImage
-            src={item.node.originalSrc}
+            src={
+              item.isVideo
+                ? uniqueData[0].node.originalSrc
+                : item.node.originalSrc
+            }
             isSelected={item.isSelected}
+            isVideo={item.isVideo}
             handleImageClick={handleImageClick}
             itemIndex={index}
             key={index}
@@ -29,11 +51,12 @@ const SmallImages = (props: ContainerProps) => {
     );
 
     return result;
-  }, [data, handleImageClick]);
+  }, [dataImg, handleImageClick]);
 
   useEffect(() => {
-    renderImgs();
-  }, [renderImgs]);
+    data.push({ node: { originalSrc: "/video.mp4" }, isVideo: true });
+    setDataImg(data);
+  }, [data]);
 
   return (
     <Box
@@ -42,7 +65,7 @@ const SmallImages = (props: ContainerProps) => {
       justifyContent="center"
       alignItems="center"
     >
-      {renderImgs()}
+      {dataImg.length > 0 && renderImgs()}
     </Box>
   );
 };

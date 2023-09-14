@@ -1,11 +1,7 @@
-import { Container } from "@chakra-ui/react";
 import { client } from "@/lib/sanity.client";
 import { useEffect, useState } from "react";
 
 import { IHome } from "@/typesSanity/pages/home";
-
-import Contact from "@/components/contact";
-import Instagram from "@/components/instragram";
 import Footer from "@/components/footer";
 
 const Home = () => {
