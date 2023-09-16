@@ -118,11 +118,11 @@ const ProductDetail = ({ producto, images }: Props) => {
         >
           <Flex direction="column" align="center" flex="1">
             {!isVideoMain && <MainImage src={imgMain} isMobile={isMobile} />}
-            {isVideoMain && (
+            {/* {isVideoMain && (
               <Box width="100%" maxWidth="100%" minW="505px">
                 <VideoComponent url={imgMain} />
               </Box>
-            )}
+            )} */}
             <SmallImages data={data} handleImageClick={handleImageClick} />
           </Flex>
           <Stack

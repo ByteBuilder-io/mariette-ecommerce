@@ -54,7 +54,7 @@ const SmallImages = (props: ContainerProps) => {
   }, [dataImg, handleImageClick]);
 
   useEffect(() => {
-    data.push({ node: { originalSrc: "/video.mp4" }, isVideo: true });
+    // data.push({ node: { originalSrc: "/video.mp4" }, isVideo: true });
     setDataImg(data);
   }, [data]);
 
