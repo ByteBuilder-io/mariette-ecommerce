@@ -65,7 +65,7 @@ const Hero = ({ dataHero }: IProps) => {
       return "32%";
     }
     if (width > 1800) {
-      return "30%";
+      return "38%";
     }
   };
 
@@ -90,6 +90,7 @@ const Hero = ({ dataHero }: IProps) => {
                     alt={item._key}
                     h={maxH}
                     width={"100%"}
+                    objectFit={"contain"}
                     onLoad={handleImageLoad}
                   />
                 </Skeleton>
