@@ -5,10 +5,11 @@ import SmallImage from "../SmallImage";
 interface ContainerProps {
   data: any;
   handleImageClick: (item: number, isVideo?: boolean) => void;
+  video: string;
 }
 
 const SmallImages = (props: ContainerProps) => {
-  const { data, handleImageClick } = props;
+  const { data, handleImageClick, video } = props;
 
   const [dataImg, setDataImg] = useState<any>([]);
 
@@ -54,7 +55,8 @@ const SmallImages = (props: ContainerProps) => {
   }, [dataImg, handleImageClick]);
 
   useEffect(() => {
-    // data.push({ node: { originalSrc: "/video.mp4" }, isVideo: true });
+    if (video !== "")
+      data.push({ node: { originalSrc: video }, isVideo: true });
     setDataImg(data);
   }, [data]);
 

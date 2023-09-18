@@ -17,7 +17,13 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
     <>
       {path && (
         <Link href={path!} onClick={() => onClose()}>
-          <Text mr="16px" color="#846a5a" fontWeight="semibold">
+          <Text
+            mr="16px"
+            color="#846a5a"
+            fontWeight="semibold"
+            fontSize={"12pt"}
+            fontFamily={"Montserrat Regular"}
+          >
             {name}
           </Text>
         </Link>

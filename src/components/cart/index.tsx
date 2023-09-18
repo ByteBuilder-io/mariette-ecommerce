@@ -22,7 +22,7 @@ import { useCounter } from "@/hooks/useContador";
 interface IItemsData {
   node: {
     id: string;
-    quatity: number;
+    quantity: number;
     title: string;
     variant: {
       id: string;
@@ -170,6 +170,31 @@ const ShoppingCart = () => {
       await Cookies.set("products", JSON.stringify(data));
     }
   };
+
+  const onChangeQuantity = async (quantity: number, idProduct: string) => {
+    console.log(dataCart, quantity, idProduct);
+    const queryUpdate = `
+      mutation MyMutation {
+        checkoutLineItemsUpdate(
+          checkoutId: "${cartId}"
+          lineItems: {id: "${idProduct}", quantity: ${quantity}}
+        ) {
+          checkoutUserErrors {
+            code
+          }
+        }
+      }
+    `;
+    await graphQLClient.request(queryUpdate);
+    await updateCart();
+    const products = Cookies.get("products");
+
+    if (products != undefined) {
+      let data = JSON.parse(products);
+      await Cookies.set("products", JSON.stringify(data));
+    }
+  };
+
   return (
     <>
       {count === 0 ? (
@@ -200,10 +225,11 @@ const ShoppingCart = () => {
                     currency={"MXN"}
                     description={item.node.variant.title}
                     imageUrl={item.node.variant.image.originalSrc}
-                    quantity={item.node.quatity}
+                    quantity={item.node.quantity}
                     idProduct={item.node.id}
                     variantId={item.node.variant.id}
                     onClickDelete={onDeleteProduct}
+                    onChangeQuantity={onChangeQuantity}
                   />
                 ))}
               </Stack>

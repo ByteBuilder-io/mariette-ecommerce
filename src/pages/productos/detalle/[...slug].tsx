@@ -16,9 +16,18 @@ export interface IDataImage {
   };
 }
 
+export interface IDataVideo {
+  product: {
+    media: {
+      nodes: [{ sources: { url: string }[] }];
+    };
+  };
+}
+
 const ProductoDetalle = () => {
   const [data, setData] = useState<IDataProductos[]>();
   const [dataImages, setDataImages] = useState<IDataImage>();
+  const [video, setVideo] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
   const router = useRouter();
   const { slug } = router.query;
@@ -64,6 +73,32 @@ const ProductoDetalle = () => {
 
         // Utilizando el cliente GraphQL
         const image: IDataImage = await graphQLClient.request(s);
+
+        const videos = `
+          query {            
+              product(id: "${data[0].gid}") {
+                media(first: 1, reverse: true) {
+                  nodes {
+                    ... on Video {
+                      sources {
+                        url
+                      }
+                    }
+                  }
+                }
+              }
+            }          
+        `;
+
+        // Utilizando el cliente GraphQL
+        const video: IDataVideo = await graphQLClient.request(videos);
+        console.log(
+          data[0].gid,
+          Object.keys(video.product.media.nodes[0]).length,
+          "???????????"
+        );
+        if (Object.keys(video.product.media.nodes[0]).length !== 0)
+          setVideo(video.product.media.nodes[0].sources[0].url);
         setDataImages(image);
         setLoading(false);
       }
@@ -81,6 +116,7 @@ const ProductoDetalle = () => {
         <ProductDetail
           producto={data[0]}
           images={dataImages.product.images.edges}
+          video={video ? video : ""}
         />
       )}
       {data && <Footer />}

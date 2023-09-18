@@ -17,7 +17,7 @@ type CartItemProps = {
   price: string;
   currency: string;
   imageUrl: string;
-  onChangeQuantity?: (quantity: number) => void;
+  onChangeQuantity: (quantity: number, idProduct: string) => Promise<void>;
   onClickGiftWrapping?: () => void;
   onClickDelete: (productId: string, variantId: string) => Promise<void>;
   idProduct: string;
@@ -36,6 +36,12 @@ const QuantitySelect = (props: SelectProps) => {
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
     </Select>
   );
 };
@@ -82,10 +88,11 @@ const CartItem = (props: CartItemProps) => {
         <QuantitySelect
           value={quantity}
           onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value);
+            onChangeQuantity(+e.currentTarget.value, idProduct);
           }}
         />
         <PriceTag price={Number(price)} currency={currency} />
+
         <CloseButton
           aria-label={`Delete ${name} from cart`}
           onClick={() => {
@@ -108,7 +115,7 @@ const CartItem = (props: CartItemProps) => {
         <QuantitySelect
           value={quantity}
           onChange={(e) => {
-            onChangeQuantity?.(+e.currentTarget.value);
+            onChangeQuantity(+e.currentTarget.value, idProduct);
           }}
         />
         <PriceTag price={Number(price)} currency={currency} />

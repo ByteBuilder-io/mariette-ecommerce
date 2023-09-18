@@ -17,9 +17,10 @@ import VideoComponent from "../videoComponent";
 interface Props {
   producto: IDataProductos;
   images: { node: { originalSrc: string } }[];
+  video: string;
 }
 
-const ProductDetail = ({ producto, images }: Props) => {
+const ProductDetail = ({ producto, images, video }: Props) => {
   const { width, height } = useWindowDimensions();
   const [available, setAvailable] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
@@ -124,12 +125,16 @@ const ProductDetail = ({ producto, images }: Props) => {
         >
           <Flex direction="column" align="center" flex="1">
             {!isVideoMain && <MainImage src={imgMain} isMobile={isMobile} />}
-            {/* {isVideoMain && (
+            {isVideoMain && (
               <Box width="100%" maxWidth="100%" minW="505px">
                 <VideoComponent url={imgMain} />
               </Box>
-            )} */}
-            <SmallImages data={data} handleImageClick={handleImageClick} />
+            )}
+            <SmallImages
+              data={data}
+              video={video}
+              handleImageClick={handleImageClick}
+            />
           </Flex>
           <Stack
             spacing={{ base: "8", md: "4" }}
