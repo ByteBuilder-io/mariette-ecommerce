@@ -142,11 +142,10 @@ const AfterCheckout = () => {
             sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
             to: [
               {
-                email: "jcarlos.horus@gmail.com",
-                name: "jcarlos@bytebuilder.io",
+                email: "mariette.jewelry@gmail.com",
+                name: "mariette.jewelry@gmail.com",
               },
             ],
-            replyTo: { email: "hecntdev1@gmail.com" },
             subject: `Nuevo compra #${pId}- Mariette`,
             htmlContent: htmlTemplate(finalData!, pId),
           };
