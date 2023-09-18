@@ -12,11 +12,16 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
     bg: useColorModeValue("gray.200", "gray.700"),
     color: useColorModeValue("blue.500", "blue.200"),
   };
-
+  function addLeadingSlash(str: string) {
+    if (str.startsWith("/")) {
+      return str;
+    }
+    return "/" + str;
+  }
   return (
     <>
       {path && (
-        <Link href={path!} onClick={() => onClose()}>
+        <Link href={addLeadingSlash(path!)} onClick={() => onClose()}>
           <Text
             mr="16px"
             color="#846a5a"

@@ -135,12 +135,9 @@ const AfterCheckout = () => {
     if (pId != undefined && pId != "") {
       const sendEmail = async () => {
         const products = await Cookies.get("products");
-        console.log(products);
         if (products != undefined) {
-          console.log(products);
           const finalData = JSON.parse(products);
           setDataProducts(finalData);
-          console.log(dataProducts);
           const opts = {
             sender: { name: "Mariette", email: "osvaldo@bytebuilder.io" },
             to: [

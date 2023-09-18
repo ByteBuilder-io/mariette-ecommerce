@@ -92,11 +92,6 @@ const ProductoDetalle = () => {
 
         // Utilizando el cliente GraphQL
         const video: IDataVideo = await graphQLClient.request(videos);
-        console.log(
-          data[0].gid,
-          Object.keys(video.product.media.nodes[0]).length,
-          "???????????"
-        );
         if (Object.keys(video.product.media.nodes[0]).length !== 0)
           setVideo(video.product.media.nodes[0].sources[0].url);
         setDataImages(image);

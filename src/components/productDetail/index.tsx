@@ -34,6 +34,7 @@ const ProductDetail = ({ producto, images, video }: Props) => {
   const [options, setOptions] = useState<IOptions[]>(producto.options);
 
   useEffect(() => {
+    console.log(producto.tags);
     if (producto.productType === "Anillos") {
       setOptions([
         {
@@ -63,6 +64,16 @@ const ProductDetail = ({ producto, images, video }: Props) => {
         ...options,
       ]);
     }
+    if (producto.tags.includes("Unica"))
+      setOptions([
+        {
+          name: "Color",
+          values: ["Rosa", "Amarillo", "Blanco"],
+          _key: "Color",
+          _type: "option",
+        },
+        ...options,
+      ]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

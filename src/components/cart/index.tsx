@@ -172,7 +172,6 @@ const ShoppingCart = () => {
   };
 
   const onChangeQuantity = async (quantity: number, idProduct: string) => {
-    console.log(dataCart, quantity, idProduct);
     const queryUpdate = `
       mutation MyMutation {
         checkoutLineItemsUpdate(

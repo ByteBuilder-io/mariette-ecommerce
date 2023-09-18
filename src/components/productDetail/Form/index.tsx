@@ -491,7 +491,6 @@ const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
         )}}`
     )
     .join(", ");
-  console.log(selectedOptionsQuery, "<<<<");
 
   const query = `
           query {

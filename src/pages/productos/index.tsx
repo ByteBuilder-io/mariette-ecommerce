@@ -53,7 +53,6 @@ const Productos = () => {
         });
         setData(filteredData);
         setLoading(false);
-        console.log(filteredData, "//////");
       } else {
         setData(data);
         setLoading(false);

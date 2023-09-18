@@ -27,7 +27,6 @@ const CheckOutMaps = (props: ContainerProps) => {
       address?.toString() || "",
       process.env.NEXT_PUBLIC_MAPBOX_API_KEY || ""
     );
-    console.log(data, "data");
     setLng(data.lng);
     setLat(data.lat);
   };
@@ -54,12 +53,14 @@ const CheckOutMaps = (props: ContainerProps) => {
             <Popup
               latitude={lat}
               longitude={lng}
-              closeButton={false} 
-              closeOnClick={false} 
-              anchor="bottom" 
+              closeButton={false}
+              closeOnClick={false}
+              anchor="bottom"
             >
               <div>
-                <p><b>Dirección de envio</b></p>
+                <p>
+                  <b>Dirección de envio</b>
+                </p>
                 <p>{address}</p>
               </div>
             </Popup>

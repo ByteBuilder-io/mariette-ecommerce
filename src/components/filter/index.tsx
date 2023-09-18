@@ -62,7 +62,6 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
   const [isOpenFilter, setIsOpenFilter] = useState<boolean>(true);
   const [isOpenFilterMovil, setIsOpenFilterMovil] = useState<boolean>(false);
   const [dataProductRender, setDataProductRender] = useState(dataProduct);
-  console.log(dataProductRender, "<<<<<<<<<");
   const [data, setData] = useState<any>({
     producto: [],
     material: [],
@@ -305,26 +304,10 @@ const Filter = ({ children, dataProduct, dataAll }: Props) => {
 
   useEffect(() => {
     const filterValues = data.producto;
-    // const filteredData = dataAll.filter((item: any) => {
-    //   console.log(
-    //     filterValues,
-    //     item.tags,
-    //     "<<<<<<>>>>>>>>>>>>>",
-    //     item.productType
-    //   );
-    //   return filterValues.includes(item.productType);
-    // });
 
     const filterValuesS = filterValues.join(", ");
 
     const filteredData = dataAll.filter((item: any) => {
-      console.log(
-        filterValuesS,
-        "????",
-        item.tags,
-        "<<<<<<>>>>>>>>>>>>>",
-        item.productType
-      );
       if (item.tags && typeof item.tags === "string") {
         // @ts-ignore
         return item.tags.toLowerCase().includes(filterValuesS.toLowerCase());
