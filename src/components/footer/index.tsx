@@ -97,8 +97,16 @@ const Footer = () => {
         (item: { _key: string; nombre: string; dataUrl: { url: string } }) => {
           const url =
             item.dataUrl.url === "PaginaDeInicio" ? "" : item.dataUrl.url;
+
+          function addLeadingSlash(str: string) {
+            if (str.startsWith("/")) {
+              return str;
+            }
+            return "/" + str;
+          }
+
           return (
-            <Link href={url} key={item._key}>
+            <Link href={addLeadingSlash(url)} key={item._key}>
               <Text fontSize="14px" textAlign="center">
                 {item.nombre}
               </Text>

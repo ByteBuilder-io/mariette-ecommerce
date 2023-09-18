@@ -34,9 +34,32 @@ const ProductDetail = ({ producto, images, video }: Props) => {
   const [options, setOptions] = useState<IOptions[]>(producto.options);
 
   useEffect(() => {
-    console.log(producto.tags);
-    if (producto.productType === "Anillos") {
-      setOptions([
+    const setTallas = async () => {
+      await setOptions([
+        {
+          name: "Talla",
+          values: [
+            "4",
+            "4.5",
+            "5",
+            "5.5",
+            "6",
+            "6.5",
+            "7",
+            "7.5",
+            "8",
+            "8.5",
+            "9",
+          ],
+          _key: "Talla",
+          _type: "option",
+        },
+        ...options,
+      ]);
+    };
+
+    const setColores = async () => {
+      await setOptions([
         {
           name: "Talla",
           values: [
@@ -63,17 +86,12 @@ const ProductDetail = ({ producto, images, video }: Props) => {
         },
         ...options,
       ]);
-    }
-    if (producto.tags.includes("Unica"))
-      setOptions([
-        {
-          name: "Color",
-          values: ["Rosa", "Amarillo", "Blanco"],
-          _key: "Color",
-          _type: "option",
-        },
-        ...options,
-      ]);
+    };
+    if (producto.productType === "Anillos" && producto.tags.includes("Unica"))
+      setColores();
+    if (producto.productType === "Anillos" && !producto.tags.includes("Unica"))
+      setTallas();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
