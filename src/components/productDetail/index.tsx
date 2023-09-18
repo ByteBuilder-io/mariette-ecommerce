@@ -87,9 +87,9 @@ const ProductDetail = ({ producto, images, video }: Props) => {
         ...options,
       ]);
     };
-    if (producto.productType === "Anillos" && producto.tags.includes("Unica"))
+    if (producto.tags.includes("Tallas") && producto.tags.includes("Unica"))
       setColores();
-    if (producto.productType === "Anillos" && !producto.tags.includes("Unica"))
+    if (producto.tags.includes("Tallas") && !producto.tags.includes("Unica"))
       setTallas();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
