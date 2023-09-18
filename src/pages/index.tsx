@@ -30,16 +30,16 @@ const Home = () => {
 
   return (
     <>
-      <ComingSoon />
-      {/*{data &&*/}
-      {/*  data.componentes.map((componente) => (*/}
-      {/*    <ComponentRenderer*/}
-      {/*      key={componente._id}*/}
-      {/*      component={componente._type}*/}
-      {/*      data={componente}*/}
-      {/*    />*/}
-      {/*  ))}*/}
-      {/*{data && <Footer />}*/}
+      {/*<ComingSoon />*/}
+      {data &&
+        data.componentes.map((componente) => (
+          <ComponentRenderer
+            key={componente._id}
+            component={componente._type}
+            data={componente}
+          />
+        ))}
+      {data && <Footer />}
     </>
   );
 };

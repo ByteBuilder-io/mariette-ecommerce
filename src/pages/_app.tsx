@@ -49,7 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
               }
             `}
           />
-          {/*<Navbar />*/}
+          <Navbar />
           <Suspense fallback={<div>Loading...</div>}>
             {isComponentLoaded && <Component {...pageProps} />}
           </Suspense>
