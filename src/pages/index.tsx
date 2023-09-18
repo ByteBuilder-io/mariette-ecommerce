@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { IHome } from "@/typesSanity/pages/home";
 import Footer from "@/components/footer";
+import ComingSoon from "@/components/coming";
 
 const Home = () => {
   const [data, setData] = useState<IHome>();
@@ -29,29 +30,16 @@ const Home = () => {
 
   return (
     <>
-      {/*<Hero />*/}
-      {/*<Container w={"100%"} maxW={"1400px"}>*/}
-      {/*  <BasicImage positionImg={"left"} data={""} />*/}
-      {/*  <CardCategory />*/}
-      {/*  <Box*/}
-      {/*    backgroundColor={"#faf5f1"}*/}
-      {/*    h="100%"*/}
-      {/*    position={"absolute"}*/}
-      {/*    top={0}*/}
-      {/*    left={0}*/}
-      {/*    w="100%"*/}
-      {/*    zIndex={-2}*/}
-      {/*  />*/}
-      {/*</Container>*/}
-      {data &&
-        data.componentes.map((componente) => (
-          <ComponentRenderer
-            key={componente._id}
-            component={componente._type}
-            data={componente}
-          />
-        ))}
-      {data && <Footer />}
+      <ComingSoon />
+      {/*{data &&*/}
+      {/*  data.componentes.map((componente) => (*/}
+      {/*    <ComponentRenderer*/}
+      {/*      key={componente._id}*/}
+      {/*      component={componente._type}*/}
+      {/*      data={componente}*/}
+      {/*    />*/}
+      {/*  ))}*/}
+      {/*{data && <Footer />}*/}
     </>
   );
 };

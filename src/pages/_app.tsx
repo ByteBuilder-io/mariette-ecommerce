@@ -6,7 +6,7 @@ import { Global, css } from "@emotion/react";
 import WhatsAppButton from "@/components/commons/WhatsAppButton";
 import { CounterProvider } from "@/hooks/useContador";
 import { DrawerProvider } from "@/hooks/useDrawer";
-import { initGA, logPageView, logEvent } from '../utils/analytics';
+import { initGA, logPageView, logEvent } from "../utils/analytics";
 
 const theme = extendTheme({
   fonts: {
@@ -49,7 +49,7 @@ export default function App({ Component, pageProps }: AppProps) {
               }
             `}
           />
-          <Navbar />
+          {/*<Navbar />*/}
           <Suspense fallback={<div>Loading...</div>}>
             {isComponentLoaded && <Component {...pageProps} />}
           </Suspense>
