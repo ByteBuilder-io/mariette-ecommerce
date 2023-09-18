@@ -113,7 +113,13 @@ const ProductCard = (props: Props) => {
                   />
                 </Box>
               </CardHeader>
-              <CardBody height="133px">
+              <CardBody
+                height="180px"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
                 <Text
                   textAlign="center"
                   fontSize={"2xl"}
