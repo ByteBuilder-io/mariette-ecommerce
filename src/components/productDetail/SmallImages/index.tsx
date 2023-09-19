@@ -46,6 +46,7 @@ const SmallImages = (props: ContainerProps) => {
             handleImageClick={handleImageClick}
             itemIndex={index}
             key={index}
+            count={uniqueData.length}
           />
         );
       }

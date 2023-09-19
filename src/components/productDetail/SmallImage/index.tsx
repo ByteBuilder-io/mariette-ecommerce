@@ -8,12 +8,14 @@ interface ContainerProps {
   handleImageClick: (item: number, isVideo?: boolean) => void;
   itemIndex: number;
   isVideo: boolean;
+  count: number;
 }
 
 const SmallImage = (props: ContainerProps) => {
   const { src, isSelected, handleImageClick, itemIndex, isVideo } = props;
 
   const [isHover, setIsHover] = useState(false);
+  console.log(props.count, "count");
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -26,7 +28,7 @@ const SmallImage = (props: ContainerProps) => {
   return (
     <Box
       position="relative"
-      width="calc((100% - 80px) / 3)"
+      width={props.count > 1 ? "calc((100% - 80px) / 3)" : "100%"}
       height="98px"
       mb="2"
       mt="2"
