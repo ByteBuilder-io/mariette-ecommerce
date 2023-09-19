@@ -290,7 +290,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
               <Box key={e._key} mb="15px" mt={5}>
                 <Box mb="10px">
                   <Text fontWeight="bold" fontSize="14px">
-                    Material
+                    Metal
                   </Text>
                 </Box>
                 <Select
@@ -316,7 +316,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
               <Box key={e._key} mb="15px" mt={5}>
                 <Box mb="10px">
                   <Text fontWeight="bold" fontSize="14px">
-                    Color
+                    Color del metal
                   </Text>
                 </Box>
                 <Select
