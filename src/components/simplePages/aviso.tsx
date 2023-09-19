@@ -39,7 +39,7 @@ const Aviso = ({ dataAviso }: { dataAviso: IDataTyc }) => {
                   {data.subtitle}
                 </Text>
               </Box>
-              <Box py={10} w={"100%"}>
+              <Box py={10} w={"100%"} display="flex" justifyContent="center">
                 <CardAviso content={data.content} />
               </Box>
             </VStack>
