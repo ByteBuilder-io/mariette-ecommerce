@@ -8,6 +8,8 @@ import { CounterProvider } from "@/hooks/useContador";
 import { DrawerProvider } from "@/hooks/useDrawer";
 import { initGA, logPageView, logEvent } from "../utils/analytics";
 
+import { initFacebookPixel } from "@/lib/fpixel";
+
 const theme = extendTheme({
   fonts: {
     heading: "Castoro Titling, sans-serif",
@@ -19,6 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const [isComponentLoaded, setIsComponentLoaded] = useState(false);
 
   useEffect(() => {
+    initFacebookPixel();
     initGA();
     logPageView();
     logEvent();
