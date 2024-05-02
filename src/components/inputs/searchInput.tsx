@@ -28,6 +28,7 @@ interface AutoCompleteProps {
   hits: Hit[];
   currentRefinement: string;
   refine: (searchTerm: string) => void;
+  closeModal?: () => void; // Agregar closeModal como una prop
 }
 
 const searchClient = algoliasearch(
@@ -39,6 +40,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
   hits,
   currentRefinement,
   refine,
+  closeModal,
 }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -62,8 +64,7 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
       <Box
         ref={containerRef}
         onClick={() => setIsHovered(true)}
-        onBlur={handleBlur}
-      >
+        onBlur={handleBlur}>
         <InputGroup>
           <InputLeftElement pointerEvents="none">
             <SearchIcon color="gray.300" />
@@ -89,14 +90,14 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
             boxShadow="md"
             borderRadius="md"
             mt={2}
-            zIndex={10}
-          >
+            zIndex={10}>
             {hits.map((hit) => (
               <Box p={3} key={hit.objectID} borderBottom="1px solid #ddd">
                 <Card
                   direction={{ base: "column", sm: "row" }}
                   overflow="hidden"
                   variant="outline"
+                  onClick={closeModal} // Llama a closeModal en el onClick
                 >
                   <Link href={"/productos/detalle/" + hit.id}>
                     <Stack direction="row" alignItems="center">
@@ -119,11 +120,12 @@ const AutoComplete: React.FC<AutoCompleteProps> = ({
 
 const CustomAutoComplete = connectAutoComplete(AutoComplete);
 
-const SearchSelect = () => {
+const SearchSelect = ({ closeModal }: { closeModal?: () => void }) => {
   return (
     <InstantSearch searchClient={searchClient} indexName="shopify_products">
       <Configure distinct={true} />
-      <CustomAutoComplete />
+      <CustomAutoComplete closeModal={closeModal} />
+      {/* Pasar closeModal como prop */}
     </InstantSearch>
   );
 };

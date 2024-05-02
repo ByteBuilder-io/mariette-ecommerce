@@ -60,7 +60,7 @@ const DrawerNav = ({ data, isOpen, onOpen, onClose }: IDrawerNav) => {
       </DrawerHeader>
       <DrawerBody>
         <Stack as="nav" spacing={2}>
-          <AlgoliaSearch />
+          <AlgoliaSearch closeModal={isOpen ? onClose : onOpen} />
           <Divider />
           {data &&
             data.links.map((e) => {

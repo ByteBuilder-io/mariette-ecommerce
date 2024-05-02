@@ -145,13 +145,11 @@ const ProductDetail = ({ producto, images, video }: Props) => {
         maxW={{ base: "3xl", lg: "7xl" }}
         mx="auto"
         px={{ base: "4", md: "8", lg: "12" }}
-        py={{ base: "6", md: "8", lg: "12" }}
-      >
+        py={{ base: "6", md: "8", lg: "12" }}>
         <Stack
           direction={{ base: "column", lg: "row" }}
           align={{ lg: "flex-start" }}
-          spacing={{ base: "8", md: "16" }}
-        >
+          spacing={{ base: "8", md: "16" }}>
           <Flex direction="column" align="center" flex="1">
             {!isVideoMain && <MainImage src={imgMain} isMobile={isMobile} />}
             {isVideoMain && (
@@ -168,13 +166,11 @@ const ProductDetail = ({ producto, images, video }: Props) => {
           <Stack
             spacing={{ base: "8", md: "4" }}
             flex="2"
-            alignItems={isMobile ? "center" : "left"}
-          >
+            alignItems={isMobile ? "center" : "left"}>
             <Text
               fontSize="3xl"
               fontWeight="semibold"
-              fontFamily="Castoro Titling"
-            >
+              fontFamily="Castoro Titling">
               {producto.title}
             </Text>
             <Currency value={value} />
