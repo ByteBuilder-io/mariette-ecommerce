@@ -81,20 +81,15 @@ const Hero = ({ dataHero }: IProps) => {
               alignItems="center"
               justifyContent="center"
               height="100%"
-              w="100%"
-            >
-              <Box h={maxH} w="100%">
-                <Skeleton isLoaded={!isLoading} width={"100%"}>
-                  <Image
-                    src={sanityImage(item.imagen.asset._ref).url()}
-                    alt={item._key}
-                    h={maxH}
-                    width={"100%"}
-                    objectFit={"contain"}
-                    onLoad={handleImageLoad}
-                  />
-                </Skeleton>
-              </Box>
+              w="100%">
+              <Image
+                src={sanityImage(item.imagen.asset._ref).url()}
+                alt={item._key}
+                w={{ base: "100%", lg: "100%", xxl: "40%" }}
+                objectFit={"cover"}
+                maxH={maxH}
+                onLoad={handleImageLoad}
+              />
               <Text
                 position="absolute"
                 w={isMobile ? "300px" : "500px"}
@@ -105,16 +100,14 @@ const Hero = ({ dataHero }: IProps) => {
                 fontSize={isMobile ? "25px" : "50px"}
                 fontWeight="100"
                 textAlign="left"
-                fontFamily="Castoro Titling"
-              >
+                fontFamily="Castoro Titling">
                 {item.texto}
                 {item.texto_button && item.urlData && (
                   <Box>
                     <Link
                       href={
                         "/productos/detalle/" + item.urlData!.url.toString()
-                      }
-                    >
+                      }>
                       <Button
                         fontWeight="300"
                         textAlign="center"
@@ -125,8 +118,7 @@ const Hero = ({ dataHero }: IProps) => {
                         }
                         color="white"
                         h={isMobile ? "40px" : "55px"}
-                        width={isMobile ? "120px" : "auto"}
-                      >
+                        width={isMobile ? "120px" : "auto"}>
                         <Text pr="10px" pl="10px">
                           {item.texto_button}
                         </Text>
@@ -167,8 +159,7 @@ const Hero = ({ dataHero }: IProps) => {
         style={{ maxWidth: "3686px" }}
         navigation={!isPaginations}
         pagination={true}
-        modules={[Navigation, Pagination]}
-      >
+        modules={[Navigation, Pagination]}>
         {renderSlider()}
       </Swiper>
     </Box>

@@ -26,9 +26,8 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
             mr="16px"
             color="#846a5a"
             fontWeight="semibold"
-            fontSize={"12pt"}
-            fontFamily={"Montserrat Regular"}
-          >
+            fontSize={{ base: "18px", lg: "0.9vw", xl: "18px" }}
+            fontFamily={"Montserrat Regular"}>
             {name}
           </Text>
         </Link>
