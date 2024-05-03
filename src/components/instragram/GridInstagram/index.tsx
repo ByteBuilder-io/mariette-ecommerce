@@ -30,8 +30,7 @@ const GridInstagram = (props: ContainerProps) => {
               cursor="pointer"
               onClick={() => {
                 openLink(item.permalink);
-              }}
-            >
+              }}>
               <Box position="relative" height="339px" width="339px">
                 <Image
                   src={item.thumbnail_url ? item.thumbnail_url : item.media_url}
@@ -59,8 +58,7 @@ const GridInstagram = (props: ContainerProps) => {
                     alignItems="center"
                     justifyContent="center"
                     width="100%"
-                    height="100%"
-                  >
+                    height="100%">
                     <FaInstagram color="white" size={40} />
                   </Flex>
                 </Box>
@@ -75,10 +73,7 @@ const GridInstagram = (props: ContainerProps) => {
   };
 
   return (
-    <SimpleGrid
-      spacing={3}
-      templateColumns="repeat(auto-fill, minmax(300px, 1fr))"
-    >
+    <SimpleGrid spacing={3} columns={4}>
       {renderInstagram()}
     </SimpleGrid>
   );
