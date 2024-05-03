@@ -36,6 +36,8 @@ const GridInstagram = (props: ContainerProps) => {
                   src={item.thumbnail_url ? item.thumbnail_url : item.media_url}
                   alt={item.media_type}
                   objectFit="cover"
+                  width={"100%"}
+                  h={"100%"}
                 />
                 <Box
                   position="absolute"
