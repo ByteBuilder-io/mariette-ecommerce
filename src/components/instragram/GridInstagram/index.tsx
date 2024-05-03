@@ -24,20 +24,18 @@ const GridInstagram = (props: ContainerProps) => {
           return (
             <Card
               borderRadius="none"
-              height="339px"
-              width="339px"
+              maxH="339px"
+              maxW="339px"
               key={index}
               cursor="pointer"
               onClick={() => {
                 openLink(item.permalink);
               }}>
-              <Box position="relative" height="339px" width="339px">
+              <Box position="relative" maxH="339px" maxW="339px">
                 <Image
                   src={item.thumbnail_url ? item.thumbnail_url : item.media_url}
                   alt={item.media_type}
                   objectFit="cover"
-                  height="100%"
-                  width="100%"
                 />
                 <Box
                   position="absolute"
