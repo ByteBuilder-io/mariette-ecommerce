@@ -23,6 +23,7 @@ import CheckOutMaps from "@/components/checkOutMaps";
 import Footer from "@/components/footer";
 
 import useWindowDimensions from "@/hooks/useWindowDimensions";
+declare var gtag: Function;
 
 interface IProducts {
   id: string;
@@ -129,7 +130,7 @@ const AfterCheckout = () => {
   const [dataProducts, setDataProducts] = useState<IProducts[]>();
   const router = useRouter();
   const { pId, adress } = router.query;
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   useEffect(() => {
     if (pId != undefined && pId != "") {
@@ -163,6 +164,16 @@ const AfterCheckout = () => {
         }
       };
       sendEmail();
+
+      // Llama a gtag para enviar el evento sin redirigir
+      if (typeof gtag === "function") {
+        gtag("event", "ads_conversion_Compra_1", {
+          event_callback: function () {
+            console.log("Evento de conversión enviado");
+          },
+          event_timeout: 2000,
+        });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pId]);
@@ -175,8 +186,7 @@ const AfterCheckout = () => {
             <Heading
               textColor={"#836a59"}
               fontFamily={"heading"}
-              textAlign={"center"}
-            >
+              textAlign={"center"}>
               Gracias por tu compra
             </Heading>
           </Box>
@@ -185,8 +195,7 @@ const AfterCheckout = () => {
               textColor={"#836a59"}
               fontSize="xl"
               textAlign={"center"}
-              fontFamily={"heading"}
-            >
+              fontFamily={"heading"}>
               Nuestro equipo dara seguimiento a tu pedido
             </Text>
           </Box>
@@ -198,8 +207,7 @@ const AfterCheckout = () => {
               overflow="hidden"
               bg={useColorModeValue("white", "gray.800")}
               w={{ base: "100%", lg: "1000px" }}
-              maxW={width}
-            >
+              maxW={width}>
               <Box p={10} maxW={width - 50}>
                 <TableContainer>
                   <Table size="sm">

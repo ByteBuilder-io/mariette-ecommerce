@@ -31,6 +31,7 @@ import Cookies from "js-cookie";
 import { useCounter } from "@/hooks/useContador";
 import { useDrawer } from "@/hooks/useDrawer";
 import useWindowDimensions from "@/hooks/useWindowDimensions";
+declare var gtag: Function;
 
 export interface IOptions {
   name: string;
@@ -274,6 +275,13 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
       placement: "right",
       size: "lg",
     });
+
+    gtag("event", "ads_conversion_Compra_1", {
+      event_callback: function () {
+        console.log("Evento de conversión enviado");
+      },
+      event_timeout: 2000,
+    });
   };
 
   return (
@@ -438,8 +446,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
             h="50px"
             fontSize="12px"
             bg="#997d6c"
-            color={"white"}
-          >
+            color={"white"}>
             <AlertIcon color={"white"} />
             Producto no disponible
           </Alert>
@@ -452,8 +459,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
           bg="#997d6c"
           color="white"
           w="237px"
-          h="50px"
-        >
+          h="50px">
           AÑADIR AL CARRITO
         </Button>
       )}
@@ -462,8 +468,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
           <SocialButton
             label={"instagrams"}
             href={"https://www.instagram.com/mariette.jewelry"}
-            size={10}
-          >
+            size={10}>
             <FaInstagram />
           </SocialButton>
           <SocialButton
@@ -471,8 +476,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
             href={
               "https://www.facebook.com/profile.php?id=100081953648446&mibextid=LQQJ4d"
             }
-            size={10}
-          >
+            size={10}>
             <FaFacebook />
           </SocialButton>
         </HStack>
