@@ -68,7 +68,10 @@ const ProductCard = (props: Props) => {
         const productImage = productImages[index];
 
         let imageSrc = "";
-        if (productImage != undefined) {
+        if (
+          productImage != undefined &&
+          productImage.product?.images.edges.length !== 0
+        ) {
           imageSrc =
             productImage.product?.images.edges.length > 1
               ? productImage.product.images.edges[1].node.originalSrc
@@ -83,16 +86,14 @@ const ProductCard = (props: Props) => {
             cursor="pointer"
             boxShadow="lg"
             key={index}
-            display={loading ? "none" : ""}
-          >
+            display={loading ? "none" : ""}>
             <Link href={"/productos/detalle/" + product.id}>
               <CardHeader padding="0" margin="0">
                 <Box width="100%" height="auto">
                   <Skeleton
                     isLoaded={isImageLoaded}
                     startColor="gray.200"
-                    endColor="white"
-                  >
+                    endColor="white">
                     <Image
                       _hover={{
                         content: `url(${imageSrc})`,
@@ -118,13 +119,11 @@ const ProductCard = (props: Props) => {
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
-                alignItems="center"
-              >
+                alignItems="center">
                 <Text
                   textAlign="center"
                   fontSize={"2xl"}
-                  fontFamily={"Castoro"}
-                >
+                  fontFamily={"Castoro"}>
                   {product.title}
                 </Text>
                 <Stack
@@ -132,8 +131,7 @@ const ProductCard = (props: Props) => {
                   align={"center"}
                   justifyContent={"center"}
                   fontSize="14px"
-                  fontWeight="semibold"
-                >
+                  fontWeight="semibold">
                   <PriceTag
                     price={product.priceRange.maxVariantPrice}
                     salePrice={0}

@@ -69,7 +69,10 @@ const RelatedProduct = (props: Props) => {
         const productImage = productImages[index];
 
         let imageSrc = "";
-        if (productImage != undefined) {
+        if (
+          productImage != undefined &&
+          productImage.product?.images.edges.length !== 0
+        ) {
           imageSrc =
             productImage.product?.images.edges.length > 1
               ? productImage.product?.images.edges[1].node.originalSrc
@@ -101,13 +104,11 @@ const RelatedProduct = (props: Props) => {
                   display="flex"
                   flexDirection="column"
                   justifyContent="center"
-                  alignItems="center"
-                >
+                  alignItems="center">
                   <Text
                     textAlign="center"
                     fontSize={"2xl"}
-                    fontFamily={"Castoro"}
-                  >
+                    fontFamily={"Castoro"}>
                     {product.title}
                   </Text>
                   <Stack
@@ -115,8 +116,7 @@ const RelatedProduct = (props: Props) => {
                     align={"center"}
                     justifyContent={"center"}
                     fontSize="14px"
-                    fontWeight="semibold"
-                  >
+                    fontWeight="semibold">
                     <PriceTag
                       price={product.priceRange.maxVariantPrice}
                       salePrice={0}
