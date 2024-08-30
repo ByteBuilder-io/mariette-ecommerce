@@ -30,8 +30,7 @@ const QuantitySelect = (props: SelectProps) => {
       maxW="64px"
       aria-label="Select quantity"
       focusBorderColor={useColorModeValue("blue.500", "blue.200")}
-      {...props}
-    >
+      {...props}>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -70,8 +69,7 @@ const CartItem = (props: CartItemProps) => {
       rounded="lg"
       padding="2"
       width="full"
-      bgColor={"white"}
-    >
+      bgColor={"white"}>
       <CartProductMeta
         name={name}
         description={description}
@@ -83,8 +81,7 @@ const CartItem = (props: CartItemProps) => {
       <Flex
         width="full"
         justify="space-between"
-        display={{ base: "none", md: "flex" }}
-      >
+        display={{ base: "none", md: "flex" }}>
         <QuantitySelect
           value={quantity}
           onChange={(e) => {
@@ -107,10 +104,14 @@ const CartItem = (props: CartItemProps) => {
         align="center"
         width="full"
         justify="space-between"
-        display={{ base: "flex", md: "none" }}
-      >
-        <Link fontSize="sm" textDecor="underline">
-          Delete
+        display={{ base: "flex", md: "none" }}>
+        <Link
+          fontSize="sm"
+          textDecor="underline"
+          onClick={() => {
+            onClickDelete(idProduct, variantId);
+          }}>
+          Eliminar
         </Link>
         <QuantitySelect
           value={quantity}

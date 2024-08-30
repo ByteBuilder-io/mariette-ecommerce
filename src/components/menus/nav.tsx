@@ -103,7 +103,7 @@ export default function Navbar() {
         // Utilizando el cliente GraphQL
         const dataCart: IDataCart = await graphQLClient.request(s);
         setDataCart(dataCart);
-        setCount(dataCart.node.lineItems.edges.length);
+        if (dataCart.node) setCount(dataCart.node.lineItems.edges.length);
       }
     }
     fetchData();
@@ -124,15 +124,13 @@ export default function Navbar() {
       boxShadow="lg"
       width="100%"
       zIndex={10}
-      backgroundColor={"white"}
-    >
+      backgroundColor={"white"}>
       <Container maxW={"1400px"}>
         <Flex
           h={16}
           alignItems="center"
           justifyContent="space-between"
-          mx="auto"
-        >
+          mx="auto">
           <HStack spacing={8} alignItems="center" ml={{ base: 0, lg: 10 }}>
             {data && (
               <Link href="/" passHref legacyBehavior>
@@ -151,8 +149,7 @@ export default function Navbar() {
             as="nav"
             spacing={1}
             display={{ base: "none", md: "flex" }}
-            alignItems="center"
-          >
+            alignItems="center">
             {data &&
               data.links.map((e) => {
                 if (!e.link.isSubmenu) {
@@ -180,8 +177,7 @@ export default function Navbar() {
                           fontWeight="normal"
                           rounded="md"
                           height="auto"
-                          _hover={{ color: "black", bg: "white" }}
-                        >
+                          _hover={{ color: "black", bg: "white" }}>
                           <Flex alignItems="center">
                             <Text>{e.title}</Text>
                             <Icon
@@ -241,8 +237,7 @@ export default function Navbar() {
                       justifyContent="center"
                       fontSize="10px"
                       fontWeight="bold"
-                      color="white"
-                    >
+                      color="white">
                       {count}
                     </Box>
                   </Box>
@@ -293,8 +288,7 @@ export default function Navbar() {
                   justifyContent="center"
                   fontSize="10px"
                   fontWeight="bold"
-                  color="white"
-                >
+                  color="white">
                   {count}
                 </Box>
               </Box>
@@ -325,8 +319,7 @@ export default function Navbar() {
         placement={drawerProps.placement}
         onClose={onClose}
         isOpen={isOpen}
-        size={drawerProps.size}
-      >
+        size={drawerProps.size}>
         <DrawerOverlay />
         {drawerProps.type === "nav" ? (
           data && (
