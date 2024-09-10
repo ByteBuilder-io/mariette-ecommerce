@@ -22,12 +22,20 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { PriceTag } from "@/components/cart/CartItem/PriceTag";
-import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 
 interface Props {
   totalRows: number;
   products: IDataProductos[];
   rootProps?: StackProps;
+}
+
+interface IDataImage {
+  product: {
+    images: {
+      edges: { node: { originalSrc: string } }[];
+    };
+    compareAtPriceRange: { maxVariantPrice: { amount: string } };
+  };
 }
 
 const RelatedProduct = (props: Props) => {
@@ -40,13 +48,18 @@ const RelatedProduct = (props: Props) => {
       // Realiza la consulta a la API de Shopify para obtener las imágenes de cada producto
       const imagePromises = products.map(async (product) => {
         const s = `
-          query {
+         query {
             product(id: "${product.gid}") {
               images(first: 10) {
                 edges {
                   node {
                     originalSrc
                   }
+                }
+              }
+              compareAtPriceRange {
+                maxVariantPrice {
+                  amount
                 }
               }
             }
@@ -118,8 +131,25 @@ const RelatedProduct = (props: Props) => {
                     fontSize="14px"
                     fontWeight="semibold">
                     <PriceTag
-                      price={product.priceRange.maxVariantPrice}
-                      salePrice={0}
+                      price={
+                        parseFloat(
+                          productImage.product.compareAtPriceRange
+                            .maxVariantPrice.amount
+                        ) > product.priceRange.maxVariantPrice
+                          ? parseFloat(
+                              productImage.product.compareAtPriceRange
+                                .maxVariantPrice.amount
+                            )
+                          : product.priceRange.maxVariantPrice
+                      }
+                      salePrice={
+                        parseFloat(
+                          productImage.product.compareAtPriceRange
+                            .maxVariantPrice.amount
+                        ) > product.priceRange.maxVariantPrice
+                          ? product.priceRange.maxVariantPrice
+                          : 0
+                      }
                       currency="USD"
                     />
                   </Stack>

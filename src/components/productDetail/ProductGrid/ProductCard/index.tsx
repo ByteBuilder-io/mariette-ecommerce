@@ -16,7 +16,6 @@ import { PriceTag } from "./PriceTag";
 import { IDataProductos } from "@/typesSanity/docs/productos";
 
 import Link from "next/link";
-import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 import { graphQLClient } from "@/lib/shopify";
 
 interface Props {
@@ -24,6 +23,15 @@ interface Props {
   products: IDataProductos[];
   rootProps?: StackProps;
   loading: boolean;
+}
+
+interface IDataImage {
+  product: {
+    images: {
+      edges: { node: { originalSrc: string } }[];
+    };
+    compareAtPriceRange: { maxVariantPrice: { amount: string } };
+  };
 }
 
 const ProductCard = (props: Props) => {
@@ -48,6 +56,11 @@ const ProductCard = (props: Props) => {
                   }
                 }
               }
+              compareAtPriceRange {
+                maxVariantPrice {
+                  amount
+                }
+              }
             }
           }
         `;
@@ -56,6 +69,7 @@ const ProductCard = (props: Props) => {
       });
 
       const images = await Promise.all(imagePromises);
+      console.log(images[0].product.compareAtPriceRange.maxVariantPrice.amount);
       setProductImages(images);
     };
 
@@ -81,6 +95,7 @@ const ProductCard = (props: Props) => {
         }
         const preloadedImage = document.createElement("img");
         preloadedImage.src = imageSrc;
+        console.log(product.priceRange);
         return (
           <Card
             cursor="pointer"
@@ -133,8 +148,25 @@ const ProductCard = (props: Props) => {
                   fontSize="14px"
                   fontWeight="semibold">
                   <PriceTag
-                    price={product.priceRange.maxVariantPrice}
-                    salePrice={0}
+                    price={
+                      parseFloat(
+                        productImage.product.compareAtPriceRange.maxVariantPrice
+                          .amount
+                      ) > product.priceRange.maxVariantPrice
+                        ? parseFloat(
+                            productImage.product.compareAtPriceRange
+                              .maxVariantPrice.amount
+                          )
+                        : product.priceRange.maxVariantPrice
+                    }
+                    salePrice={
+                      parseFloat(
+                        productImage.product.compareAtPriceRange.maxVariantPrice
+                          .amount
+                      ) > product.priceRange.maxVariantPrice
+                        ? product.priceRange.maxVariantPrice
+                        : 0
+                    }
                     currency="USD"
                   />
                 </Stack>

@@ -13,14 +13,16 @@ import { IDataProductos } from "@/typesSanity/docs/productos";
 import { IDataImage } from "@/pages/productos/detalle/[...slug]";
 import Loading from "../commons/Loading";
 import VideoComponent from "../videoComponent";
+import { PriceTag } from "../relatedProduct/PriceTag";
 
 interface Props {
   producto: IDataProductos;
   images: { node: { originalSrc: string } }[];
   video: string;
+  salesPrice: string;
 }
 
-const ProductDetail = ({ producto, images, video }: Props) => {
+const ProductDetail = ({ producto, images, video, salesPrice }: Props) => {
   const { width, height } = useWindowDimensions();
   const [available, setAvailable] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
@@ -173,7 +175,13 @@ const ProductDetail = ({ producto, images, video }: Props) => {
               fontFamily="Castoro Titling">
               {producto.title}
             </Text>
-            <Currency value={value} />
+            <PriceTag
+              price={
+                parseFloat(salesPrice) > value ? parseFloat(salesPrice) : value
+              }
+              currency="USD"
+              salePrice={parseFloat(salesPrice) > value ? value : 0}
+            />
             <Form
               options={options}
               idProduct={producto.gid}

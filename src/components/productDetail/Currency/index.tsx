@@ -21,7 +21,9 @@ const Currency = (ContainerProps: ContainerProps) => {
       <Text fontWeight="bold" mr="7px" color="#846a5a">
         $
       </Text>
-      <Text color="#846a5a" fontWeight="400">{format}</Text>
+      <Text color="#846a5a" fontWeight="400">
+        {format}
+      </Text>
     </Box>
   );
 };

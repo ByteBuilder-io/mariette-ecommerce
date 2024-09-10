@@ -13,6 +13,7 @@ export interface IDataImage {
     images: {
       edges: { node: { originalSrc: string } }[];
     };
+    compareAtPriceRange: { maxVariantPrice: { amount: string } };
   };
 }
 
@@ -67,6 +68,11 @@ const ProductoDetalle = () => {
                   }
                 }
               }
+              compareAtPriceRange {
+                maxVariantPrice {
+                  amount
+                }
+              }
             }
           }
         `;
@@ -112,6 +118,9 @@ const ProductoDetalle = () => {
           producto={data[0]}
           images={dataImages.product.images.edges}
           video={video ? video : ""}
+          salesPrice={
+            dataImages.product.compareAtPriceRange.maxVariantPrice.amount
+          }
         />
       )}
       {data && <Footer />}
