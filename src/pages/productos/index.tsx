@@ -16,7 +16,7 @@ const Productos = () => {
   const router = useRouter();
 
   const { filter } = router.query;
-  const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false] {
+  const query = `*[_type == 'product' && store.status == 'active' && store.isDeleted == false] {
     "createdAt": store.createdAt,
     "descriptionHtml": store.descriptionHtml,
     "gid": store.gid,

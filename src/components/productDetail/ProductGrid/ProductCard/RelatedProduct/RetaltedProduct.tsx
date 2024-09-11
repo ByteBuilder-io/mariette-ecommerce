@@ -130,28 +130,37 @@ const RelatedProduct = (props: Props) => {
                     justifyContent={"center"}
                     fontSize="14px"
                     fontWeight="semibold">
-                    <PriceTag
-                      price={
-                        parseFloat(
-                          productImage.product.compareAtPriceRange
-                            .maxVariantPrice.amount
-                        ) > product.priceRange.maxVariantPrice
-                          ? parseFloat(
-                              productImage.product.compareAtPriceRange
-                                .maxVariantPrice.amount
-                            )
-                          : product.priceRange.maxVariantPrice
-                      }
-                      salePrice={
-                        parseFloat(
-                          productImage.product.compareAtPriceRange
-                            .maxVariantPrice.amount
-                        ) > product.priceRange.maxVariantPrice
-                          ? product.priceRange.maxVariantPrice
-                          : 0
-                      }
-                      currency="USD"
-                    />
+                    {productImage.product &&
+                    productImage.product.compareAtPriceRange ? (
+                      <PriceTag
+                        price={
+                          parseFloat(
+                            productImage.product.compareAtPriceRange
+                              .maxVariantPrice.amount
+                          ) > product.priceRange.maxVariantPrice
+                            ? parseFloat(
+                                productImage.product.compareAtPriceRange
+                                  .maxVariantPrice.amount
+                              )
+                            : product.priceRange.maxVariantPrice
+                        }
+                        salePrice={
+                          parseFloat(
+                            productImage.product.compareAtPriceRange
+                              .maxVariantPrice.amount
+                          ) > product.priceRange.maxVariantPrice
+                            ? product.priceRange.maxVariantPrice
+                            : 0
+                        }
+                        currency="USD"
+                      />
+                    ) : (
+                      <PriceTag
+                        price={product.priceRange.maxVariantPrice}
+                        salePrice={0}
+                        currency="USD"
+                      />
+                    )}
                   </Stack>
                 </CardBody>
               </Link>

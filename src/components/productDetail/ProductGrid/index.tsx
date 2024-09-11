@@ -36,7 +36,7 @@ const ProductGrid = ({
     : "";
 
   const query = `
-*[_type == 'product' && store.status != 'draft' && store.isDeleted == false ${conditionForCurrentProduct} && (${conditionForTags})] {
+*[_type == 'product' && store.status == 'active' && store.isDeleted == false ${conditionForCurrentProduct} && (${conditionForTags})] {
   "createdAt": store.createdAt,
   "descriptionHtml": store.descriptionHtml,
   "gid": store.gid,
