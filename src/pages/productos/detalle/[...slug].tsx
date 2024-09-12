@@ -38,7 +38,7 @@ const ProductoDetalle = () => {
       if (slug != undefined && slug != "") {
         setData(undefined);
         setDataImages(undefined);
-        const query = `*[_type == 'product' && store.status != 'draft' && store.isDeleted == false && store.id == ${slug}] {
+        const query = `*[_type == 'product' && store.status == 'active' && store.isDeleted == false && store.id == ${slug}] {
           "createdAt": store.createdAt,
           "descriptionHtml": store.descriptionHtml,
           "gid": store.gid,
@@ -56,6 +56,7 @@ const ProductoDetalle = () => {
           "vendor": store.vendor,
         }`;
         const data: IDataProductos[] = await client.fetch(query);
+        console.log(data);
         setData(data);
         if (data === undefined || data.length === 0) return;
         const s = `

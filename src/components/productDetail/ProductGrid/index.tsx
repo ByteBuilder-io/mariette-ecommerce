@@ -97,7 +97,7 @@ const ProductGrid = ({
             textAlign="center"
             size="md"
             fontFamily="Castoro Titling">
-            {title ? "title" : "Productos Relacionados"}
+            {title ? title : "Productos Relacionados"}
           </Heading>
 
           {data && data.length > 0 && (

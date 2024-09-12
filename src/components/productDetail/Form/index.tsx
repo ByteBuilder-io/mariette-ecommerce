@@ -144,6 +144,7 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
         });
         setDataQuery(myDataquery);
         const dq: any = await getLastPrice(idProduct, myDataquery);
+        console.log(dq);
         if (dq.product.variantBySelectedOptions === null) {
           setAvailable(false);
           setValue(0);
@@ -510,6 +511,7 @@ const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
             }
           }
         `;
+  console.log(query);
   // Utilizando el cliente GraphQL
   return await graphQLClient.request(query);
 };
