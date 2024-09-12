@@ -115,13 +115,18 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
                   title
                 }
               }
+                availableForSale
             }
           }
         `;
         // Utilizando el cliente GraphQL
         const data: any = await graphQLClient.request(query);
+        console.log(data.product.availableForSale);
 
-        if (data.product.variantBySelectedOptions === null) {
+        if (
+          data.product.variantBySelectedOptions === null ||
+          !data.product.availableForSale
+        ) {
           setAvailable(false);
           setValue(0);
           setValidateProduct(true);
@@ -145,7 +150,10 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
         setDataQuery(myDataquery);
         const dq: any = await getLastPrice(idProduct, myDataquery);
         console.log(dq);
-        if (dq.product.variantBySelectedOptions === null) {
+        if (
+          dq.product.variantBySelectedOptions === null ||
+          !dq.product.availableForSale
+        ) {
           setAvailable(false);
           setValue(0);
           setValidateProduct(true);
@@ -508,6 +516,7 @@ const getLastPrice = async (idProduct: string, myDataquery: IDataQuery[]) => {
                   amount
                 }
               }
+                availableForSale
             }
           }
         `;
