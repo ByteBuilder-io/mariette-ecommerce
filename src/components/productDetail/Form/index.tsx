@@ -296,7 +296,61 @@ const Form = ({ options, idProduct, setValue, type, setAvailable }: Props) => {
   return (
     <Box pt="20px">
       {options.map((e) => {
+        console.log(e);
+
         switch (e.name) {
+          case "Inicial":
+            let inicial: { label: string; value: string }[] = [];
+            e.values.map((i) => {
+              inicial = [...inicial, { label: i, value: i }];
+            });
+            let inicialDefault = inicial[0];
+            return (
+              <Box key={e._key} mb="15px" mt={5}>
+                <Box mb="10px">
+                  <Text fontWeight="bold" fontSize="14px">
+                    Inicial
+                  </Text>
+                </Box>
+                <Select
+                  defaultValue={inicialDefault}
+                  onChange={(value) => {
+                    handleSelectChange(value, e.name);
+                    inicialDefault = value!;
+                  }}
+                  placeholder="Selecciona..."
+                  styles={customStyles}
+                  options={inicial}
+                />
+              </Box>
+            );
+            break;
+          case "Cadena":
+            let cadena: { label: string; value: string }[] = [];
+            e.values.map((i) => {
+              cadena = [...cadena, { label: i, value: i }];
+            });
+            let cadenaDefault = cadena[0];
+            return (
+              <Box key={e._key} mb="15px" mt={5}>
+                <Box mb="10px">
+                  <Text fontWeight="bold" fontSize="14px">
+                    Cadena
+                  </Text>
+                </Box>
+                <Select
+                  defaultValue={cadenaDefault}
+                  onChange={(value) => {
+                    handleSelectChange(value, e.name);
+                    cadenaDefault = value!;
+                  }}
+                  placeholder="Selecciona..."
+                  styles={customStyles}
+                  options={cadena}
+                />
+              </Box>
+            );
+            break;
           case "Metal":
             let metal: { label: string; value: string }[] = [];
             e.values.map((i) => {
